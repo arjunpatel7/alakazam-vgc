@@ -2,10 +2,34 @@ import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from peft import PeftModel, PeftConfig
-from calculations import formatted_speed_check
+from calculations import speed_check, check_if_exists
 import re 
+from supabase import create_client, Client 
+import os
 import ast
+import random
+import time
 
+# Create Streamlit Session State
+# CONVO_ID should persist across reruns of application
+# a session_history dictionary should also persist, to keep track of the conversation history
+
+
+if "convo_id" not in st.session_state:
+  # create random convo id for each run of the application
+  CONVO_ID = random.randint(100000, 999999)
+  st.session_state.convo_id = CONVO_ID
+  st.session_state.session_history = []
+
+
+# Supabase Setup
+
+sb_url = os.environ.get("SUPABASE_URL")
+sb_key = os.environ.get("SUPABASE_KEY")
+supabase_client = create_client(sb_url, sb_key)
+
+
+# Load the Peft model
 
 model_name = "bloom-speed-check-small"
 
@@ -16,7 +40,6 @@ tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
 
 # Load the Lora model
 speed_model = PeftModel.from_pretrained(model, peft_model_id)
-
 
 
 def make_inference(input):
@@ -42,22 +65,80 @@ def search_json_dict(string):
         return None
 
 
+def formatted_speed_check(arg_strings):
+  # take arg_strings and format it into a dictionary for speed_check
+
+    speed_check_dict = ast.literal_eval(arg_strings)
+
+    p1 = check_if_exists(speed_check_dict, "p1")
+    p2 = check_if_exists(speed_check_dict, "p2")
+    p1_stat_changes = check_if_exists(speed_check_dict, "p1_stat_changes")
+    p2_stat_changes = check_if_exists(speed_check_dict, "p2_stat_changes")
+    p1_ev = check_if_exists(speed_check_dict, "p1_ev")
+    p2_ev = check_if_exists(speed_check_dict, "p2_ev")
+    print("Pokemons extracted successfully!")
+
+    # wrap above variables into a dictionary, to pass to speed_check
+    speed_check_dict = {
+        "p1": p1, 
+        "p2": p2, 
+        "p1_stat_changes": p1_stat_changes, 
+        "p2_stat_changes": p2_stat_changes, 
+        "p1_ev": p1_ev, 
+        "p2_ev": p2_ev
+    }
+
+    # pass speed_check_dict to speed_check
+    speed_check_string = speed_check(**speed_check_dict)
+
+    return speed_check_string, speed_check_dict
+
+
+
 # take prompt and grab the strings after output
-import json
 def get_speedcheck(prompt):
+  
+  # keep track of how long it takes to run
+    start_time = time.time()
     instruction = f'''
 Given the following input, please parse it and return a valid JSON string with the corresponding arguments. If the input contains the phrase "max speed", please assume that corresponds to 252 speed ev investment and stage change of 0 unless otherwise state.\n\nInput:\n{prompt}\n
 Output:\n
 '''
+    result = make_inference(prompt).replace(instruction, "")
+    st.write(result)
+
+    # Try to parse the result into the dictionary
     try:
-        result = make_inference(prompt).replace(instruction, "")
-        # st.write(result)
-    
-        speedcheck_outcome = formatted_speed_check(result)
-        #st.write(speedcheck_outcome)
+        st.write("Calculating speed check...")
+        speedcheck_outcome, speed_check_dict = formatted_speed_check(result)
+
+        # Report the speed check outcome
         st.write(speedcheck_outcome)
+
+        # save the result to supabase
+        convo_log = {
+          "query": prompt,
+          "speed_check_string": result,
+          "query_result": speedcheck_outcome,
+          "speed_check_dict": speed_check_dict,
+          "speed_check_pass": True,
+          "convo_id": st.session_state.convo_id
+        }
+        st.write("Speed check calculated successfully!")
+        # save to supabase
     except:
-        st.write("Sorry, I didn't understand that. Could you make sure to specify the pokemons, ev, and stat changes?")
+      # save the error to supabase
+      # leave other entires blank to be NULL
+      convo_log = {
+          "query": prompt,
+          "speed_check_string": result,
+          "speed_check_pass": False,
+          "convo_id": st.session_state.convo_id
+        }
+      st.write("Sorry, I didn't understand that. Could you make sure to specify the pokemons, ev, and stat changes?")
+    # round time_to_result to 4 decimal places
+    convo_log["time_to_result"] = round(time.time() - start_time, 4)
+    dat = supabase_client.table("speed-checks-logs").insert(convo_log).execute()
 
 
 st.title("Welcome to speedcheck bot!")
@@ -66,19 +147,6 @@ input_prompt = st.text_input(label = "Write your query here")
 if input_prompt != "":
       get_speedcheck(input_prompt)
 
-# input_prompt = "Tell me if max speed iron bundle outspeeds max speed iron hands"
-
-# instruction = f'''
-# Given the following input, please parse it and return a valid JSON string with the corresponding arguments. If the input contains the phrase "max speed", please assume that corresponds to 252 speed ev investment and stage change of 0 unless otherwise state.\n\nInput:\n{input_prompt}\n
-# Output:\n
-# '''
-
-# output = get_speedcheck(input_prompt)
-
-
-#print(ast.literal_eval(output))
-#import json
-#print(json.dumps(output))
 
 # need to increase speed
 # need to find why the model is returning entire instruction instead of just the generated part

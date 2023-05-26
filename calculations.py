@@ -154,6 +154,8 @@ def speed_check(p1, p2, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_ev=2
     pokemon_one = lookup_pokemon(p1.lower())
     pokemon_two = lookup_pokemon(p2.lower())
 
+    
+    # from pokemon extract stat
     p1_speed = extract_stat(pokemon_one, "speed")
     p2_speed = extract_stat(pokemon_two, "speed")
 
@@ -167,28 +169,16 @@ def speed_check(p1, p2, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_ev=2
     if p1_final_speed == p2_final_speed:
         return "Speed Tie"
     elif p1_final_speed < p2_final_speed:
-        print(f"{p1} speed stat is {p1_final_speed}, which is slower than {p2} at {p2_final_speed}")
-        return p2
-    print(f"{p1} speed stat is {p1_final_speed}, which is faster than {p2} at {p2_final_speed}")
-    return p1
+        return f"{p1} speed stat is {p1_final_speed}, which is slower than {p2} at {p2_final_speed}"
+
+    return f"{p1} speed stat is {p1_final_speed}, which is faster than {p2} at {p2_final_speed}"
 
 import ast
 
 def check_if_exists(d, arg):
     return d[arg] if arg in d.keys() else ""    
 
-def formatted_speed_check(arg_strings):
-    speed_check_dict = ast.literal_eval(arg_strings)
 
-    p1 = check_if_exists(speed_check_dict, "p1")
-    p2 = check_if_exists(speed_check_dict, "p2")
-    p1_stat_changes = check_if_exists(speed_check_dict, "p1_stat_changes")
-    p2_stat_changes = check_if_exists(speed_check_dict, "p2_stat_changes")
-    p1_ev = check_if_exists(speed_check_dict, "p1_ev")
-    p2_ev = check_if_exists(speed_check_dict, "p2_ev")
-
-    return speed_check(p1, p2, p1_stat_changes=p1_stat_changes,
-    p2_stat_changes=p2_stat_changes, p1_ev=p1_ev, p2_ev=p2_ev)
 
 
 
