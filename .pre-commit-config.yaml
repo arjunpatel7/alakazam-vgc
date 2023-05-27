@@ -29,7 +29,7 @@ repos:
     hooks:
       - id: ruff
       # prevent ruff from checking the length of each line
-        args: ["--max-line-length", "0"]
+        args: ["--line-length", "150"]
 
   # shellcheck-py for linting shell files
   - repo: https://github.com/shellcheck-py/shellcheck-py

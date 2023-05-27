@@ -32,7 +32,7 @@ supabase_client = create_client(sb_url, sb_key)
 
 # Load the Peft model
 
-model_name = "bloom-speed-check-small"
+model_name = "bloom-speed-check-expanded"
 
 peft_model_id = f"arjunpatel/{model_name}"
 config = PeftConfig.from_pretrained(peft_model_id)
@@ -51,10 +51,7 @@ speed_model = PeftModel.from_pretrained(model, peft_model_id)
 def make_inference(input):
     batch = tokenizer(
         f"""
-Given the following input, please parse it and return a valid JSON string with
-the corresponding arguments. If the input contains the phrase "max speed",
-please assume that corresponds to 252 speed ev investment and stage change
- of 0 unless otherwise state.\n\nInput:\n{input}\n
+Given the following input, please parse it and return a valid JSON string with the corresponding arguments.\n\nInput:\n{input}\n
 Output:\n
 """,
         return_tensors="pt",
@@ -112,10 +109,7 @@ def get_speedcheck(prompt):
     # keep track of how long it takes to run
     start_time = time.time()
     instruction = f"""
-Given the following input, please parse it and return a valid JSON string
-with the corresponding arguments. If the input contains the phrase "max speed",
-please assume that corresponds to 252 speed ev investment and stage change of 0 unless
-otherwise state.\n\nInput:\n{prompt}\n
+Given the following input, please parse it and return a valid JSON string with the corresponding arguments.\n\nInput:\n{prompt}\n
 Output:\n
 """
     result = make_inference(prompt).replace(instruction, "")
