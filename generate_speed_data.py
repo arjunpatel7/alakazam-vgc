@@ -184,3 +184,14 @@ with jsonlines.open("speed_training_data.jsonl", mode="w") as writer:
     for x in range(0, 5000):
         example = construct_no_stat_changes_examples()
         writer.write(example)
+
+with jsonlines.open("speed_training_data_eval.jsonl", mode="w") as writer:
+    for x in range(0, 100):
+        example = construct_example()
+        writer.write(example)
+    for x in range(0, 50):
+        example = construct_max_speed_example()
+        writer.write(example)
+    for x in range(0, 50):
+        example = construct_no_stat_changes_examples()
+        writer.write(example)
