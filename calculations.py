@@ -1,10 +1,12 @@
-#helll yeeeee
 import math
 import random
+import editdistance
+import jsonlines
 
 
 def poke_round(num):
     pass
+
 
 def base_damage(base_power, attack, defense):
     # given args, calculatse base damage of attack
@@ -13,11 +15,12 @@ def base_damage(base_power, attack, defense):
 
     level_weight = math.floor(((2 * LEVEL) / 5) + 2)
 
-    step1 = math.floor((level_weight * base_power * attack)/defense)
+    step1 = math.floor((level_weight * base_power * attack) / defense)
 
-    step2 = math.floor(step1/50) + 2
+    step2 = math.floor(step1 / 50) + 2
 
     return step2
+
 
 # DaWoblefet calc exam[le]
 
@@ -29,30 +32,33 @@ def base_damage(base_power, attack, defense):
 def spread_move_modifier(damage):
     # reduce damage by 0.75 and pokeround
 
-    return poke_round(damage * (3072/4096))
+    return poke_round(damage * (3072 / 4096))
 
 
 def random_modifier(damage):
     n = random.randint(85, 100)
 
-    return math.floor(damage * (100 - n)/100)
+    return math.floor(damage * (100 - n) / 100)
+
 
 def STAB_modifier(damage):
-    return poke_round((6144/4096) * damage)
+    return poke_round((6144 / 4096) * damage)
 
 
 def burn_modifier(damage):
     pass
 
 
-#BST to actual stat
+# BST to actual stat
 
-def calc_stat(level, base, ev, iv, is_hp = False):
-    first_term = math.floor((( (2 * base) + iv + math.floor(ev/4)) * level)/100)
+
+def calc_stat(level, base, ev, iv, is_hp=False):
+    first_term = math.floor((((2 * base) + iv + math.floor(ev / 4)) * level) / 100)
     if is_hp:
         return level + first_term + 10
     else:
         return math.floor(first_term + 5)
+
 
 # quaxly_hp = calc_stat(50, 55, 252, 31, True)
 # quaxly_atk = calc_stat(50, 65, 252, 31, False)
@@ -62,11 +68,8 @@ def calc_stat(level, base, ev, iv, is_hp = False):
 # assert quaxly_atk == 117, "Atk calc is wrong"
 
 
-
-
-
-
 # Attack stat modifirs
+
 
 def stat_modifier(num_stages, stat):
     # given stat change, compute modifier and new stat
@@ -78,23 +81,24 @@ def stat_modifier(num_stages, stat):
     if num_stages >= 6:
         modifier = 4
     elif num_stages == 5:
-        modifier = 7/2
+        modifier = 7 / 2
     elif num_stages == 4:
         modifier = 3
     elif num_stages == 3:
-        modifier = 5/2
+        modifier = 5 / 2
     elif num_stages == 2:
         modifier = 2
     elif num_stages == 1:
-        modifier = 3/2
-    
+        modifier = 3 / 2
+
     if direction == -1:
-        return math.floor((1/modifier) * stat)
+        return math.floor((1 / modifier) * stat)
     return math.floor(modifier * stat)
+
 
 #  gholdengo stat checks
 # print("Gholdengo checks")
-# ghol_test_1= stat_modifier(num_stages = 2, stat = calc_stat(50, 84, 252, 31)) 
+# ghol_test_1= stat_modifier(num_stages = 2, stat = calc_stat(50, 84, 252, 31))
 # assert ghol_test_1 == 272, "Ghol test is wrong"
 
 # ghol_test_2 = stat_modifier(num_stages = -3, stat = calc_stat(50, 84, 252, 31))
@@ -104,15 +108,17 @@ def stat_modifier(num_stages, stat):
 
 # implement type effectivess checks
 # figure out how to represent two pokemon and the resultant calculation
-import editdistance
-import jsonlines
 
-pokemons = []
-with jsonlines.open("gen9_pokemon.jsonl") as reader:
-    for entry in reader:
-        pokemons.append(entry)
 
-def lookup_pokemon(pokemon):
+def read_in_pokemon(f):
+    pokemons = []
+    with jsonlines.open(f) as reader:
+        for entry in reader:
+            pokemons.append(entry)
+    return pokemons
+
+
+def lookup_pokemon(pokemon, pokemons):
 
     # first, check for exact match
     # if no exact match,check for edit distance closest
@@ -120,10 +126,12 @@ def lookup_pokemon(pokemon):
     all_pokemon = [x["name"] for x in pokemons]
 
     matched_pokemon = pokemon if pokemon in all_pokemon else None
-    if matched_pokemon == None:
+    if matched_pokemon is None:
         # find the closest name by edit distance
-        matched_pokemon = min(all_pokemon, key=lambda x: abs(editdistance.eval(pokemon, x)))
-    
+        matched_pokemon = min(
+            all_pokemon, key=lambda x: abs(editdistance.eval(pokemon, x))
+        )
+
     # given pokemon dict, just grab relevant mon and return
     for poke in pokemons:
         if poke["name"] == matched_pokemon:
@@ -134,37 +142,36 @@ def lookup_pokemon(pokemon):
 # print(lookup_pokemon("samence")["name"])
 # print(lookup_pokemon("fueco")["name"])
 
-    
+
 def type_check():
     # retrieve type modifier based on input types
     pass
 
+
 def item_lookup():
-    #return properties of item
+    # return properties of item
     pass
+
 
 def extract_stat(p, stat):
 
     return list(filter(lambda x: x["stat"]["name"] == stat, p["stats"]))[0]["base_stat"]
 
 
-
-def speed_check(p1, p2, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_ev=252):
+def speed_check(p1, p2, f, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_ev=252):
     # given game state for changes, check if p1 stat outspeeds p2 stat
-    pokemon_one = lookup_pokemon(p1.lower())
-    pokemon_two = lookup_pokemon(p2.lower())
+    pokemon_one = lookup_pokemon(p1.lower(), f)
+    pokemon_two = lookup_pokemon(p2.lower(), f)
 
-    
     # from pokemon extract stat
     p1_speed = extract_stat(pokemon_one, "speed")
     p2_speed = extract_stat(pokemon_two, "speed")
 
+    p1_final_speed = calc_stat(level=50, base=p1_speed, ev=p1_ev, iv=31)
+    p2_final_speed = calc_stat(level=50, base=p2_speed, ev=p2_ev, iv=31)
 
-    p1_final_speed = calc_stat(level=50, base =p1_speed, ev=p1_ev, iv=31)
-    p2_final_speed = calc_stat(level=50, base =p2_speed, ev=p2_ev, iv=31)
-
-    p1_final_speed = stat_modifier(num_stages = p1_stat_changes, stat = p1_final_speed)      
-    p2_final_speed = stat_modifier(num_stages = p2_stat_changes, stat = p2_final_speed) 
+    p1_final_speed = stat_modifier(num_stages=p1_stat_changes, stat=p1_final_speed)
+    p2_final_speed = stat_modifier(num_stages=p2_stat_changes, stat=p2_final_speed)
 
     if p1_final_speed == p2_final_speed:
         return "Speed Tie"
@@ -173,14 +180,9 @@ def speed_check(p1, p2, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_ev=2
 
     return f"{p1} speed stat is {p1_final_speed}, which is faster than {p2} at {p2_final_speed}"
 
-import ast
 
 def check_if_exists(d, arg):
-    return d[arg] if arg in d.keys() else ""    
-
-
-
-
+    return d[arg] if arg in d.keys() else ""
 
 
 # print(speed_check("gholdengho", "gholdengo", 2, -1, 252, 252))
@@ -190,16 +192,15 @@ def check_if_exists(d, arg):
 # print(speed_check("flutter man", "iron bundle", p1_stat_changes=1))
 
 
-
 def calculate_damage(p1, move, p2, p1_stat_changes, p2_stat_changes):
     # basic implementation of pokemon move calculator
 
-    #lookup stats, type, of both pokemon
+    # lookup stats, type, of both pokemon
 
-    #lookup move type and power
-    #transform stats given stat changes
-    #do damage calculation
+    # lookup move type and power
+    # transform stats given stat changes
+    # do damage calculation
     # factor in offensive/defensive items
 
-    #return damage windows
+    # return damage windows
     pass

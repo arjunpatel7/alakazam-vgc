@@ -149,7 +149,8 @@ Output:\n
         )
     # round time_to_result to 4 decimal places
     convo_log["time_to_result"] = round(time.time() - start_time, 4)
-    supabase_client.table("speed-checks-logs").insert(convo_log).execute()
+    print(convo_log["time_to_result"])
+    # supabase_client.table("speed-checks-logs").insert(convo_log).execute()
 
 
 st.title("Welcome to speedcheck bot!")
