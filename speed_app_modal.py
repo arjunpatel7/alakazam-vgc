@@ -4,7 +4,6 @@ import re
 from supabase import create_client
 import time
 import modal
-import os
 import ast
 from calculations import read_in_pokemon, speed_check, check_if_exists
 
@@ -19,9 +18,9 @@ if "convo_id" not in st.session_state:
     st.session_state.session_history = []
 
 # Supabase Setup
-
-sb_url = os.environ.get("SUPABASE_URL")
-sb_key = os.environ.get("SUPABASE_KEY")
+# set url and key from streamlit secrets
+sb_url = st.secrets["SUPABASE_URL"]
+sb_key = st.secrets["SUPABASE_KEY"]
 
 
 def search_json_dict(string):
@@ -126,7 +125,6 @@ with st.sidebar:
     st.write(
         "Right now, speedcheck bot only support queries that include info about the two pokemon involved, their evs, and their speed stat changes."
     )
-
     st.write(
         "Speedcheck bot is NOT like chatgpt, so please be sure to ask only about speedchecks including the above info"
     )
