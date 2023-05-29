@@ -1,8 +1,5 @@
 from modal import Image, Stub, method, Secret, create_package_mounts
 
-from modal import gpu
-
-
 # load model into Modal
 model_name = "bloom-speed-check-expanded"
 
@@ -51,7 +48,7 @@ stub = Stub("pkmn-py", image=image)
 # use gpu.A100 for fastest inference, around 3s after startup
 # t4 is cheaper and just as fast as a100
 # use cpu to specify core, around 10s after startup
-@stub.cls(secret=Secret.from_name("my-huggingface-secret"), gpu=gpu.T4)
+@stub.cls(secret=Secret.from_name("my-huggingface-secret"), gpu="T4")
 class PokemonSpeedChecker:
     def __enter__(self):
         # the enter function is for one-time initialization
