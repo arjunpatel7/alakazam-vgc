@@ -133,3 +133,5 @@ dmypy.json
 *.jsonl
 
 .DS_Store
+
+secrets.toml
