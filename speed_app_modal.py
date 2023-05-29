@@ -116,6 +116,28 @@ def get_speedcheck(prompt):
 
 
 st.title("Welcome to speedcheck bot!")
+
+with st.sidebar:
+    # create a description of the speedcheck bot in really fancy text
+    st.header("What is speedcheck bot?")
+    st.write(
+        "Speedcheck bot allows you to pass natural language queries about Pokemon speedchecks and it will return the speedcheck outcome for you!"
+    )
+    st.write(
+        "Right now, speedcheck bot only support queries that include info about the two pokemon involved, their evs, and their speed stat changes."
+    )
+
+    st.write(
+        "Speedcheck bot is NOT like chatgpt, so please be sure to ask only about speedchecks including the above info"
+    )
+
+st.subheader("Query Examples")
+with st.expander("Here are some examples of queries you can ask speedcheck bot:"):
+    st.write("Is -5 35 Noibat slower than -5 19 Blissey")
+    st.write("Will Finneon with 230 speed evs outspeed Meowth with 215 speed evs")
+    st.write("Does max speed Salamence outspeed 248 Talonflame?")
+
+st.subheader("Ask away!")
 input_prompt = st.text_input(label="Write your query here")
 
 if input_prompt != "":
