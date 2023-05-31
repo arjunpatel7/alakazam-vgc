@@ -131,6 +131,10 @@ def lookup_pokemon(pokemon, pokemons):
         matched_pokemon = min(
             all_pokemon, key=lambda x: abs(editdistance.eval(pokemon, x))
         )
+        # add a condition here that if the edit distance is too large
+        # then we should return None
+        if editdistance.eval(pokemon, matched_pokemon) > 4:
+            return None
 
     # given pokemon dict, just grab relevant mon and return
     for poke in pokemons:
@@ -163,18 +167,29 @@ def speed_check(p1, p2, f, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_e
     pokemon_one = lookup_pokemon(p1.lower(), f)
     pokemon_two = lookup_pokemon(p2.lower(), f)
 
+    # check if either pokemon is None
+    # if so, return a failure message
+
+    if pokemon_one is None:
+        return f"{p1} is not a valid pokemon"
+    if pokemon_two is None:
+        return f"{p2} is not a valid pokemon"
+
     # from pokemon extract stat
     p1_speed = extract_stat(pokemon_one, "speed")
     p2_speed = extract_stat(pokemon_two, "speed")
 
+    # we can now calculate speed stat after evs and ivs
     p1_final_speed = calc_stat(level=50, base=p1_speed, ev=p1_ev, iv=31)
     p2_final_speed = calc_stat(level=50, base=p2_speed, ev=p2_ev, iv=31)
 
+    # now we can apply stat changes
     p1_final_speed = stat_modifier(num_stages=p1_stat_changes, stat=p1_final_speed)
     p2_final_speed = stat_modifier(num_stages=p2_stat_changes, stat=p2_final_speed)
 
+    # we have all info to compare the two pokemon
     if p1_final_speed == p2_final_speed:
-        return "Speed Tie"
+        return f"Speed Tie, with both pokemon at {p1_final_speed}"
     elif p1_final_speed < p2_final_speed:
         return f"{p1} speed stat is {p1_final_speed}, which is slower than {p2} at {p2_final_speed}"
 
