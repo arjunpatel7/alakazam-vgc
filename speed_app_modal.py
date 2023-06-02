@@ -5,7 +5,12 @@ from supabase import create_client
 import time
 import modal
 import ast
-from calculations import read_in_pokemon, speed_check, check_if_exists
+from calculations import (
+    read_in_pokemon,
+    speed_check,
+    check_if_exists,
+    speed_check_statement,
+)
 import pandas as pd
 
 pokemons = read_in_pokemon("gen9_pokemon.jsonl")
@@ -60,9 +65,11 @@ def formatted_speed_check(arg_strings, f):
     }
 
     # pass speed_check_dict to speed_check
-    speed_check_string = speed_check(**speed_check_dict)
+    speed_check_calcs = speed_check(**speed_check_dict)
 
-    return speed_check_string, speed_check_dict
+    speed_check_string, r = speed_check_statement(speed_check_calcs)
+
+    return speed_check_string, speed_check_calcs, r
 
 
 def get_speedcheck(prompt):
@@ -75,10 +82,17 @@ def get_speedcheck(prompt):
     # call run_inference remotely on modal
     result = extract.call(prompt)
     st.write(result)
+    speed_check_calcs = None
+    # this is the string that will be the name of pokemon that is faster
+    # write a better variable name for it
+    r = None
+
     # Try to parse the result into the dictionary
     try:
         st.write("Calculating speed check...")
-        speedcheck_outcome, speed_check_dict = formatted_speed_check(result, pokemons)
+        speedcheck_outcome, speed_check_calcs, r = formatted_speed_check(
+            result, pokemons
+        )
 
         # Report the speed check outcome
         st.write(speedcheck_outcome)
@@ -116,10 +130,23 @@ def get_speedcheck(prompt):
 
     # add prompt and query result to session history
     # note to self: history should be easier to view, by having columns for who is actually faster, the actual speeds, parameters, etc
-
-    st.session_state.session_history.append(
-        {"calc": convo_log["query"], "result": convo_log["query_result"]}
-    )
+    if speed_check_calcs is not None:
+        # add to session history a structured respresentation of the speed_check
+        # must include query, the faster pokemon, the final speeds, the parameters, and the time to result
+        history_entry = {
+            "query": prompt,
+            "faster_pokemon": r,
+            "p1": speed_check_calcs["p1"],
+            "p2": speed_check_calcs["p2"],
+            "p1_final_speed": speed_check_calcs["p1_final_speed"],
+            "p2_final_speed": speed_check_calcs["p2_final_speed"],
+            "p1_stat_changes": speed_check_calcs["p1_stat_changes"],
+            "p2_stat_changes": speed_check_calcs["p2_stat_changes"],
+            "p1_ev": speed_check_calcs["p1_ev"],
+            "p2_ev": speed_check_calcs["p2_ev"],
+            "time_to_result": convo_log["time_to_result"],
+        }
+        st.session_state.session_history.append(history_entry)
 
 
 st.title("Welcome to speedcheck bot!")
@@ -163,4 +190,20 @@ if len(st.session_state.session_history) > 0:
     st.subheader("Session History")
     # instead of writing the session history, make a data frame and display it
     session_history_df = pd.DataFrame(st.session_state.session_history)
+    # rearrange columns so query is last
+    session_history_df = session_history_df[
+        [
+            "faster_pokemon",
+            "p1",
+            "p2",
+            "p1_final_speed",
+            "p2_final_speed",
+            "p1_stat_changes",
+            "p2_stat_changes",
+            "p1_ev",
+            "p2_ev",
+            "time_to_result",
+            "query",
+        ]
+    ]
     st.dataframe(session_history_df)

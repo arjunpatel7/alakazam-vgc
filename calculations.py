@@ -197,12 +197,41 @@ def speed_check(p1, p2, f, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_e
     p2_final_speed = stat_modifier(num_stages=p2_stat_changes, stat=p2_final_speed)
 
     # we have all info to compare the two pokemon
-    if p1_final_speed == p2_final_speed:
-        return f"Speed Tie, with both pokemon at {p1_final_speed}"
-    elif p1_final_speed < p2_final_speed:
-        return f"{p1} speed stat is {p1_final_speed}, which is slower than {p2} at {p2_final_speed}"
 
-    return f"{p1} speed stat is {p1_final_speed}, which is faster than {p2} at {p2_final_speed}"
+    # return a dictionary with all function parameters AND the final speeds of each pokemon
+
+    final_calculation = {
+        "p1": pokemon_one["name"],
+        "p2": pokemon_two["name"],
+        "p1_final_speed": p1_final_speed,
+        "p2_final_speed": p2_final_speed,
+        "p1_stat_changes": p1_stat_changes,
+        "p2_stat_changes": p2_stat_changes,
+        "p1_ev": p1_ev,
+        "p2_ev": p2_ev,
+    }
+    return final_calculation
+
+
+def speed_check_statement(final_calculation):
+    # given final calculation, return a statement the bot responds with
+    p1 = final_calculation["p1"]
+    p2 = final_calculation["p2"]
+    p1_final_speed = final_calculation["p1_final_speed"]
+    p2_final_speed = final_calculation["p2_final_speed"]
+
+    if p1_final_speed == p2_final_speed:
+        return f"Speed Tie, with both pokemon at {p1_final_speed}", "speed_tie"
+    elif p1_final_speed < p2_final_speed:
+        return (
+            f"{p1} speed stat is {p1_final_speed}, which is slower than {p2} at {p2_final_speed}",
+            p2,
+        )
+
+    return (
+        f"{p1} speed stat is {p1_final_speed}, which is faster than {p2} at {p2_final_speed}",
+        p1,
+    )
 
 
 def check_if_exists(d, arg):
