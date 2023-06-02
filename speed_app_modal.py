@@ -6,7 +6,7 @@ import time
 import modal
 import ast
 from calculations import read_in_pokemon, speed_check, check_if_exists
-
+import pandas as pd
 
 pokemons = read_in_pokemon("gen9_pokemon.jsonl")
 
@@ -15,6 +15,7 @@ if "convo_id" not in st.session_state:
     # create random convo id for each run of the application
     CONVO_ID = random.randint(100000, 999999)
     st.session_state.convo_id = CONVO_ID
+if "session_history" not in st.session_state:
     st.session_state.session_history = []
 
 # Supabase Setup
@@ -113,6 +114,13 @@ def get_speedcheck(prompt):
     supabase_client = create_client(sb_url, sb_key)
     supabase_client.table("speed-checks-logs").insert(convo_log).execute()
 
+    # add prompt and query result to session history
+    # note to self: history should be easier to view, by having columns for who is actually faster, the actual speeds, parameters, etc
+
+    st.session_state.session_history.append(
+        {"calc": convo_log["query"], "result": convo_log["query_result"]}
+    )
+
 
 st.title("Welcome to speedcheck bot!")
 
@@ -138,5 +146,21 @@ with st.expander("Here are some examples of queries you can ask speedcheck bot:"
 st.subheader("Ask away!")
 input_prompt = st.text_input(label="Write your query here")
 
+
+# I want to give users the ability to add queries to a cache, then compute all queries at once
+# Below is the streamlit code for this
+
+# if st.button("Add to cache"):
+#     st.session_state.cache.append(input_prompt)
+#     st.write(st.session_state.cache)
+
+
 if input_prompt != "":
     get_speedcheck(input_prompt)
+
+
+if len(st.session_state.session_history) > 0:
+    st.subheader("Session History")
+    # instead of writing the session history, make a data frame and display it
+    session_history_df = pd.DataFrame(st.session_state.session_history)
+    st.dataframe(session_history_df)

@@ -119,9 +119,17 @@ def read_in_pokemon(f):
 
 
 def lookup_pokemon(pokemon, pokemons):
+    # given pokemon name, return pokemon dict of stats
 
     # first, check for exact match
     # if no exact match,check for edit distance closest
+
+    # preprocess pokemon names to avoid errors
+    # check for whitespace, lowercase, commas, everything except hypens
+    # and apostrophes
+
+    # preprocess pokemon name
+    pokemon = pokemon.replace(" ", "").replace(",", "").lower()
 
     all_pokemon = [x["name"] for x in pokemons]
 
@@ -164,6 +172,7 @@ def extract_stat(p, stat):
 
 def speed_check(p1, p2, f, p1_stat_changes=0, p2_stat_changes=0, p1_ev=252, p2_ev=252):
     # given game state for changes, check if p1 stat outspeeds p2 stat
+
     pokemon_one = lookup_pokemon(p1.lower(), f)
     pokemon_two = lookup_pokemon(p2.lower(), f)
 
