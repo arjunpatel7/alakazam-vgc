@@ -1,4 +1,4 @@
-# alakazam: A command line interface for Pokemon VGC calculations
+# :dizzy: alakazam :spoon: : A command line interface for Pokemon VGC calculations
 
 alakazam is a chatbot-like interface for running calculations for the Pokemon video games Pokemon Scarlet and Pokemon Violet, specifically for standard doubles (VGC) competitive play. Think of it like a standard damage calculator, except with natural language instructions instead!
 
@@ -54,5 +54,3 @@ We use Hugging Face (transformers, peft) and Google Colab to finetune an instanc
 - Add full damage calc capability
 
 ## License
-
-
