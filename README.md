@@ -1,14 +1,46 @@
-# pkmn-py
-A chatbot for Pokemon VGC damage calculations. Star the repo if you are interested!
+# alakazam: A command line interface for Pokemon VGC calculations
+
+alakazam is a chatbot-like interface for running calculations for the Pokemon video games Pokemon Scarlet and Pokemon Violet, specifically for standard doubles (VGC) competitive play. Think of it like a standard damage calculator, except with natural language instructions instead!
+
+Simply type in a calculation you wish to compute, and the app will parse your natural language instructions and return the result.
+
+Alakazam only works for speed checks right now, but advanced capabilites such as damage calcs are incoming! If there's something specific you'd want to see, please open an issue. Thanks, and enjoy!
 
 
 
-# implemented
+## Table of Contents
+- [Usage](#usage)
+- [How it Works] (#how it works)
+- [Stack](#stack)
+- [Features](#features)
+- [Roadmap](#roadmap)
+- [License](#license)
+- [Contact Information](#contact-information)
+
+## Usage
+
+Navigate to the deployed [Streamlit web application here](https://alakazam.streamlit.app/).
+
+From here, just type in a natural language command and hit enter! It may take up to fifteen seconds to get your first response. After submitting a few responses, latency should decrease to about four seconds.
+
+Submitted results are cached in the app so you can keep track of your calcs.
+
+## How it Works
+
+## Stack
+
+We use Streamlit for the web application, and Streamlit Cloud to host it.
+
+We use Modal to host a finetuned large language model model for parsing user commands.
+
+We use langchain to generate examples
 
 
-# todos/ideas
-- add access to vgcguide.com, to serve as a chatbot interface there
-- add  db connected to bulbapedia
-- cache calcs to return similar calcs to users
-- keep track of calcs in a structured database, to use as info or dashboard
-- come up with a kickass name....
+## Features
+
+## Roadmap
+
+## License
+
+## Contact Information
+
