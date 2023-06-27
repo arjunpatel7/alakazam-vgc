@@ -37,7 +37,7 @@ We use [Streamlit](https://streamlit.io) for the web application, and Streamlit 
 
 We use [Modal](https://modal.com) to host a finetuned large language model model for parsing user commands.
 
-We use [langchain](https://api.python.langchain.com/en/latest/) to generate examples, and we use PokeAPI to get the data about the games and Pokemon for the app to lookup.
+We use [langchain](https://api.python.langchain.com/en/latest/) to generate examples, and we use [PokeAPI](https://pokeapi.co) to get the data about the games and Pokemon for the app to lookup.
 
 We use [Supabase](https://supabase.com) to store queries made by users, so we can learn about what users request and what calcs work.
 
