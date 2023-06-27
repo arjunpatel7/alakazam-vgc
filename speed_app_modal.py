@@ -149,19 +149,19 @@ def get_speedcheck(prompt):
         st.session_state.session_history.append(history_entry)
 
 
-st.title("Welcome to speedcheck bot!")
+st.title("Welcome to alakazam!")
 
 with st.sidebar:
     # create a description of the speedcheck bot in really fancy text
-    st.header("What is speedcheck bot?")
+    st.header("What is alakazam")
     st.write(
-        "Speedcheck bot allows you to pass natural language queries about Pokemon speedchecks and it will return the speedcheck outcome for you!"
+        "alakazam allows you to pass natural language queries about Pokemon speedchecks and it will return the speedcheck outcome for you!"
     )
     st.write(
-        "Right now, speedcheck bot only support queries that include info about the two pokemon involved, their evs, and their speed stat changes."
+        "Right now, alakazam only support queries that include info about the two pokemon involved, their evs, and their speed stat changes."
     )
     st.write(
-        "Speedcheck bot is NOT like chatgpt, so please be sure to ask only about speedchecks including the above info"
+        "alakazam is NOT like chatgpt, so please be sure to ask only about speedchecks including the above info"
     )
 
 st.subheader("Query Examples")

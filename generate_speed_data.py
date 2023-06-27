@@ -28,6 +28,7 @@ def random_mon(pokemons):
     return pokemon
 
 
+# first section of prompts
 templates = [
     "Does {p1_changes} {p1_ev} {p1} outspeed {p2_changes} {p2_ev} {p2}?",
     "Will {p1} at {p1_changes} with {p1_ev} outspeed {p2} at \

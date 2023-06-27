@@ -7,7 +7,6 @@ Simply type in a calculation you wish to compute, and the app will parse your na
 Alakazam only works for speed checks right now, but advanced capabilites such as damage calcs are incoming! If there's something specific you'd want to see, please open an issue. Thanks, and enjoy!
 
 
-
 ## Table of Contents
 - [Usage](#usage)
 - [How It Works](#how-it-works)
