@@ -2,7 +2,7 @@
 
 alakazam is a chatbot-like interface for running calculations for the Pokemon video games Pokemon Scarlet and Pokemon Violet, specifically for standard doubles (VGC) competitive play. Think of it like a standard damage calculator, except with natural language instructions instead!
 
-Simply type in a calculation you wish to compute, and the app will parse your natural language instructions and return the result.
+Simply type in a calculation you wish to compute, and the app will parse your natural language instructions and return the result, just like magic!
 
 Alakazam only works for speed checks right now, but advanced capabilites such as damage calcs are incoming! If there's something specific you'd want to see, please open an issue. Thanks, and enjoy!
 
