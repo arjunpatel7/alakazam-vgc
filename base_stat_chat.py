@@ -4,6 +4,7 @@ from langchain import Cohere, SQLDatabase, SQLDatabaseChain
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import OperationalError
 
 # a chatbot for doing natural language querying on a dataset of pokemon stats
 
@@ -17,8 +18,6 @@ pokemons = read_in_pokemon("gen9_pokemon.jsonl")
 
 pokemon_stats = []
 
-
-print(pokemons[0]["stats"])
 for p in pokemons:
     pokemon_stats.append(
         {
@@ -39,6 +38,8 @@ for p in pokemons:
 
 Base = declarative_base()
 
+# Following code was generated with chatgpt to properly convert data to db
+
 
 class Pokemon(Base):
     __tablename__ = "pokemon"
@@ -53,6 +54,10 @@ class Pokemon(Base):
 
 
 def convert_to_sqlite(pokemon_stats, db_name="pokemon_stats.db"):
+
+    # writes data to a sqlite database
+    # written using chatgpt
+
     engine = create_engine(f"sqlite:///{db_name}")
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
@@ -75,9 +80,9 @@ def convert_to_sqlite(pokemon_stats, db_name="pokemon_stats.db"):
 
 
 def create_chain():
-    llm = Cohere(model="command", temperature=0.90)
+    llm = Cohere(model="command", temperature=0)
     db = SQLDatabase.from_uri("sqlite:///pokemon_stats.db")
-    chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
+    chain = SQLDatabaseChain.from_llm(llm, db)
     return chain
 
 
@@ -92,7 +97,23 @@ args = parser.parse_args()
 ask = args.ask
 
 if __name__ == "__main__":
+    # need some try except blocks to handle sql query failing
+    # and Cohere generation errors if illicit input is passed
+
+    # eventually, will integrate nemo guardails to prevent illicit input
+    # for now, just try except blocks
     chain = create_chain()
-    print(run_query(chain, ask))
+
+    try:
+        print(run_query(chain, ask))
+
+    except OperationalError:
+        # query failed
+        print("Query couldn't be transformed. Please try again by rephrasing.")
+
+    # if cohere model returns error, return input rejected
+    except ValueError:
+        print("Input rejected. Please try again by rephrasing.")
+
 
 # we need to convert my json file of pokemon stats into a sqlite database
