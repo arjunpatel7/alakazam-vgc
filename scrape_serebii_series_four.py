@@ -33,10 +33,6 @@ for td in td_elements:
 # for specific pokemon, add them manually
 # also, find index of charmander and remove everything above it
 
-# given list find index of "Charmander"
-charmander_index = new_pokemon_series_4.index("charmander")
-
-new_pokemon_series_4 = new_pokemon_series_4[charmander_index:]
 
 # manually add the pokemon that are not in the list
 
