@@ -5,6 +5,8 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
+from cohere.error import CohereAPIError
+
 
 # a chatbot for doing natural language querying on a dataset of pokemon stats
 
@@ -12,7 +14,7 @@ from sqlalchemy.exc import OperationalError
 
 # this will be a command line script that accepts the query and returns the result
 
-pokemons = read_in_pokemon("gen9_pokemon.jsonl")
+pokemons = read_in_pokemon("./data/gen9_pokemon.jsonl")
 
 # convert pokemons to just pokemon and associated stats in columns
 
@@ -95,6 +97,7 @@ parser.add_argument("ask", type=str, help="The query to run")
 
 args = parser.parse_args()
 ask = args.ask
+convert_to_sqlite(pokemon_stats)
 
 if __name__ == "__main__":
     # need some try except blocks to handle sql query failing
@@ -102,6 +105,9 @@ if __name__ == "__main__":
 
     # eventually, will integrate nemo guardails to prevent illicit input
     # for now, just try except blocks
+
+    # if the pokemon db doesn't exist, create it
+
     chain = create_chain()
 
     try:
@@ -112,7 +118,7 @@ if __name__ == "__main__":
         print("Query couldn't be transformed. Please try again by rephrasing.")
 
     # if cohere model returns error, return input rejected
-    except ValueError:
+    except ValueError or CohereAPIError:
         print("Input rejected. Please try again by rephrasing.")
 
 
