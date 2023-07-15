@@ -142,8 +142,10 @@ def item_lookup():
     pass
 
 
-def extract_stat(p, stat):
+# this function needs to be refactored to reflect changes in data_collection.py
 
+
+def extract_stat(p, stat):
     return list(filter(lambda x: x["stat"]["name"] == stat, p["stats"]))[0]["base_stat"]
 
 

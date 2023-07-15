@@ -179,10 +179,6 @@ def reduce_size(pokemons):
     # we want to retain the stats, moves, types, and abilities
     # we can drop everything else
     for p in pokemons:
-        p["stats"] = [
-            {"base_stat": stat["base_stat"], "name": stat["stat"]["name"]}
-            for stat in p["stats"]
-        ]
         p["moves"] = [move["move"]["name"] for move in p["moves"]]
         p["types"] = [type["type"]["name"] for type in p["types"]]
         p["abilities"] = [ability["ability"]["name"] for ability in p["abilities"]]
