@@ -13,7 +13,7 @@ from calculations import (
 )
 import pandas as pd
 
-pokemons = read_in_pokemon("gen9_pokemon.jsonl")
+pokemons = read_in_pokemon("./data/gen9_pokemon.jsonl")
 
 
 if "convo_id" not in st.session_state:
