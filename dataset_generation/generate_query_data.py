@@ -1,8 +1,16 @@
 import random
 from langchain.llms import Cohere
+import jsonlines
 
 # This file will be exactly the same as generate_speed_data.py, except for the
 # the prompts being related to the query task instead of the speed task.
+from generate_speed_data import random_mon
+
+
+pokemons = []
+with jsonlines.open("./data/gen9_pokemon.jsonl") as reader:
+    for entry in reader:
+        pokemons.append(entry)
 
 
 def random_stat_name():
@@ -23,8 +31,8 @@ stat_templates = [
 # second section of prompts
 # these ask about the top X pokemon in a stat
 top_x_templates = [
-    "What are the top {x} pokemon in {stat}?"
-    "Which pokemon are the top {x} in {stat} stat?"
+    "What are the top {x} pokemon in {stat}?",
+    "Which pokemon are the top {x} in {stat} stat?",
 ]
 
 
@@ -32,9 +40,9 @@ top_x_templates = [
 # these ask about the bottom X pokemon in a stat
 
 bottom_x_templates = [
-    "What are the bottom {x} pokemon in {stat}?"
-    "Who are the bottom {x} pokemon in {stat} stat?"
-    "Which pokemon are the bottom {x} in {stat} stat?"
+    "What are the bottom {x} pokemon in {stat}?",
+    "Who are the bottom {x} pokemon in {stat} stat?",
+    "Which pokemon are the bottom {x} in {stat} stat?",
 ]
 
 
@@ -47,12 +55,76 @@ bottom_x_templates = [
 llm = Cohere(model="command")
 
 
-def create_random_pokemon_prompts():
-    for x in range(3):
+def create_random_pokemon_prompts(x):
+    prompts = []
+    for i in range(0, x):
         new_prompt = llm(
-            "Come up with a one sentence statement related to the pokemon video game."
+            "Come up with a one sentence question related to the pokemon video game."
         )
-        print(new_prompt)
+        prompts.append(new_prompt)
+    return prompts
 
 
-create_random_pokemon_prompts()
+def create_dataset(num_samples=500):
+    # randomly samples the prompt templates
+    # fills in with random pokemon names and stat names and numbers
+    # returns a list of prompts
+
+    # randomly creates pokemon prompts, equal number
+
+    # writes all out in jsonl file
+    all_prompts = []
+
+    for x in range(0, 250):
+        # do the first section of prompts
+        # randomly sample a template
+        template = random.choice(stat_templates)
+        # randomly sample a pokemon
+        pokemon = random_mon(pokemons)
+        # randomly sample a stat
+        stat = random_stat_name()
+        # fill in the template
+        prompt = template.format(pokemon=pokemon, stat=stat)
+        all_prompts.append(prompt)
+    for x in range(0, 250):
+        # do the second section of prompts
+        # randomly sample a template
+        template = random.choice(top_x_templates)
+        # randomly sample a pokemon
+        pokemon = random_mon(pokemons)
+        # randomly sample a stat
+        stat = random_stat_name()
+        # randomly sample a number
+        x = random.randint(1, 10)
+        # fill in the template
+        prompt = template.format(pokemon=pokemon, stat=stat, x=x)
+        all_prompts.append(prompt)
+    for x in range(0, 250):
+        # do the third section of prompts
+        # randomly sample a template
+        template = random.choice(bottom_x_templates)
+        # randomly sample a pokemon
+        pokemon = random_mon(pokemons)
+        # randomly sample a stat
+        stat = random_stat_name()
+        # randomly sample a number
+        x = random.randint(1, 10)
+        # fill in the template
+        prompt = template.format(pokemon=pokemon, stat=stat, x=x)
+        all_prompts.append(prompt)
+
+    # get random prompts from the Cohere API
+    random_prompts = create_random_pokemon_prompts(500)
+
+    # combine all prompts
+    all_prompts.extend(random_prompts)
+
+    # write out to jsonl file
+    with jsonlines.open("./data/query_prompts.jsonl", "w") as writer:
+        print("Writing prompts....")
+        for prompt in all_prompts:
+            writer.write(prompt)
+
+
+if __name__ == "__main__":
+    create_dataset()
