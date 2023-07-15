@@ -173,6 +173,22 @@ def write_all_pokemon(pokemons):
     return
 
 
+def reduce_size(pokemons):
+    # this reduces the size of the pokemon data by removing unnecessary fields
+
+    # we want to retain the stats, moves, types, and abilities
+    # we can drop everything else
+    for p in pokemons:
+        p["stats"] = [
+            {"base_stat": stat["base_stat"], "name": stat["stat"]["name"]}
+            for stat in p["stats"]
+        ]
+        p["moves"] = [move["move"]["name"] for move in p["moves"]]
+        p["types"] = [type["type"]["name"] for type in p["types"]]
+        p["abilities"] = [ability["ability"]["name"] for ability in p["abilities"]]
+    return pokemons
+
+
 # this is the main function that will be called to create the jsonl file
 if __name__ == "__main__":
     paldea_pokemon = get_paldea_pokemon()
@@ -182,4 +198,7 @@ if __name__ == "__main__":
     # combine the paldea and series four pokemon
 
     all_pokemon = paldea_pokemon + series_four_pokemon
+
+    all_pokemon = reduce_size(all_pokemon)
+
     write_all_pokemon(all_pokemon)
