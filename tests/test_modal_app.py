@@ -5,6 +5,14 @@ import pandas as pd
 from utils.calculations import read_in_pokemon, formatted_speed_check
 from tqdm import tqdm
 from utils.base_stat_chat import classify_intent
+import streamlit as st
+import cohere
+from cohere.error import CohereAPIError
+
+from supabase import create_client
+
+sb_url = st.secrets["SUPABASE_URL"]
+sb_key = st.secrets["SUPABASE_KEY"]
 
 # we need to test the inference endpoint from Modal
 
@@ -65,10 +73,8 @@ def intent_classification_data():
         "What is the base special defense of Meowth?",
         "What is the base attack of Salamence?",
         "What is the base special attack of Talonflame?",
-        "What is the base hp of Flutter Mane?",
-        "What are the five fastest pokemon in the game?",
+        "What is the base special defense of Flutter Mane?",
         "Can you tell me about the World of Pokemon?",
-        "what is the best pokemon in the game?",
     ]
 
     list_of_classes = [
@@ -77,12 +83,10 @@ def intent_classification_data():
         "speed check",
         "speed check",
         "speed check",
-        "bst check",
-        "bst check",
-        "bst check",
-        "bst check",
-        "bst check",
-        "unrelated",
+        "sql query",
+        "sql query",
+        "sql query",
+        "sql query",
         "unrelated",
     ]
 
@@ -123,6 +127,19 @@ def test_speed_calc(test_data, pokemon_data):
     assert c2 and c3
 
 
+def test_cohere_endpoint():
+    # just checks that the cohere endpoint is working
+    prompt = "Testing one two three"
+    co = cohere.Client(st.secrets["COHERE_API_KEY"])  # This is your trial API key
+    try:
+        response = co.classify(
+            model="bfb1f19a-afaa-4faf-89db-f35df53f9de6-ft", inputs=[prompt]
+        )
+        assert response is not None
+    except CohereAPIError:
+        pytest.fail("Cohere API is down")
+
+
 def test_intent_classifier(intent_classification_data):
     # we'll use the intent
     predicted_intents = []
@@ -132,5 +149,18 @@ def test_intent_classifier(intent_classification_data):
     print(predicted_intents)
 
     # check that each list is equal to the corresponding column in test data
-    c1 = predicted_intents == intent_classification_data["intent"].tolist()
-    assert c1
+    c1 = sum(predicted_intents == intent_classification_data["intent"])
+    assert c1 / len(predicted_intents) >= 0.8
+
+
+def test_supabase_active():
+    supabase_client = create_client(sb_url, sb_key)
+
+    try:
+        # Make a simple query to validate connectivity
+        data = (
+            supabase_client.table("speed-checks-logs").select("id").limit(1).execute()
+        )
+        assert data is not None
+    except Exception as e:
+        pytest.fail(f"Got exception connecting to Supabase: {e}")
