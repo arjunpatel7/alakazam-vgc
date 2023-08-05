@@ -31,8 +31,8 @@ stat_templates = [
 # second section of prompts
 # these ask about the top X pokemon in a stat
 top_x_templates = [
-    "What are the top {x} pokemon in {stat}?",
-    "Which pokemon are the top {x} in {stat} stat?",
+    "What are the top {x} pokemon with the highest {stat}?",
+    "Which pokemon are the top {x} for the {stat} stat?",
 ]
 
 
@@ -40,9 +40,8 @@ top_x_templates = [
 # these ask about the bottom X pokemon in a stat
 
 bottom_x_templates = [
-    "What are the bottom {x} pokemon in {stat}?",
-    "Who are the bottom {x} pokemon in {stat} stat?",
-    "Which pokemon are the bottom {x} in {stat} stat?",
+    "What are the bottom {x} pokemon with the lowest {stat}?",
+    "Who are the bottom {x} pokemon for the {stat} stat?",
 ]
 
 
@@ -114,11 +113,9 @@ def create_dataset(num_samples=500):
         all_prompts.append(prompt)
 
     # get random prompts from the Cohere API
-    random_prompts = create_random_pokemon_prompts(500)
-
+    random_prompts = create_random_pokemon_prompts(50)
     # combine all prompts
     all_prompts.extend(random_prompts)
-
     # write out to jsonl file
     with jsonlines.open("./data/query_prompts.jsonl", "w") as writer:
         print("Writing prompts....")

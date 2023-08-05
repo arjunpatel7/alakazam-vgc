@@ -4,17 +4,14 @@ import re
 from supabase import create_client
 import time
 import modal
-import ast
-from calculations import (
+from utils.calculations import (
     read_in_pokemon,
-    speed_check,
-    check_if_exists,
-    speed_check_statement,
+    formatted_speed_check,
 )
 import pandas as pd
+from utils.base_stat_chat import handle_query, classify_intent
 
 pokemons = read_in_pokemon("./data/gen9_pokemon.jsonl")
-
 
 if "convo_id" not in st.session_state:
     # create random convo id for each run of the application
@@ -38,38 +35,6 @@ def search_json_dict(string):
         return json_dict_string
     else:
         return None
-
-
-def formatted_speed_check(arg_strings, f):
-    # take arg_strings and format it into a dictionary for speed_check
-
-    speed_check_dict = ast.literal_eval(arg_strings)
-
-    p1 = check_if_exists(speed_check_dict, "p1")
-    p2 = check_if_exists(speed_check_dict, "p2")
-    p1_stat_changes = check_if_exists(speed_check_dict, "p1_stat_changes")
-    p2_stat_changes = check_if_exists(speed_check_dict, "p2_stat_changes")
-    p1_ev = check_if_exists(speed_check_dict, "p1_ev")
-    p2_ev = check_if_exists(speed_check_dict, "p2_ev")
-    print("Pokemons extracted successfully!")
-
-    # wrap above variables into a dictionary, to pass to speed_check
-    speed_check_dict = {
-        "p1": p1,
-        "p2": p2,
-        "p1_stat_changes": p1_stat_changes,
-        "p2_stat_changes": p2_stat_changes,
-        "p1_ev": p1_ev,
-        "p2_ev": p2_ev,
-        "f": f,
-    }
-
-    # pass speed_check_dict to speed_check
-    speed_check_calcs = speed_check(**speed_check_dict)
-
-    speed_check_string, r = speed_check_statement(speed_check_calcs)
-
-    return speed_check_string, speed_check_calcs, r
 
 
 def get_speedcheck(prompt):
@@ -165,7 +130,7 @@ with st.sidebar:
     )
 
 st.subheader("Query Examples")
-with st.expander("Here are some examples of queries you can ask speedcheck bot:"):
+with st.expander("Here are some examples of queries you can ask alakazam:"):
     st.write("Is -5 35 Noibat slower than -5 19 Blissey")
     st.write("Will Finneon with 230 speed evs outspeed Meowth with 215 speed evs")
     st.write("Does max speed Salamence outspeed 248 Talonflame?")
@@ -183,7 +148,20 @@ input_prompt = st.text_input(label="Write your query here")
 
 
 if input_prompt != "":
-    get_speedcheck(input_prompt)
+    # classify the intent of the input prompt
+    response = classify_intent(input_prompt)
+    st.write(response)
+    # if the intent is speedcheck, run the speedcheck code
+    if response == "speed check":
+        get_speedcheck(input_prompt)
+    elif response == "sql query":
+        st.write("bst check")
+        result = handle_query(input_prompt)
+        st.write(result)
+    else:
+        st.write(
+            "Sorry, I didn't understand that. Could you rephrase your to be a speedcheck or bst?"
+        )
 
 
 if len(st.session_state.session_history) > 0:

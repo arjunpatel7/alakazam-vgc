@@ -2,6 +2,7 @@ import math
 import random
 import editdistance
 import jsonlines
+import ast
 
 
 def poke_round(num):
@@ -211,6 +212,38 @@ def speed_check_statement(final_calculation):
         f"{p1} speed stat is {p1_final_speed}, which is faster than {p2} at {p2_final_speed}",
         p1,
     )
+
+
+def formatted_speed_check(arg_strings, f):
+    # take arg_strings and format it into a dictionary for speed_check
+
+    speed_check_dict = ast.literal_eval(arg_strings)
+
+    p1 = check_if_exists(speed_check_dict, "p1")
+    p2 = check_if_exists(speed_check_dict, "p2")
+    p1_stat_changes = check_if_exists(speed_check_dict, "p1_stat_changes")
+    p2_stat_changes = check_if_exists(speed_check_dict, "p2_stat_changes")
+    p1_ev = check_if_exists(speed_check_dict, "p1_ev")
+    p2_ev = check_if_exists(speed_check_dict, "p2_ev")
+    print("Pokemons extracted successfully!")
+
+    # wrap above variables into a dictionary, to pass to speed_check
+    speed_check_dict = {
+        "p1": p1,
+        "p2": p2,
+        "p1_stat_changes": p1_stat_changes,
+        "p2_stat_changes": p2_stat_changes,
+        "p1_ev": p1_ev,
+        "p2_ev": p2_ev,
+        "f": f,
+    }
+
+    # pass speed_check_dict to speed_check
+    speed_check_calcs = speed_check(**speed_check_dict)
+
+    speed_check_string, r = speed_check_statement(speed_check_calcs)
+
+    return speed_check_string, speed_check_calcs, r
 
 
 def check_if_exists(d, arg):
