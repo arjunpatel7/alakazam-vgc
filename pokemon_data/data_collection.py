@@ -52,7 +52,6 @@ additional_pokemon_forms = [
     "gimmighoul",
 ]
 
-
 # functions needed to create the jsonls, general utilities
 
 # wrap this in a function

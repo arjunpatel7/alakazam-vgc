@@ -1,15 +1,11 @@
 import streamlit as st
 import random
-import re
+import pandas as pd
 from supabase import create_client
 import time
 import modal
-from utils.calculations import (
-    read_in_pokemon,
-    formatted_speed_check,
-)
-import pandas as pd
-from utils.base_stat_chat import handle_query, classify_intent
+from calculations import read_in_pokemon, formatted_speed_check
+from base_stat_chat import handle_query, classify_intent
 
 pokemons = read_in_pokemon("./data/gen9_pokemon.jsonl")
 
@@ -26,22 +22,9 @@ sb_url = st.secrets["SUPABASE_URL"]
 sb_key = st.secrets["SUPABASE_KEY"]
 
 
-def search_json_dict(string):
-    # thx chatgpt
-    pattern = r"{.*?}"
-    match = re.search(pattern, string)
-    if match:
-        json_dict_string = match.group()
-        return json_dict_string
-    else:
-        return None
-
-
 def get_speedcheck(prompt):
-
     # keep track of how long it takes to run
     start_time = time.time()
-
     # grab our PokemonSpeedCheck inference function from Modal and predict
     extract = modal.Function.lookup("pkmn-py", "run_inference")
     # call run_inference remotely on modal
@@ -49,7 +32,6 @@ def get_speedcheck(prompt):
     st.write(result)
     speed_check_calcs = None
     # this is the string that will be the name of pokemon that is faster
-    # write a better variable name for it
     r = None
 
     # Try to parse the result into the dictionary

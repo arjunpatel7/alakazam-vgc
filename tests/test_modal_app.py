@@ -97,7 +97,7 @@ def intent_classification_data():
 def get_inference(dat):
     extract = modal.Function.lookup("pkmn-py", "run_inference")
     # call run_inference remotely on modal
-    result = extract.call(dat)
+    result = extract.remote(dat)
     return result
 
 
