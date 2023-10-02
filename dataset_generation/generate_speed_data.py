@@ -5,7 +5,7 @@ import string
 
 
 pokemons = []
-with jsonlines.open("gen9_pokemon.jsonl") as reader:
+with jsonlines.open("./data/gen9_pokemon.jsonl") as reader:
     for entry in reader:
         pokemons.append(entry)
 

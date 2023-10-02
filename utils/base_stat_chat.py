@@ -1,5 +1,5 @@
 import argparse
-from calculations import read_in_pokemon, extract_stat
+from utils.calculations import read_in_pokemon, extract_stat
 from langchain import Cohere, SQLDatabase, SQLDatabaseChain
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base

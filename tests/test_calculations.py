@@ -1,14 +1,4 @@
-# write a bunch of test for the calcuations.py file
-
-# import our functions from calculations.py
-# this import statement assumes that the calculations.py file is in the same directory as this file
-# how do I properly import from a different directory?
-
-# is this the appropriate way to timpor from a different directory?
-from app.calculations import calc_stat, stat_modifier
-
-
-# convert the following into tests
+from utils.calculations import calc_stat, stat_modifier
 
 
 def test_calc_stat_hp():
