@@ -8,6 +8,7 @@ from utils.base_stat_chat import classify_intent
 import streamlit as st
 import cohere
 from cohere.error import CohereAPIError
+import time
 
 from supabase import create_client
 
@@ -101,7 +102,16 @@ def get_inference(dat):
     return result
 
 
+def get_batch_inference(dat):
+    extract = modal.Function.lookup("pkmn-py", "run_batch_inference")
+    result = extract.remote(dat)
+    return result
+
+
 def test_speed_calc(test_data, pokemon_data):
+    # time the inference
+
+    start_time = time.time()
     faster_pokemon = []
     p1_final_speed = []
     p2_final_speed = []
@@ -125,6 +135,43 @@ def test_speed_calc(test_data, pokemon_data):
     print(c2, c3)
     print(p1_final_speed)
     assert c2 and c3
+    end_time = time.time()
+    print(f"Total time taken: {end_time - start_time}")
+    # time per input
+    print(f"Time per input: {(end_time - start_time) / len(test_data)}")
+
+
+def test_batch_inference(test_data, pokemon_data):
+    # similar to test_speed_calc, but we'll use the batch inference endpoint
+
+    # time the inference
+    start_time = time.time()
+
+    faster_pokemon = []
+    p1_final_speed = []
+    p2_final_speed = []
+    processed_mons = get_batch_inference(test_data["query"].tolist())
+    print(processed_mons)
+    for d in tqdm(processed_mons):
+        # call the speed calc function locally
+        _, result, _ = formatted_speed_check(d, pokemon_data)
+        p1_final_speed.append(result["p1_final_speed"])
+        p2_final_speed.append(result["p2_final_speed"])
+        faster_pokemon.append(
+            result["p1"]
+            if result["p1_final_speed"] > result["p2_final_speed"]
+            else result["p2"]
+        )
+    c2 = p1_final_speed == test_data["p1_final_speed"].tolist()
+    c3 = p2_final_speed == test_data["p2_final_speed"].tolist()
+
+    print(c2, c3)
+    print(p1_final_speed)
+    assert c2 and c3
+    end_time = time.time()
+    print(f"Total time taken: {end_time - start_time}")
+    # time per input
+    print(f"Time per input: {(end_time - start_time) / len(test_data)}")
 
 
 def test_cohere_endpoint():
@@ -164,3 +211,33 @@ def test_supabase_active():
         assert data is not None
     except Exception as e:
         pytest.fail(f"Got exception connecting to Supabase: {e}")
+
+
+# Write a test that attempts to check that all pokemon names
+# in our database are parsed correctly by our LLM
+# Do this in batch so that inference time is faster
+
+
+def test_stress_pokemon_name_extraction(pokemon_data):
+    # for every pokemon in pokemon_data
+    # generate 10 speed calc queries
+    # combine all the queries
+    # run batch inference job on the queries
+
+    # check if the queries are properly parsed
+
+    # report statistics on how many queries were parsed correctly per mon
+    # fail if average query passing rate is below 80%
+    # write out the names of pokemon that failed 90% or more of the time
+
+    return
+
+
+# idea for a test
+
+# generate a set of random calcs, and check how many are successful and unsuccessful
+
+# somehow determine what kinds of errors are being made on the unsucccessful ones
+# maybe by checking parameters like the evs, pokemon names, etc
+
+# return a report of the errors and the success rate
