@@ -28,7 +28,7 @@ def get_speedcheck(prompt):
     # grab our PokemonSpeedCheck inference function from Modal and predict
     extract = modal.Function.lookup("pkmn-py", "run_inference")
     # call run_inference remotely on modal
-    result = extract.call(prompt)
+    result = extract.remote(prompt)
     st.write(result)
     speed_check_calcs = None
     # this is the string that will be the name of pokemon that is faster

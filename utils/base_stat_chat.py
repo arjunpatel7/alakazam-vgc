@@ -2,7 +2,7 @@ import argparse
 from utils.calculations import read_in_pokemon, extract_stat
 from langchain import Cohere, SQLDatabase, SQLDatabaseChain
 from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
 from cohere.error import CohereAPIError

@@ -52,6 +52,11 @@ additional_pokemon_forms = [
     "gimmighoul",
 ]
 
+# Add in the Kitakami dex from pokeapi
+
+kitakami_dex = requests.get("https://pokeapi.co/api/v2/pokedex/kitakami/")
+kitakami_pokemon = kitakami_dex.json()["pokemon_entries"]
+
 # functions needed to create the jsonls, general utilities
 
 # wrap this in a function
@@ -81,6 +86,24 @@ def get_paldea_pokemon():
     # retrieves paldea pokedex pokemon from pokeapi
     pokemons = []
     for pokemon in tqdm(paldea_pokemon, desc="retrieving paldea pokemon"):
+        pokemon_url = pokemon["pokemon_species"]["url"]
+        # should really use pokemon id here instead of pokemon name. allows for the actual pokemon to appear if they have forms
+
+        # instead of looking on name, look on url
+        pokemon_properties = requests.get(
+            pokemon_url.replace("pokemon-species", "pokemon")
+        )
+
+        pokemon_properties = pokemon_properties.json()
+        pokemons.append(pokemon_entry_to_dict(pokemon_properties))
+
+    return pokemons
+
+
+def get_kitakami_pokemon():
+    # retrieves kitakami pokedex pokemon from pokeapi
+    pokemons = []
+    for pokemon in tqdm(kitakami_pokemon, desc="retrieving kitakami pokemon"):
         pokemon_url = pokemon["pokemon_species"]["url"]
         # should really use pokemon id here instead of pokemon name. allows for the actual pokemon to appear if they have forms
 
@@ -189,10 +212,13 @@ if __name__ == "__main__":
     paldea_pokemon = get_paldea_pokemon()
     series_four_pokemon = scrape_serebii_series_four_mons()
     series_four_pokemon = get_series_four_pokemon(series_four_pokemon)
-    # drop duplicates and combine
-    # combine the paldea and series four pokemon
 
-    all_pokemon = paldea_pokemon + series_four_pokemon
+    kitakami_pokemon = get_kitakami_pokemon()
+
+    # drop duplicates and combine
+    # combine the paldea and series four pokemon and the kitakami pokemon
+
+    all_pokemon = paldea_pokemon + series_four_pokemon + kitakami_pokemon
 
     all_pokemon = reduce_size(all_pokemon)
 
