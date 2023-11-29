@@ -76,7 +76,7 @@ def get_speedcheck(prompt):
     supabase_client.table("speed-checks-logs").insert(convo_log).execute()
 
     # add prompt and query result to session history
-    # note to self: history should be easier to view, by having columns for who is actually faster, the actual speeds, parameters, etc
+
     if speed_check_calcs is not None:
         # add to session history a structured respresentation of the speed_check
         # must include query, the faster pokemon, the final speeds, the parameters, and the time to result
@@ -144,6 +144,46 @@ if input_prompt != "":
         st.write(
             "Sorry, I didn't understand that. Could you rephrase your to be a speedcheck or bst?"
         )
+
+
+def send_speed_calc_error_report(incorrect_explanation):
+    # grab most recent entry in history
+    wrong_result = st.session_state.session_history[-1]
+
+    report = {
+        "query": wrong_result["query"],
+        "wrong_explanation": incorrect_explanation,
+        "p1": wrong_result["p1"],
+        "p2": wrong_result["p2"],
+        "p1_final_speed": wrong_result["p1_final_speed"],
+        "p2_final_speed": wrong_result["p2_final_speed"],
+        "p1_stat_changes": wrong_result["p1_stat_changes"],
+        "p2_stat_changes": wrong_result["p2_stat_changes"],
+        "p1_ev": wrong_result["p1_ev"],
+        "p2_ev": wrong_result["p2_ev"],
+        "convo_id": st.session_state.convo_id,
+    }
+    # write the report, along with the status of the application to the supabase table
+    supabase_client = create_client(sb_url, sb_key)
+    supabase_client.table("speed-checks-error-reports").insert(report).execute()
+
+
+form_expander = st.expander("Report incorrect response")
+with form_expander:
+    if input_prompt != "":
+        with st.form("Report Form") as form:
+            # response was wrong for some reason
+            st.write(
+                "hey, sorry about that! Can you fill this out to help us tune the model better?"
+            )
+            # create a response box for the user to explain what happened
+            incorrect_explanation = st.text_input(label="What went wrong?")
+            send_report = st.form_submit_button(
+                "Send report!",
+                on_click=send_speed_calc_error_report(incorrect_explanation),
+            )
+            if send_report:
+                st.write("Report sent! Thank you for your feedback!")
 
 
 if len(st.session_state.session_history) > 0:
