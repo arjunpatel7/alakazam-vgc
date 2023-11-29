@@ -178,12 +178,11 @@ with form_expander:
             )
             # create a response box for the user to explain what happened
             incorrect_explanation = st.text_input(label="What went wrong?")
-            send_report = st.form_submit_button(
-                "Send report!",
-                on_click=send_speed_calc_error_report(incorrect_explanation),
-            )
+            send_report = st.form_submit_button("Send report!")
             if send_report:
+                send_speed_calc_error_report(incorrect_explanation)
                 st.write("Report sent! Thank you for your feedback!")
+                # reset the form submission variable
 
 
 if len(st.session_state.session_history) > 0:
