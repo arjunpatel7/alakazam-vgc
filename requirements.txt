@@ -12,3 +12,4 @@ supabase==1.0.3
 torch==2.0.1
 tqdm==4.64.1
 transformers==4.23.1
+cohere=4.11.2
