@@ -4,8 +4,8 @@ import pandas as pd
 from supabase import create_client
 import time
 import modal
-from calculations import read_in_pokemon, formatted_speed_check
-from base_stat_chat import handle_query, classify_intent
+from utils.calculations import read_in_pokemon, formatted_speed_check
+from utils.base_stat_chat import handle_query, classify_intent
 
 pokemons = read_in_pokemon("./data/gen9_pokemon.jsonl")
 
