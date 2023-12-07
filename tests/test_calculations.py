@@ -1,4 +1,4 @@
-from utils.calculations import calc_stat, stat_modifier
+from app.utils.calculations import calc_stat, stat_modifier
 
 
 def test_calc_stat_hp():

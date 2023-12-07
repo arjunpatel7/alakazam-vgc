@@ -2,9 +2,9 @@
 import pytest
 import modal
 import pandas as pd
-from utils.calculations import read_in_pokemon, formatted_speed_check
+from app.utils.calculations import read_in_pokemon, formatted_speed_check
 from tqdm import tqdm
-from utils.base_stat_chat import classify_intent
+from app.utils.base_stat_chat import classify_intent
 import streamlit as st
 import cohere
 from cohere.error import CohereAPIError
