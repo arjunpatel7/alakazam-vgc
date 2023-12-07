@@ -2,7 +2,8 @@ beautifulsoup4==4.12.2
 cohere==4.37
 editdistance==0.6.2
 jsonlines==3.1.0
-langchain==0.0.345
+langchain==0.0.347
+langchain_experimental==0.0.44
 modal==0.55.4144
 modal_client==0.49.2323
 pandas==1.5.1
