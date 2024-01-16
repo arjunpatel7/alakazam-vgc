@@ -4,7 +4,7 @@ alakazam is a chatbot-like interface for running calculations for the Pokemon vi
 
 Simply type in a calculation you wish to compute, and the app will parse your natural language instructions and return the result, just like magic!
 
-Alakazam only works for speed checks right now, but advanced capabilites such as damage calcs are incoming! If there's something specific you'd want to see, please open an issue. Thanks, and enjoy!
+alakazam only works for speed checks right now, but advanced capabilities such as damage calcs are incoming! If there's something specific you'd want to see, please open an issue. Thanks, and enjoy!
 
 
 ## Table of Contents
@@ -30,6 +30,7 @@ When VGC players communicate the game state of a Pokemon match, they use a certa
 
 Alakazam uses an augmented finetuned large langauge model to compute speed checks. A pretrained large langauge model was instruction finetuned using LoRA techniques on a synthetic dataset containing pokemon names in a formatted calc phrasing. After parsing the damage calc, the model passes this information to a set of scripts to do the actual math. The results are returned directly back to the user, much like a computer command line interface.
 
+
 ## Stack
 
 We use [Streamlit](https://streamlit.io) for the web application, and Streamlit Cloud to host it.
@@ -45,11 +46,14 @@ We use [Hugging Face](https://huggingface.co) (transformers, peft) and [Google C
 
 ## Features
 
-- Fast calculation of natural language speed checks
+- Fast calculation of natural language speed checks for Pokemon VGC
+- Natural language querying of pokemon stats
 - History to keep track of previous calculations
+- Report incorrect statistics to the maintainer
 
-## Roadmap
+## Future Features
 - Add chatbot functionality (Retrieval Augmented Generation) to external useful data sources (like an items dictionary, or berry dict, or game knowledge)
+- Retrain a different base model to improve performance
 - Submit multiple calcs at once for comparison
 - Calculate more advanced queries such as "When does X outspeed y?"
 - Add full damage calc capability
@@ -71,4 +75,6 @@ Thanks to Full Stack Deep Learning's free online LLM Bootcamp, where I learned h
 ## License
 
 The underlying bloom model uses the BigScience Bloom RAIL 1.0 License. Please be aware that any derivatives of this application will have to incorporate this license.
+
+References to Pokemon are property, trademark, copyright of Nintendo and the Pokemon Company International, not myself.
 
