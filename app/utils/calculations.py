@@ -5,8 +5,23 @@ import jsonlines
 import ast
 
 
+# A technique known as “pokeRounding“, where Game Freak decided to
+# round down on 0.5. If the number has a decimal of higher than 0.5,
+# round up to the nearest whole number; if the decimal is less than or equal to 0.5,
+# round down. So pokeRound(30.2) = 30, pokeRound(30.5) = 30, and pokeRound(30.7) = 31.
+
+
 def poke_round(num):
-    pass
+    # given a number, round it down if decimal is less than 0.5
+    # round up if decimal is greater than 0.5
+
+    decimal = num - math.floor(num)
+    return math.floor(num) if decimal <= 0.5 else math.ceil(num)
+
+
+assert poke_round(30.2) == 30, "poke_round is wrong"
+assert poke_round(30.5) == 30, "poke_round is wrong"
+assert poke_round(30.7) == 31, "poke_round is wrong"
 
 
 def base_damage(base_power, attack, defense):
