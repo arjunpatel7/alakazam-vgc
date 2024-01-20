@@ -1,14 +1,34 @@
 import math
-import random
 import editdistance
 import jsonlines
 import ast
 
 
-# A technique known as “pokeRounding“, where Game Freak decided to
-# round down on 0.5. If the number has a decimal of higher than 0.5,
-# round up to the nearest whole number; if the decimal is less than or equal to 0.5,
-# round down. So pokeRound(30.2) = 30, pokeRound(30.5) = 30, and pokeRound(30.7) = 31.
+# class based implementation of pokemon calculator
+# TODO: refactor this into a class based implementation
+# TODO: Add in terrain modifications
+# TODO: Add in item modifications, but only for attack/defense
+# TODO: Add in nature modifications
+
+
+# need to do all 18 types eventually.....
+offensive_type_effectiveness = {
+    # type maps to what types it is supereffective against
+    "grass": ["water", "ground", "rock"],
+    "fire": ["grass", "ice", "bug", "steel"],
+    "water": ["fire", "ground", "rock"],
+    "normal": ["nothing"],
+}
+
+offensive_type_resistance = {
+    # type maps to what types it is resisted by
+    "grass": ["fire", "grass", "poison", "flying", "bug", "dragon", "steel"],
+    "fire": ["fire", "water", "rock", "dragon"],
+    "water": ["water", "grass", "dragon"],
+    "normal": ["rock", "steel"],
+}
+
+# add a dictionary for immunities
 
 
 def poke_round(num):
@@ -19,50 +39,77 @@ def poke_round(num):
     return math.floor(num) if decimal <= 0.5 else math.ceil(num)
 
 
-assert poke_round(30.2) == 30, "poke_round is wrong"
-assert poke_round(30.5) == 30, "poke_round is wrong"
-assert poke_round(30.7) == 31, "poke_round is wrong"
-
-
-def base_damage(base_power, attack, defense):
-    # given args, calculatse base damage of attack
-
-    LEVEL = 50
-
-    level_weight = math.floor(((2 * LEVEL) / 5) + 2)
-
-    step1 = math.floor((level_weight * base_power * attack) / defense)
-
-    step2 = math.floor(step1 / 50) + 2
-
-    return step2
-
-
-# DaWoblefet calc exam[le]
-
-# incin_calc = base_damage(base_power=70, attack=136, defense=100)
-# print(incin_calc)
-# assert incin_calc == 43, "Calc is wrong"
-
-
-def spread_move_modifier(damage):
+def spread_move_modifier(damage, is_spread=False):
     # reduce damage by 0.75 and pokeround
-
-    return poke_round(damage * (3072 / 4096))
+    if is_spread:
+        return poke_round(damage * (3072 / 4096))
+    return damage
 
 
 def random_modifier(damage):
-    n = random.randint(85, 100)
+    # returns two values, which are the min and max damage possible
 
-    return math.floor(damage * (100 - n) / 100)
+    return math.floor((damage * 85) / 100), poke_round(damage)
 
 
 def STAB_modifier(damage):
     return poke_round((6144 / 4096) * damage)
 
 
-def burn_modifier(damage):
-    pass
+def tera_modifier(pokemon, move_type, damage):
+    # tera typing where the move is same type as pokemon
+    # just doubles the stab modifier
+    # otherwise if the types are different, we do a normal stab bonus
+    pokemon_types = pokemon.types
+    tera_type = pokemon.tera_type
+    tera_active = pokemon.tera_active
+
+    if tera_active:
+        if tera_type == move_type:
+            # then just do the 1.5x modifier
+            if tera_type in pokemon_types:
+                # then do the 2x modifier
+                return poke_round((8192 / 4096) * damage)
+            return STAB_modifier(damage)
+    # then no modifier
+    elif move_type in pokemon_types:
+        return STAB_modifier(damage)
+    else:
+        return damage
+
+
+def burn_modifier(damage, is_physical=False, is_burned=False):
+    if is_physical and is_burned:
+
+        return poke_round((2048 / 4096) * damage)
+    return damage
+
+
+def weather_modifier(weather, move_type, damage):
+    # account for sun or rain only
+    # boosts for rain and water, and sun and fire
+    # halves for rain and fire, and sun and water
+
+    # does not do defense boost for hail or special
+    # defense for sandstorm
+
+    if weather == "rain" and move_type == "water":
+        return poke_round((6144 / 4096) * damage)
+    elif weather == "sun" and move_type == "fire":
+        return poke_round((6144 / 4096) * damage)
+    elif weather == "rain" and move_type == "fire":
+        return poke_round((2048 / 4096) * damage)
+    elif weather == "sun" and move_type == "water":
+        return poke_round((2048 / 4096) * damage)
+    else:
+        return damage
+
+
+def critical_hit_modifier(damage, critical_hit=False):
+    # need to double check this one
+    if critical_hit:
+        return poke_round((6144 / 4096) * damage)
+    return damage
 
 
 # BST to actual stat
@@ -83,7 +130,9 @@ def stat_modifier(num_stages, stat):
     # given stat change, compute modifier and new stat
     modifier = 1
     direction = 1
-    if num_stages <= 0:
+    if num_stages == 0:
+        return stat
+    if num_stages < 0:
         direction = -1
         num_stages = abs(num_stages)
     if num_stages >= 6:
@@ -104,8 +153,208 @@ def stat_modifier(num_stages, stat):
     return math.floor(modifier * stat)
 
 
-# implement type effectivess checks
-# figure out how to represent two pokemon and the resultant calculation
+def type_mulitplier_lookup(p2_type, move_type):
+    # returns mulitplier for type effectiveness and resistance in a list
+    print(p2_type, move_type)
+    is_resisted = p2_type in offensive_type_resistance[move_type]
+    is_effective = p2_type in offensive_type_effectiveness[move_type]
+    print(is_resisted, is_effective)
+    if is_resisted:
+        return 0.5
+    elif is_effective:
+        return 2
+    else:
+        return 1
+
+
+def type_multiplier(p2_type, move_type):
+    # returns mulitplier for type effectiveness and resistance
+    modifiers = [type_mulitplier_lookup(x, move_type) for x in p2_type]
+    print(modifiers)
+    # good for if there is only one type
+    return math.prod(modifiers)
+
+
+def type_modifier(damage, gamestate):
+    # grab types
+    p2_type = gamestate.p2.types
+    # grab types of move
+    move_type = gamestate.move.type
+    # override types if tera typing is active
+    if gamestate.p2.tera_active:
+        p2_type = gamestate.p2.tera_type
+
+    # calculate type modifier
+    return damage * type_multiplier(p2_type, move_type)
+
+    # return type modifier
+
+
+class Pokemon:
+    # contains all relevant information about a pokemon
+
+    def __init__(
+        self,
+        name,
+        evs,
+        nature=None,
+        tera_type=None,
+        tera_active=False,
+        status=None,
+        stat_stages=None,
+    ):
+        self.name = name
+        # evs is a dictionary mapping stat to ev
+        self.evs = evs
+        self.nature = nature
+        self.tera_type = tera_type
+        self.tera_active = tera_active
+        self.status = status
+        # also a dictionary, mapping stat to stat stage
+        self.stat_stages = stat_stages
+        # later, add a function that does a lookup for type, stats,
+
+        pokemon = lookup_pokemon(name, read_in_pokemon("./data/gen9_pokemon.jsonl"))
+        # get types
+        self.types = [x for x in pokemon["types"]]
+        # get stats
+        self.stats = {x["stat"]["name"]: x["base_stat"] for x in pokemon["stats"]}
+        # upgrade stats based on evs
+        self.stats = {
+            k: calc_stat(50, v, self.evs[k], 31) for k, v in self.stats.items()
+        }
+        # fill in stat distributions
+
+
+class Move:
+    # contains all relevant information about a move
+
+    def __init__(self, name, type, category, power):
+        self.name = name
+        self.type = type
+        self.category = category
+        self.power = power
+
+
+def verbose_print(verbose, result, message=""):
+    if verbose:
+        print(message, result)
+
+
+class GameState:
+    # contains all relevant information about the game state
+
+    def __init__(self, p1, p2, move, weather=None, terrain=None, critical_hit=False):
+        self.p1 = p1
+        self.p2 = p2
+        self.move = move
+        self.weather = weather
+        self.terrain = terrain
+        self.critical_hit = False
+
+    def calculate_base_damage(self):
+        # given args, calculatse base damage of attack
+
+        # lookup if move is physical or special
+
+        category = self.move.category
+        attacking_stat = "attack" if category == "physical" else "special-attack"
+        defending_stat = "defense" if category == "physical" else "special-defense"
+
+        # pull stat changes and stats from pokemon
+        attacking_stat_changes = (
+            0 if self.p1.stat_stages is None else self.p1.stat_stages[attacking_stat]
+        )
+        defending_stat_changes = (
+            0 if self.p2.stat_stages is None else self.p2.stat_stages[defending_stat]
+        )
+
+        attacking_stat = stat_modifier(
+            num_stages=attacking_stat_changes, stat=self.p1.stats[attacking_stat]
+        )
+        defending_stat = stat_modifier(
+            num_stages=defending_stat_changes, stat=self.p2.stats[defending_stat]
+        )
+
+        LEVEL = 50
+
+        level_weight = math.floor(((2 * LEVEL) / 5) + 2)
+
+        step1 = math.floor(
+            (level_weight * self.move.power * attacking_stat) / defending_stat
+        )
+
+        step2 = math.floor(step1 / 50) + 2
+
+        return step2
+
+    def calculate_modified_damage(self, verbose=False):
+        base_damage = self.calculate_base_damage()
+        verbose_print(verbose, message="Base damage of move is", result=base_damage)
+
+        # spread move modifier
+        final_damage = spread_move_modifier(base_damage)
+        verbose_print(
+            verbose, message="spread modified damage of move is", result=final_damage
+        )
+
+        # weather modifier
+        final_damage = weather_modifier(self.weather, self.move.type, final_damage)
+        verbose_print(
+            verbose, message="weather modified damage of move is:", result=final_damage
+        )
+
+        # critical hit modifier
+        final_damage = critical_hit_modifier(final_damage, self.critical_hit)
+        verbose_print(
+            verbose,
+            message="critical hit modified damage of move is",
+            result=final_damage,
+        )
+        # random modifier
+        final_damage_min, final_damage_max = random_modifier(final_damage)
+        verbose_print(verbose, message="random min of move is", result=final_damage_min)
+        verbose_print(verbose, message="random max of move is", result=final_damage_max)
+
+        # tera effectiveness modifier
+        final_damage_min = tera_modifier(self.p1, self.move.type, final_damage_min)
+        verbose_print(
+            verbose, message="tera and stab effectiveness", result=final_damage_min
+        )
+        final_damage_max = tera_modifier(self.p1, self.move.type, final_damage_max)
+        verbose_print(
+            verbose, message="min damage after tera/stab mod", result=final_damage_min
+        )
+
+        verbose_print(
+            verbose, message="max damage after tera/stab mod", result=final_damage_max
+        )
+
+        # type effectiveness modifier
+        final_damage_min = type_modifier(final_damage_min, self)
+        final_damage_max = type_modifier(final_damage_max, self)
+        verbose_print(
+            verbose,
+            message="min damage after type effectiveness",
+            result=final_damage_min,
+        )
+        verbose_print(
+            verbose,
+            message="max damage after type effectiveness",
+            result=final_damage_max,
+        )
+
+        # burn modifier
+        final_damage_min = burn_modifier(
+            final_damage_min, self.move.category, self.p1.status
+        )
+        final_damage_max = burn_modifier(
+            final_damage_max, self.move.category, self.p1.status
+        )
+
+        # final modifier/special cases
+
+        return (final_damage_min, final_damage_max)
 
 
 def read_in_pokemon(f):
@@ -263,17 +512,3 @@ def formatted_speed_check(arg_strings, f):
 
 def check_if_exists(d, arg):
     return d[arg] if arg in d.keys() else ""
-
-
-def calculate_damage(p1, move, p2, p1_stat_changes, p2_stat_changes):
-    # basic implementation of pokemon move calculator
-
-    # lookup stats, type, of both pokemon
-
-    # lookup move type and power
-    # transform stats given stat changes
-    # do damage calculation
-    # factor in offensive/defensive items
-
-    # return damage windows
-    pass
