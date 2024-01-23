@@ -46,8 +46,21 @@ def pokemon_data():
     return pokemons
 
 
-def test_calculate_base_damage_sprigatito():
+@pytest.fixture
+def fuecoco():
+    fuecoco_evs = {
+        "hp": 0,
+        "attack": 252,
+        "defense": 0,
+        "special-attack": 0,
+        "special-defense": 0,
+        "speed": 252,
+    }
+    return Pokemon("Fuecoco", fuecoco_evs, None)
 
+
+@pytest.fixture
+def sprigatito():
     sprigatito_evs = {
         "hp": 0,
         "attack": 252,
@@ -56,77 +69,86 @@ def test_calculate_base_damage_sprigatito():
         "special-defense": 0,
         "speed": 252,
     }
-
-    sprigatito = Pokemon("Sprigatito", sprigatito_evs, "Adamant")
-
-    fuecoco = Pokemon("Fuecoco", sprigatito_evs, "Adamant")
-
-    tackle = Move("Tackle", "normal", "physical", 40)
-    game_state = GameState(sprigatito, fuecoco, tackle)
-    base_damage_min, base_damage_max = game_state.calculate_modified_damage(
-        verbose=True
-    )
-
-    # damage should be 22 min, 27 max
-    print(base_damage_min, base_damage_max)
-    assert (
-        base_damage_min == 22 and base_damage_max == 27
-    ), "Base damage calculation is wrong for Sprigatito"
+    return Pokemon("Sprigatito", sprigatito_evs, None)
 
 
-# Next task is to write more test cases to cover each of the game state alterations individually
-
-# Weather
-def test_calculate_base_damage_sun_fire(pokemon_data):
+@pytest.fixture
+def charizard():
     charizard_evs = {
         "hp": 0,
         "attack": 252,
         "defense": 0,
         "special-attack": 252,
         "special-defense": 0,
-        "speed": 252,
+        "speed": 0,
     }
+    return Pokemon("Charizard", charizard_evs, None)
 
-    sprigatito_evs = {
-        "hp": 0,
-        "attack": 252,
-        "defense": 0,
-        "special-attack": 0,
-        "special-defense": 0,
-        "speed": 252,
-    }
 
-    charizard = Pokemon("Charizard", charizard_evs)
-    sprigatito = Pokemon("Sprigatito", sprigatito_evs)
+def test_calculate_base_damage_sprigatito(sprigatito, fuecoco):
+    tackle = Move("Tackle", "normal", "physical", 40)
+    game_state = GameState(sprigatito, fuecoco, tackle)
+    base_damage_min, base_damage_max = game_state.calculate_modified_damage()
+
+    # damage should be 22 min, 27 max
+    assert (
+        base_damage_min == 22 and base_damage_max == 27
+    ), "Base damage calculation is wrong for Sprigatito"
+
+
+def test_calculate_damage_sun_fire(charizard, sprigatito):
 
     fire_move = Move("Fire Blast", "fire", "special", 110)
     game_state = GameState(charizard, sprigatito, fire_move, weather="sun")
 
-    base_damage_min, base_damage_max = game_state.calculate_modified_damage(
-        verbose=True
-    )
+    base_damage_min, base_damage_max = game_state.calculate_modified_damage()
 
     assert (
         base_damage_min == 458 and base_damage_max == 542
     ), "Base damage calculation is wrong for Charizard in Sun with Fire Blast"
 
 
-# Terrain
+# write test for same scenario, but rain instead of sun
+def test_calculate_base_damage_rain_fire(charizard, sprigatito):
+
+    fire_move = Move("Fire Blast", "fire", "special", 110)
+    game_state = GameState(charizard, sprigatito, fire_move, weather="rain")
+
+    base_damage_min, base_damage_max = game_state.calculate_modified_damage()
+
+    assert (
+        base_damage_min == 152 and base_damage_max == 180
+    ), "Base damage calculation is wrong for Charizard in Rain with Fire Blast"
+
+
+def test_calculate_damage_fully_loaded(charizard, sprigatito):
+    # mean to activate as many modifiers as possible
+
+    fire_move = Move("Fire Blast", "fire", "special", 110)
+    game_state = GameState(charizard, sprigatito, fire_move, weather="rain")
+
+    # charizard modifiers
+    charizard.stat_stages = {"special-attack": 2}
+    charizard.tera_active = True
+    charizard.tera_type = "fire"
+    charizard.item = "specs"
+
+    # sprigatito modifiers
+    sprigatito.stat_stages = {"special-defense": 1}
+    sprigatito.tera_active = True
+    sprigatito.tera_type = "water"
+    sprigatito.item = "av"
+
+    base_damage_min, base_damage_max = game_state.calculate_modified_damage(
+        verbose=True
+    )
+
+    assert (
+        base_damage_min == 68 and base_damage_max == 81
+    ), "Base damage calculation is wrong for Charizard in Rain with Fire Blast"
+
 
 # Spread Moves
 
-# Type Effectiveness, no tera type
-
-# Tera Type Active -- Neutral
-
-# Tera Type Active -- Super Effective
-
-# Tera Type STAB
-
-# Defensive Tera Type
 
 # Critical Hit
-
-# Burn modifier
-
-#

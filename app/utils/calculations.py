@@ -2,12 +2,10 @@ import math
 import editdistance
 import jsonlines
 import ast
-
+from typing import Dict, Optional
 
 # class based implementation of pokemon calculator
-# TODO: refactor this into a class based implementation
 # TODO: Add in terrain modifications
-# TODO: Add in item modifications, but only for attack/defense
 # TODO: Add in nature modifications
 
 
@@ -78,11 +76,36 @@ def tera_modifier(pokemon, move_type, damage):
         return damage
 
 
-def burn_modifier(damage, is_physical=False, is_burned=False):
-    if is_physical and is_burned:
+def item_modifier(pokemon, item_class):
+    if item_class in ["band", "banded", "choice band"]:
+        # choice band ups attack by 1.5x
+        pokemon.stat["attack"] = poke_round((6144 / 4096) * pokemon.stat["attack"])
+    elif item_class in ["specs", "choice specs"]:
+        # choice specs ups special attack by 1.5x
+        pokemon.stat["special_attack"] = poke_round(
+            (6144 / 4096) * pokemon.stat["special_attack"]
+        )
+    elif item_class in ["scarf", "choice scarf"]:
+        # choice scarf ups speed by 1.5x
+        pokemon.stat["speed"] = poke_round((6144 / 4096) * pokemon.stat["speed"])
+    elif item_class in ["assault vest", "vest", "av"]:
+        # assault vest ups special defense by 1.5x
+        pokemon.stat["special_defense"] = poke_round(
+            (6144 / 4096) * pokemon.stat["special_defense"]
+        )
+    return pokemon
 
-        return poke_round((2048 / 4096) * damage)
-    return damage
+
+def bp_item_modifier(move, item):
+    # base power modifiers that occur with special items
+    # for now, these are using placeholders to refer to classes of items
+    if item == "boosted":
+        # generic 1.2x boost
+        return poke_round((12288 / 4096) * move.power)
+    elif item == "life orb":
+        # life orb 1.3x boost
+        return poke_round((13312 / 4096) * move.power)
+    return move.power
 
 
 def weather_modifier(weather, move_type, damage):
@@ -155,10 +178,8 @@ def stat_modifier(num_stages, stat):
 
 def type_mulitplier_lookup(p2_type, move_type):
     # returns mulitplier for type effectiveness and resistance in a list
-    print(p2_type, move_type)
     is_resisted = p2_type in offensive_type_resistance[move_type]
     is_effective = p2_type in offensive_type_effectiveness[move_type]
-    print(is_resisted, is_effective)
     if is_resisted:
         return 0.5
     elif is_effective:
@@ -170,7 +191,6 @@ def type_mulitplier_lookup(p2_type, move_type):
 def type_multiplier(p2_type, move_type):
     # returns mulitplier for type effectiveness and resistance
     modifiers = [type_mulitplier_lookup(x, move_type) for x in p2_type]
-    print(modifiers)
     # good for if there is only one type
     return math.prod(modifiers)
 
@@ -182,7 +202,7 @@ def type_modifier(damage, gamestate):
     move_type = gamestate.move.type
     # override types if tera typing is active
     if gamestate.p2.tera_active:
-        p2_type = gamestate.p2.tera_type
+        p2_type = [gamestate.p2.tera_type]
 
     # calculate type modifier
     return damage * type_multiplier(p2_type, move_type)
@@ -190,18 +210,26 @@ def type_modifier(damage, gamestate):
     # return type modifier
 
 
+def burn_modifier(damage, category, status):
+    # if pokemon is burned, and category is physical, then damage is halved
+    if status == "burn" and category == "physical":
+        return poke_round((2048 / 4096) * damage)
+    return damage
+
+
 class Pokemon:
     # contains all relevant information about a pokemon
 
     def __init__(
         self,
-        name,
-        evs,
-        nature=None,
-        tera_type=None,
-        tera_active=False,
-        status=None,
-        stat_stages=None,
+        name: str,
+        evs: Dict[str, int],
+        nature: Optional[str] = None,
+        tera_type: Optional[str] = None,
+        tera_active: Optional[bool] = False,
+        status: Optional[str] = None,
+        stat_stages: Optional[Dict[str, int]] = None,
+        item: Optional[str] = None,
     ):
         self.name = name
         # evs is a dictionary mapping stat to ev
@@ -212,24 +240,62 @@ class Pokemon:
         self.status = status
         # also a dictionary, mapping stat to stat stage
         self.stat_stages = stat_stages
-        # later, add a function that does a lookup for type, stats,
+        self.item = item
 
         pokemon = lookup_pokemon(name, read_in_pokemon("./data/gen9_pokemon.jsonl"))
         # get types
-        self.types = [x for x in pokemon["types"]]
+        types = pokemon["types"]
+        if isinstance(types, str):
+            types = [types]
+        self.types = types
         # get stats
         self.stats = {x["stat"]["name"]: x["base_stat"] for x in pokemon["stats"]}
         # upgrade stats based on evs
-        self.stats = {
-            k: calc_stat(50, v, self.evs[k], 31) for k, v in self.stats.items()
+        self.trained_stats = {
+            k: calc_stat(50, v, self.evs[k], 31, is_hp=True)
+            if k == "hp"
+            else calc_stat(50, v, self.evs[k], 31)
+            for k, v in self.stats.items()
         }
+
+    def stat_stage_increase(self, stat: str, num_stages: int):
+        # when a pokemon's stat increases, modify the stat and the stage_stages
+
+        current_stages = self.stat_stages[stat]
+        if current_stages is None:
+            # if no stat stages, then just set it to 0
+            current_stages[stat] = 0
+        self.stat_stages[stat] = current_stages + num_stages
+        self.trained_stats[stat] = stat_modifier(num_stages, self.trained_stats[stat])
+
+    def retrain(self, stat: str, ev: int):
+        # retrain a pokemon with new evs
+
+        self.evs[stat] = ev
+        # upgrade stats based on evs
+        self.trained_stats[stat] = calc_stat(50, self.stats[stat], self.evs[stat], 31)
+        return self
+
+    def pretty_print(self):
+        # prints out the pokemon name, and all stats, and attributes
+
+        print(f"Pokemon is {self.name}")
+        print(f"Pokemon types are {self.types}")
+        print(f"Pokemon stats are {self.stats}")
+        print(f"Pokemon evs are {self.evs}")
+        print(f"Pokemon nature is {self.nature}")
+        print(f"Pokemon tera type is {self.tera_type}")
+        print(f"Pokemon tera active is {self.tera_active}")
+        print(f"Pokemon status is {self.status}")
+        print(f"Pokemon stat stages are {self.stat_stages}")
+
         # fill in stat distributions
 
 
 class Move:
     # contains all relevant information about a move
 
-    def __init__(self, name, type, category, power):
+    def __init__(self, name: str, type: str, category: str, power: int):
         self.name = name
         self.type = type
         self.category = category
@@ -244,7 +310,15 @@ def verbose_print(verbose, result, message=""):
 class GameState:
     # contains all relevant information about the game state
 
-    def __init__(self, p1, p2, move, weather=None, terrain=None, critical_hit=False):
+    def __init__(
+        self,
+        p1: Pokemon,
+        p2: Pokemon,
+        move: Move,
+        weather: Optional[str] = None,
+        terrain: Optional[str] = None,
+        critical_hit: Optional[bool] = False,
+    ):
         self.p1 = p1
         self.p2 = p2
         self.move = move
@@ -270,15 +344,21 @@ class GameState:
         )
 
         attacking_stat = stat_modifier(
-            num_stages=attacking_stat_changes, stat=self.p1.stats[attacking_stat]
+            num_stages=attacking_stat_changes,
+            stat=self.p1.trained_stats[attacking_stat],
         )
         defending_stat = stat_modifier(
-            num_stages=defending_stat_changes, stat=self.p2.stats[defending_stat]
+            num_stages=defending_stat_changes,
+            stat=self.p2.trained_stats[defending_stat],
         )
 
         LEVEL = 50
 
         level_weight = math.floor(((2 * LEVEL) / 5) + 2)
+
+        # modify move base power based on item
+        if self.p1.item is not None:
+            self.move.power = bp_item_modifier(self.move, self.p1.item)
 
         step1 = math.floor(
             (level_weight * self.move.power * attacking_stat) / defending_stat
