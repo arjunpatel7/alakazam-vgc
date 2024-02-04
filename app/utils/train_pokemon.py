@@ -1,4 +1,5 @@
-from calculations import Pokemon, Move, GameState
+from .calculations import GameState
+from typing import Optional
 
 # functions for the "train" functionality in our app
 
@@ -6,16 +7,10 @@ from calculations import Pokemon, Move, GameState
 # and returns optimal EVs for 1hko for the attacking pokemon
 
 
-def get_highest_base_power_move(pokemon: Pokemon):
-    pass
-
-
-def calculate_optimal_evs(game_state: GameState):
+def calculate_optimal_evs(game_state: GameState, criteria: Optional[str] = "1hko"):
     """
     Calculates optimal EVs for 1hko for the attacking pokemon
     """
-
-    # gamestate contains info about the ... entire game
 
     """
     1. Determine what the highest attacking stat of p1 is
@@ -28,7 +23,7 @@ def calculate_optimal_evs(game_state: GameState):
     4. if given move, move forward.
     5. Now, begin optimal EV calculation
         - for each possible condition in the following parameter sets:
-          (neutral, super_effective, and all possible p2 spreads, and boosting items)
+          (and all possible p2 spreads, and boosting items)
         - check if max ev in attacking stat is enough to 1hko p2
         - if enough, log this, and remove 4 EVs from attacking stat
         - repeat this process until 1hko is no longer possible
@@ -42,15 +37,25 @@ def calculate_optimal_evs(game_state: GameState):
         "attack" if game_state.move.category == "physical" else "special-attack"
     )
 
-    print("initial state")
+    # adjust evs_remaining to account for the fact that we can't exceed 252+252+4 across stats
+    evs_remaining = min(508 - sum(game_state.p1.evs.values()), 252)
 
-    evs_remaining = 252
+    # determine the minimum damage required to 1hko or 2hko
+    if criteria == "2hko":
+        damage_min = round(game_state.p2.trained_stats["hp"] / 2)
+    else:
+        damage_min = game_state.p2.trained_stats["hp"]
 
     # Check if max 252 investment KOs
     min_damage, _ = game_state.calculate_modified_damage()
     if min_damage >= game_state.p2.stats["hp"]:
         results.append(
-            {"evs_invested": evs_remaining, "stat": higher_stat_name, "training": "max"}
+            {
+                "evs_invested": evs_remaining,
+                "stat": higher_stat_name,
+                "training": "max",
+                "criteria": criteria,
+            }
         )
 
     while evs_remaining > 0:
@@ -58,47 +63,16 @@ def calculate_optimal_evs(game_state: GameState):
         # calculate damage
         game_state.p1 = game_state.p1.retrain(stat=higher_stat_name, ev=evs_remaining)
         min_damage, _ = game_state.calculate_modified_damage()
-        if min_damage < game_state.p2.trained_stats["hp"]:
+        if min_damage < damage_min:
             print("Optimiality achieved")
             results.append(
                 {
                     "evs_invested": evs_remaining + 4,
                     "stat": higher_stat_name,
-                    "training": "max",
+                    "training": "optimal",
+                    "criteria": criteria,
                 }
             )
             break
 
     return results
-
-
-# Test a game state with a pokemon with 252 EVs in HP and the corresponding defensive stat
-
-
-def charizard():
-    charizard_evs = {
-        "hp": 0,
-        "attack": 0,
-        "defense": 0,
-        "special-attack": 252,
-        "special-defense": 0,
-        "speed": 0,
-    }
-    return Pokemon("Charizard", charizard_evs, None)
-
-
-def eevee():
-    eevee_evs = {
-        "hp": 0,
-        "attack": 0,
-        "defense": 0,
-        "special-attack": 0,
-        "special-defense": 0,
-        "speed": 0,
-    }
-    return Pokemon("Eevee", eevee_evs, None)
-
-
-move = Move("Overheat", "fire", "special", 130)
-practice_gamestate = GameState(charizard(), eevee(), move)
-print(calculate_optimal_evs(practice_gamestate))
