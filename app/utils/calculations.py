@@ -6,6 +6,7 @@ from typing import Dict, Optional
 from app.utils.consts import (
     offensive_type_resistance,
     offensive_type_effectiveness,
+    offensive_type_immunities,
     natures,
 )
 
@@ -430,10 +431,15 @@ def type_mulitplier_lookup(p2_type, move_type):
     # returns mulitplier for type effectiveness and resistance in a list
     is_resisted = p2_type in offensive_type_resistance[move_type]
     is_effective = p2_type in offensive_type_effectiveness[move_type]
+
+    if move_type in offensive_type_immunities:
+        is_immune = p2_type in offensive_type_immunities[move_type]
     if is_resisted:
         return 0.5
     elif is_effective:
         return 2
+    elif is_immune:
+        return 0
     else:
         return 1
 

@@ -43,6 +43,17 @@ offensive_type_resistance = {
     "ground": ["poison", "rock"],
 }
 
+offensive_type_immunities = {
+    # type maps to what types it is immune to when attacking with it
+    "electric": ["ground"],
+    "normal": ["ghost"],
+    "fighting": ["ghost"],
+    "psychic": ["dark"],
+    "dragon": ["fairy"],
+    "poison": ["steel"],
+    "ground": ["flying"],
+}
+
 natures = {
     # only natures that have actual VGC importance
     "adamant": {"attack": 1.1, "special-attack": 0.9},
