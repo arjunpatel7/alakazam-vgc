@@ -3,7 +3,11 @@ import editdistance
 import jsonlines
 import ast
 from typing import Dict, Optional
-from app.utils.consts import offensive_type_resistance, offensive_type_effectiveness
+from app.utils.consts import (
+    offensive_type_resistance,
+    offensive_type_effectiveness,
+    natures,
+)
 
 # class based implementation of pokemon calculator
 # TODO: Add in terrain modifications
@@ -46,7 +50,9 @@ class Pokemon:
         # get stats
         self.stats = {x["stat"]["name"]: x["base_stat"] for x in pokemon["stats"]}
         # upgrade stats based on evs
-        self.trained_stats = create_trained_stats(self.evs, self.stats)
+        self.trained_stats = create_trained_stats(
+            self.evs, self.stats, nature=self.nature
+        )
 
     def stat_stage_increase(self, stat: str, num_stages: int):
         # when a pokemon's stat increases, modify the stat and the stage_stages
@@ -461,9 +467,37 @@ def burn_modifier(damage, category, status):
     return damage
 
 
-def create_trained_stats(evs, stats):
+def nature_modifier(stats, nature):
+    # given stats and nature, return modified stats
+    # nature is a dictionary of stat to multiplier
+    print(stats, nature)
+    if nature is not None:
+        for stat, mod in natures[nature].items():
+            stats[stat] = math.floor(stats[stat] * mod)
+    print(stats)
+    return stats
+
+
+def create_empty_ev_spread():
+    # create an empty ev spread
+    return {
+        x: 0
+        for x in [
+            "hp",
+            "attack",
+            "defense",
+            "special-attack",
+            "special-defense",
+            "speed",
+        ]
+    }
+
+
+def create_trained_stats(evs, stats, nature=None):
     # given a pokemon's evs and stats, return trained stats
     # handles no-evs case by setting evs to 0
+    if evs is None:
+        evs = create_empty_ev_spread()
     ev_spread = evs.keys()
     trained_stats = {}
     for stat in stats:
@@ -473,6 +507,8 @@ def create_trained_stats(evs, stats):
             trained_stats[stat] = calc_stat(50, stats[stat], evs[stat], 31)
         else:
             trained_stats[stat] = calc_stat(50, stats[stat], 0, 31)
+
+    trained_stats = nature_modifier(trained_stats, nature)
     return trained_stats
 
 

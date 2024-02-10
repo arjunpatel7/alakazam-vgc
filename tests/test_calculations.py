@@ -82,7 +82,31 @@ def charizard():
         "special-defense": 0,
         "speed": 0,
     }
-    return Pokemon("Charizard", charizard_evs, None)
+    return Pokemon("Charizard", charizard_evs)
+
+
+def test_nature_modifier_increase():
+    # test that the nature meodi
+
+    # special attack increase
+    pokemon = Pokemon("Charizard", nature="quiet")
+
+    # check that special attack stat is 141
+    assert (
+        pokemon.trained_stats["special-attack"] == 141
+    ), "Nature modifier isn't increasing correctly"
+
+
+def test_nature_modifier_decrease():
+    # tests that nature stat is decreased as expected
+
+    # speed decrease
+
+    pokemon = Pokemon("Charizard", nature="quiet")
+    assert (
+        pokemon.trained_stats["speed"] == 108
+    ), "Nature modifier isn't decreasing correctly"
+    pass
 
 
 def test_calculate_base_damage_sprigatito(sprigatito, fuecoco):
