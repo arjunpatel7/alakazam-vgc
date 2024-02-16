@@ -427,13 +427,23 @@ def stat_modifier(num_stages, stat):
     return math.floor(modifier * stat)
 
 
+def immunity_check(p2_type, move_type):
+    # first, we need to check that the move type is in the immunities dictionary
+    # then we need to check if the pokemon has the type that is immune to the move
+    if move_type in offensive_type_immunities:
+        return p2_type in offensive_type_immunities[move_type]
+    return False
+
+
 def type_mulitplier_lookup(p2_type, move_type):
     # returns mulitplier for type effectiveness and resistance in a list
     is_resisted = p2_type in offensive_type_resistance[move_type]
     is_effective = p2_type in offensive_type_effectiveness[move_type]
 
-    if move_type in offensive_type_immunities:
-        is_immune = p2_type in offensive_type_immunities[move_type]
+    is_immune = immunity_check(p2_type, move_type)
+
+    if is_immune:
+        return 0
     if is_resisted:
         return 0.5
     elif is_effective:
