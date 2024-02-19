@@ -97,14 +97,14 @@ class Move:
         name: Optional[str] = None,
         type: Optional[str] = None,
         category: Optional[str] = None,
-        power: Optional[int] = None,
+        base_power: Optional[int] = None,
         priority: Optional[int] = 0,
         description: Optional[str] = None,
     ):
         self.name = name
         self.type = type
         self.category = category
-        self.power = power
+        self.base_power = base_power
         self.priority = priority
         self.description = description
 
@@ -174,10 +174,10 @@ class GameState:
 
         # modify move base power based on item
         if self.p1.item is not None:
-            self.move.power = bp_item_modifier(self.move, self.p1.item)
+            self.move.base_power = bp_item_modifier(self.move, self.p1.item)
 
         step1 = math.floor(
-            (level_weight * self.move.power * attacking_stat) / defending_stat
+            (level_weight * self.move.base_power * attacking_stat) / defending_stat
         )
 
         step2 = math.floor(step1 / 50) + 2
@@ -352,11 +352,11 @@ def bp_item_modifier(move, item):
     # for now, these are using placeholders to refer to classes of items
     if item == "boosted":
         # generic 1.2x boost
-        return poke_round((12288 / 4096) * move.power)
+        return poke_round((12288 / 4096) * move.base_power)
     elif item == "life orb":
         # life orb 1.3x boost
-        return poke_round((13312 / 4096) * move.power)
-    return move.power
+        return poke_round((13312 / 4096) * move.base_power)
+    return move.base_power
 
 
 def weather_modifier(weather, move_type, damage):
@@ -486,11 +486,9 @@ def burn_modifier(damage, category, status):
 def nature_modifier(stats, nature):
     # given stats and nature, return modified stats
     # nature is a dictionary of stat to multiplier
-    print(stats, nature)
     if nature is not None:
         for stat, mod in natures[nature].items():
             stats[stat] = math.floor(stats[stat] * mod)
-    print(stats)
     return stats
 
 
@@ -514,6 +512,12 @@ def create_trained_stats(evs, stats, nature=None):
     # handles no-evs case by setting evs to 0
     if evs is None:
         evs = create_empty_ev_spread()
+    # if not all evs are present, then fill in the rest with 0
+    if len(evs) < 6:
+        ev_spread = evs.keys()
+        for stat in stats:
+            if stat not in ev_spread:
+                evs[stat] = 0
     ev_spread = evs.keys()
     trained_stats = {}
     for stat in stats:
