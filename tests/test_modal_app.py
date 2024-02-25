@@ -57,6 +57,18 @@ def test_data():
 
 
 @pytest.fixture
+def dmg_data():
+    # read in the first 5 rows of the eval damage calc data jsonl
+    data = [
+        "train Naclstack using scratch to 2hko Cinderace.",
+        "train Basculin Red Striped using pay-day to ohko Glimmet.",
+        "What are the optimal evs for Eelektross to 1hko Cacturne using fire-punch?",
+        "train Barraskewda using pay-day to ohko Garchomp.",
+    ]
+    return data
+
+
+@pytest.fixture
 def pokemon_data():
     pokemons = read_in_pokemon("./data/gen9_pokemon.jsonl")
     return pokemons
@@ -104,6 +116,12 @@ def get_inference(dat):
 
 def get_batch_inference(dat):
     extract = modal.Function.lookup("pkmn-py", "run_batch_inference")
+    result = extract.remote(dat)
+    return result
+
+
+def get_dmg_inference_batch(dat):
+    extract = modal.Function.lookup("pkmn-dmg", "run_batch_inference")
     result = extract.remote(dat)
     return result
 
@@ -172,6 +190,21 @@ def test_batch_inference(test_data, pokemon_data):
     print(f"Total time taken: {end_time - start_time}")
     # time per input
     print(f"Time per input: {(end_time - start_time) / len(test_data)}")
+
+
+def test_dmg_batch_inference(dmg_data):
+    # we'll do this, but we'll use the batch inference endpoint for the damage calc
+    # but we won't check the results, we'll just check that the endpoint is working
+    # and that the time per input is reasonable
+
+    # time the inference
+    start_time = time.time()
+    processed_mons = get_dmg_inference_batch(dmg_data)
+    end_time = time.time()
+    print(f"Total time taken: {end_time - start_time}")
+    # time per input
+    print(f"Time per input: {(end_time - start_time) / len(dmg_data)}")
+    assert processed_mons is not None
 
 
 def test_cohere_endpoint():

@@ -1,53 +1,390 @@
 import math
-import random
 import editdistance
 import jsonlines
 import ast
+from typing import Dict, Optional
+from .consts import (
+    offensive_type_resistance,
+    offensive_type_effectiveness,
+    offensive_type_immunities,
+    natures,
+)
+
+# class based implementation of pokemon calculator
+# TODO: Add in terrain modifications
+# TODO: Add in nature modifications
+
+MOVE_DATA_PATH = "./data/move_data.jsonl"
+
+
+class Pokemon:
+    # contains all relevant information about a pokemon
+
+    def __init__(
+        self,
+        name: str,
+        evs: Dict[str, int] = None,
+        nature: Optional[str] = None,
+        tera_type: Optional[str] = None,
+        tera_active: Optional[bool] = False,
+        status: Optional[str] = None,
+        stat_stages: Optional[Dict[str, int]] = None,
+        item: Optional[str] = None,
+    ):
+        self.name = name
+        # evs is a dictionary mapping stat to ev
+        self.evs = evs
+        self.nature = nature
+        self.tera_type = tera_type
+        self.tera_active = tera_active
+        self.status = status
+        # also a dictionary, mapping stat to stat stage
+        self.stat_stages = stat_stages
+        self.item = item
+
+        pokemon = lookup_pokemon(name, read_in_pokemon("./data/gen9_pokemon.jsonl"))
+        # get types
+        types = pokemon["types"]
+        if isinstance(types, str):
+            types = [types]
+        self.types = types
+        # get stats
+        self.stats = {x["stat"]["name"]: x["base_stat"] for x in pokemon["stats"]}
+        # upgrade stats based on evs
+        self.trained_stats = create_trained_stats(
+            self.evs, self.stats, nature=self.nature
+        )
+
+    def stat_stage_increase(self, stat: str, num_stages: int):
+        # when a pokemon's stat increases, modify the stat and the stage_stages
+
+        current_stages = self.stat_stages[stat]
+        if current_stages is None:
+            # if no stat stages, then just set it to 0
+            current_stages[stat] = 0
+        self.stat_stages[stat] = current_stages + num_stages
+        self.trained_stats[stat] = stat_modifier(num_stages, self.trained_stats[stat])
+
+    def retrain(self, stat: str, ev: int):
+        # retrain a pokemon with new evs
+
+        if self.evs is None:
+            self.evs = create_empty_ev_spread()
+
+        self.evs[stat] = ev
+        # upgrade stats based on evs
+        self.trained_stats[stat] = calc_stat(50, self.stats[stat], self.evs[stat], 31)
+        return self
+
+    def pretty_print(self):
+        # prints out the pokemon name, and all stats, and attributes
+
+        print(f"Pokemon is {self.name}")
+        print(f"Pokemon types are {self.types}")
+        print(f"Pokemon stats are {self.stats}")
+        print(f"Pokemon evs are {self.evs}")
+        print(f"Pokemon nature is {self.nature}")
+        print(f"Pokemon tera type is {self.tera_type}")
+        print(f"Pokemon tera active is {self.tera_active}")
+        print(f"Pokemon status is {self.status}")
+        print(f"Pokemon stat stages are {self.stat_stages}")
+
+        # fill in stat distributions
+
+
+class Move:
+    # contains all relevant information about a move
+
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        type: Optional[str] = None,
+        category: Optional[str] = None,
+        base_power: Optional[int] = None,
+        priority: Optional[int] = 0,
+        description: Optional[str] = None,
+    ):
+        self.name = name
+        self.type = type
+        self.category = category
+        self.base_power = base_power
+        self.priority = priority
+        self.description = description
+
+    @classmethod
+    def from_name(cls, name: str):
+        # given move name, return move
+        moves = read_in_moves(MOVE_DATA_PATH)
+        selected_move = None
+        for move in moves:
+            if move["name"] == name:
+                selected_move = move
+                return Move(**selected_move)
+        if selected_move is None:
+            raise ValueError(f"Move {name} not found")
+
+
+class GameState:
+    # contains all relevant information about the game state
+
+    def __init__(
+        self,
+        p1: Pokemon,
+        p2: Pokemon,
+        move: Move,
+        weather: Optional[str] = None,
+        terrain: Optional[str] = None,
+        critical_hit: Optional[bool] = False,
+    ):
+        self.p1 = p1
+        self.p2 = p2
+        self.move = move
+        self.weather = weather
+        self.terrain = terrain
+        self.critical_hit = False
+
+    def calculate_base_damage(self):
+        # given args, calculatse base damage of attack
+
+        # lookup if move is physical or special
+
+        category = self.move.category
+        attacking_stat = "attack" if category == "physical" else "special-attack"
+        defending_stat = "defense" if category == "physical" else "special-defense"
+
+        # pull stat changes and stats from pokemon
+        attacking_stat_changes = (
+            0 if self.p1.stat_stages is None else self.p1.stat_stages[attacking_stat]
+        )
+        defending_stat_changes = (
+            0 if self.p2.stat_stages is None else self.p2.stat_stages[defending_stat]
+        )
+
+        attacking_stat = stat_modifier(
+            num_stages=attacking_stat_changes,
+            stat=self.p1.trained_stats[attacking_stat],
+        )
+        defending_stat = stat_modifier(
+            num_stages=defending_stat_changes,
+            stat=self.p2.trained_stats[defending_stat],
+        )
+
+        LEVEL = 50
+
+        level_weight = math.floor(((2 * LEVEL) / 5) + 2)
+
+        # modify move base power based on item
+        if self.p1.item is not None:
+            self.move.base_power = bp_item_modifier(self.move, self.p1.item)
+
+        step1 = math.floor(
+            (level_weight * self.move.base_power * attacking_stat) / defending_stat
+        )
+
+        step2 = math.floor(step1 / 50) + 2
+
+        return step2
+
+    def calculate_modified_damage(self, verbose=False):
+        base_damage = self.calculate_base_damage()
+        verbose_print(verbose, message="Base damage of move is", result=base_damage)
+
+        # spread move modifier
+        final_damage = spread_move_modifier(base_damage)
+        verbose_print(
+            verbose, message="spread modified damage of move is", result=final_damage
+        )
+
+        # weather modifier
+        final_damage = weather_modifier(self.weather, self.move.type, final_damage)
+        verbose_print(
+            verbose, message="weather modified damage of move is:", result=final_damage
+        )
+
+        # critical hit modifier
+        final_damage = critical_hit_modifier(final_damage, self.critical_hit)
+        verbose_print(
+            verbose,
+            message="critical hit modified damage of move is",
+            result=final_damage,
+        )
+        # random modifier
+        final_damage_min, final_damage_max = random_modifier(final_damage)
+        verbose_print(verbose, message="random min of move is", result=final_damage_min)
+        verbose_print(verbose, message="random max of move is", result=final_damage_max)
+
+        # tera effectiveness modifier
+        final_damage_min = tera_modifier(self.p1, self.move.type, final_damage_min)
+        verbose_print(
+            verbose, message="tera and stab effectiveness", result=final_damage_min
+        )
+        final_damage_max = tera_modifier(self.p1, self.move.type, final_damage_max)
+        verbose_print(
+            verbose, message="min damage after tera/stab mod", result=final_damage_min
+        )
+
+        verbose_print(
+            verbose, message="max damage after tera/stab mod", result=final_damage_max
+        )
+
+        # type effectiveness modifier
+        final_damage_min = type_modifier(final_damage_min, self)
+        final_damage_max = type_modifier(final_damage_max, self)
+        verbose_print(
+            verbose,
+            message="min damage after type effectiveness",
+            result=final_damage_min,
+        )
+        verbose_print(
+            verbose,
+            message="max damage after type effectiveness",
+            result=final_damage_max,
+        )
+
+        # burn modifier
+        final_damage_min = burn_modifier(
+            final_damage_min, self.move.category, self.p1.status
+        )
+        final_damage_max = burn_modifier(
+            final_damage_max, self.move.category, self.p1.status
+        )
+
+        # final modifier/special cases
+
+        return (final_damage_min, final_damage_max)
+
+
+def verbose_print(verbose, result, message=""):
+    if verbose:
+        print(message, result)
 
 
 def poke_round(num):
-    pass
+    # given a number, round it down if decimal is less than 0.5
+    # round up if decimal is greater than 0.5
+
+    decimal = num - math.floor(num)
+    return math.floor(num) if decimal <= 0.5 else math.ceil(num)
 
 
-def base_damage(base_power, attack, defense):
-    # given args, calculatse base damage of attack
-
-    LEVEL = 50
-
-    level_weight = math.floor(((2 * LEVEL) / 5) + 2)
-
-    step1 = math.floor((level_weight * base_power * attack) / defense)
-
-    step2 = math.floor(step1 / 50) + 2
-
-    return step2
-
-
-# DaWoblefet calc exam[le]
-
-# incin_calc = base_damage(base_power=70, attack=136, defense=100)
-# print(incin_calc)
-# assert incin_calc == 43, "Calc is wrong"
-
-
-def spread_move_modifier(damage):
+def spread_move_modifier(damage, is_spread=False):
     # reduce damage by 0.75 and pokeround
+    if is_spread:
+        return poke_round(damage * (3072 / 4096))
+    return damage
 
-    return poke_round(damage * (3072 / 4096))
+
+def read_in_moves(f):
+    moves = []
+    with jsonlines.open(f) as reader:
+        for entry in reader:
+            moves.append(entry)
+    return moves
+
+
+def lookup_move(move_name, move_data_path):
+
+    # read in move data
+    moves = read_in_moves(move_data_path)
+    selected_move = None
+    for move in moves:
+        if move["name"] == move_name:
+            selected_move = move
+            break
+    if selected_move is not None:
+        move = Move(**selected_move)
+    return None
 
 
 def random_modifier(damage):
-    n = random.randint(85, 100)
+    # returns two values, which are the min and max damage possible
 
-    return math.floor(damage * (100 - n) / 100)
+    return math.floor((damage * 85) / 100), poke_round(damage)
 
 
 def STAB_modifier(damage):
     return poke_round((6144 / 4096) * damage)
 
 
-def burn_modifier(damage):
-    pass
+def tera_modifier(pokemon, move_type, damage):
+    # tera typing where the move is same type as pokemon
+    # just doubles the stab modifier
+    # otherwise if the types are different, we do a normal stab bonus
+    pokemon_types = pokemon.types
+    tera_type = pokemon.tera_type
+    tera_active = pokemon.tera_active
+
+    if tera_active:
+        if tera_type == move_type:
+            # then just do the 1.5x modifier
+            if tera_type in pokemon_types:
+                # then do the 2x modifier
+                return poke_round((8192 / 4096) * damage)
+            return STAB_modifier(damage)
+    # then no modifier
+    elif move_type in pokemon_types:
+        return STAB_modifier(damage)
+    else:
+        return damage
+
+
+def item_modifier(pokemon, item_class):
+    if item_class in ["band", "banded", "choice band"]:
+        # choice band ups attack by 1.5x
+        pokemon.stat["attack"] = poke_round((6144 / 4096) * pokemon.stat["attack"])
+    elif item_class in ["specs", "choice specs"]:
+        # choice specs ups special attack by 1.5x
+        pokemon.stat["special_attack"] = poke_round(
+            (6144 / 4096) * pokemon.stat["special_attack"]
+        )
+    elif item_class in ["scarf", "choice scarf"]:
+        # choice scarf ups speed by 1.5x
+        pokemon.stat["speed"] = poke_round((6144 / 4096) * pokemon.stat["speed"])
+    elif item_class in ["assault vest", "vest", "av"]:
+        # assault vest ups special defense by 1.5x
+        pokemon.stat["special_defense"] = poke_round(
+            (6144 / 4096) * pokemon.stat["special_defense"]
+        )
+    return pokemon
+
+
+def bp_item_modifier(move, item):
+    # base power modifiers that occur with special items
+    # for now, these are using placeholders to refer to classes of items
+    if item == "boosted":
+        # generic 1.2x boost
+        return poke_round((12288 / 4096) * move.base_power)
+    elif item == "life orb":
+        # life orb 1.3x boost
+        return poke_round((13312 / 4096) * move.base_power)
+    return move.base_power
+
+
+def weather_modifier(weather, move_type, damage):
+    # account for sun or rain only
+    # boosts for rain and water, and sun and fire
+    # halves for rain and fire, and sun and water
+
+    # does not do defense boost for hail or special
+    # defense for sandstorm
+
+    if weather == "rain" and move_type == "water":
+        return poke_round((6144 / 4096) * damage)
+    elif weather == "sun" and move_type == "fire":
+        return poke_round((6144 / 4096) * damage)
+    elif weather == "rain" and move_type == "fire":
+        return poke_round((2048 / 4096) * damage)
+    elif weather == "sun" and move_type == "water":
+        return poke_round((2048 / 4096) * damage)
+    else:
+        return damage
+
+
+def critical_hit_modifier(damage, critical_hit=False):
+    # need to double check this one
+    if critical_hit:
+        return poke_round((6144 / 4096) * damage)
+    return damage
 
 
 # BST to actual stat
@@ -68,7 +405,9 @@ def stat_modifier(num_stages, stat):
     # given stat change, compute modifier and new stat
     modifier = 1
     direction = 1
-    if num_stages <= 0:
+    if num_stages == 0:
+        return stat
+    if num_stages < 0:
         direction = -1
         num_stages = abs(num_stages)
     if num_stages >= 6:
@@ -89,8 +428,109 @@ def stat_modifier(num_stages, stat):
     return math.floor(modifier * stat)
 
 
-# implement type effectivess checks
-# figure out how to represent two pokemon and the resultant calculation
+def immunity_check(p2_type, move_type):
+    # first, we need to check that the move type is in the immunities dictionary
+    # then we need to check if the pokemon has the type that is immune to the move
+    if move_type in offensive_type_immunities:
+        return p2_type in offensive_type_immunities[move_type]
+    return False
+
+
+def type_mulitplier_lookup(p2_type, move_type):
+    # returns mulitplier for type effectiveness and resistance in a list
+    is_resisted = p2_type in offensive_type_resistance[move_type]
+    is_effective = p2_type in offensive_type_effectiveness[move_type]
+
+    is_immune = immunity_check(p2_type, move_type)
+
+    if is_immune:
+        return 0
+    if is_resisted:
+        return 0.5
+    elif is_effective:
+        return 2
+    elif is_immune:
+        return 0
+    else:
+        return 1
+
+
+def type_multiplier(p2_type, move_type):
+    # returns mulitplier for type effectiveness and resistance
+    modifiers = [type_mulitplier_lookup(x, move_type) for x in p2_type]
+    # good for if there is only one type
+    return math.prod(modifiers)
+
+
+def type_modifier(damage, gamestate):
+    # grab types
+    p2_type = gamestate.p2.types
+    # grab types of move
+    move_type = gamestate.move.type
+    # override types if tera typing is active
+    if gamestate.p2.tera_active:
+        p2_type = [gamestate.p2.tera_type]
+
+    # calculate type modifier
+    return damage * type_multiplier(p2_type, move_type)
+
+    # return type modifier
+
+
+def burn_modifier(damage, category, status):
+    # if pokemon is burned, and category is physical, then damage is halved
+    if status == "burn" and category == "physical":
+        return poke_round((2048 / 4096) * damage)
+    return damage
+
+
+def nature_modifier(stats, nature):
+    # given stats and nature, return modified stats
+    # nature is a dictionary of stat to multiplier
+    if nature is not None:
+        for stat, mod in natures[nature].items():
+            stats[stat] = math.floor(stats[stat] * mod)
+    return stats
+
+
+def create_empty_ev_spread():
+    # create an empty ev spread
+    return {
+        x: 0
+        for x in [
+            "hp",
+            "attack",
+            "defense",
+            "special-attack",
+            "special-defense",
+            "speed",
+        ]
+    }
+
+
+def create_trained_stats(evs, stats, nature=None):
+    # given a pokemon's evs and stats, return trained stats
+    # handles no-evs case by setting evs to 0
+    if evs is None:
+        evs = create_empty_ev_spread()
+    # if not all evs are present, then fill in the rest with 0
+    if len(evs) < 6:
+        ev_spread = evs.keys()
+        for stat in stats:
+            if stat not in ev_spread:
+                evs[stat] = 0
+    ev_spread = evs.keys()
+    trained_stats = {}
+    for stat in stats:
+        if stat == "hp":
+            trained_stats[stat] = calc_stat(50, stats[stat], evs[stat], 31, is_hp=True)
+        elif stat in ev_spread:
+            trained_stats[stat] = calc_stat(50, stats[stat], evs[stat], 31)
+        else:
+            trained_stats[stat] = calc_stat(50, stats[stat], 0, 31)
+
+    trained_stats = nature_modifier(trained_stats, nature)
+    return trained_stats
 
 
 def read_in_pokemon(f):
@@ -131,16 +571,6 @@ def lookup_pokemon(pokemon, pokemons):
     for poke in pokemons:
         if poke["name"] == matched_pokemon:
             return poke
-
-
-def type_check():
-    # retrieve type modifier based on input types
-    pass
-
-
-def item_lookup():
-    # return properties of item
-    pass
 
 
 # this function needs to be refactored to reflect changes in data_collection.py
@@ -248,17 +678,3 @@ def formatted_speed_check(arg_strings, f):
 
 def check_if_exists(d, arg):
     return d[arg] if arg in d.keys() else ""
-
-
-def calculate_damage(p1, move, p2, p1_stat_changes, p2_stat_changes):
-    # basic implementation of pokemon move calculator
-
-    # lookup stats, type, of both pokemon
-
-    # lookup move type and power
-    # transform stats given stat changes
-    # do damage calculation
-    # factor in offensive/defensive items
-
-    # return damage windows
-    pass

@@ -1,31 +1,7 @@
 import jsonlines
 from langchain import PromptTemplate
 import random
-import string
-
-
-pokemons = []
-with jsonlines.open("./data/gen9_pokemon.jsonl") as reader:
-    for entry in reader:
-        pokemons.append(entry)
-
-
-def random_ev():
-    return random.randint(0, 252)
-
-
-def random_stat_changes():
-    stat_change = random.randint(-6, 6)
-    if stat_change > 0:
-        return "+" + str(stat_change)
-    return str(stat_change)
-
-
-def random_mon(pokemons):
-    pokemon = random.choice(pokemons)["name"]
-    pokemon = pokemon.replace("-", " ")
-    pokemon = string.capwords(pokemon)
-    return pokemon
+from random_properties import random_ev, random_stat_changes, random_mon, pokemons
 
 
 # first section of prompts
