@@ -4,7 +4,7 @@ alakazam is a chatbot-like interface for running calculations for the Pokemon vi
 
 Simply type in a calculation you wish to compute, and the app will parse your natural language instructions and return the result, just like magic!
 
-alakazam only works for speed checks right now, but advanced capabilities such as damage calcs are incoming! If there's something specific you'd want to see, please open an issue. Thanks, and enjoy!
+alakazam works for three styles of intents: speed checks, optimal ev calculations (aka "/train"), and querying over base stat totals for Pokemon. It is currently deployed on Streamlit Cloud, and uses a finetuned large language model to parse user commands.
 
 
 ## Table of Contents
@@ -18,7 +18,7 @@ alakazam only works for speed checks right now, but advanced capabilities such a
 
 ## Usage
 
-Navigate to the deployed [Streamlit web application here](https://alakazam.streamlit.app/).
+Navigate to the deployed [Streamlit web application here](https://alakazam-vgc.streamlit.app).
 
 From here, just type in a natural language command and hit enter! It may take up to fifteen seconds to get your first response. After submitting a few responses, latency should decrease to about four seconds.
 
@@ -29,6 +29,54 @@ When VGC players communicate the game state of a Pokemon match, they use a certa
 
 
 Alakazam uses an augmented finetuned large langauge model to compute speed checks. A pretrained large langauge model was instruction finetuned using LoRA techniques on a synthetic dataset containing pokemon names in a formatted calc phrasing. After parsing the damage calc, the model passes this information to a set of scripts to do the actual math. The results are returned directly back to the user, much like a computer command line interface.
+
+## Intents
+
+Alakazam can parse three types of intents: speed checks, optimal ev calculations, and querying over base stat totals for Pokemon.
+
+### A note on intents.
+
+All intents are still in development, and there will be bugs! If you notice an issue, please open an issue and describe the query that failed. I'll get to work as soon as I can!
+
+
+### Speed Checks
+A speed check consists of two pokemon, their stat stages, their investment in the speed stat, and that's it!
+
+Instead of typing in 252 speed, you can also say "max speed".
+
+An example of a speed check would be the following:
+- Does max speed Salamence outspeed 248 Talonflame?
+
+### Optimal EV Calculations (aka /train feature)
+
+Often, players want to know how to optimally invest their EVs to one-hit ko, or two-hit ko, a certain Pokemon. This is a more complex calculation, and requires more information than a speed check.
+
+alakazam can take natural language descriptions of the game state in addition to the pokemon names and moves, in order to quickly facilitate optimal ev calculation.
+
+In order to do this, simply construct a query beginning with "/train" and then describe the condition in which you want a Pokemon to ohko another. Please include the following info, at minimum:
+- The attacking Pokemon
+- The defending Pokemon
+- The move used (the name of the move will suffice)
+
+You may also include the following info, if you know it:
+- The attacking Pokemon's item (choice band, life orb, a 1.2x item referred as boosted, and choice specs)
+- The defending Pokemon's item
+- the weather
+- the defending Pokemon's nature, stat distribution
+- the tera types of the attacking and/or defending pokemon
+
+An example of this query would be the following:
+- /train Charizard to ohko Eevee using overheat
+- /train banded Hippowdon using fire-punch to 2hko Dipplin
+
+### Querying over base stat totals for Pokemon
+
+You can also ask natural language questions about the base stats of Pokemon, and alakazam will run a SQL query to find the answer for you.
+
+For example, you may ask:
+- What is the base stat total of Charizard?
+- what is the speed stat of Pikachu?
+
 
 
 ## Stack
@@ -47,16 +95,10 @@ We use [Hugging Face](https://huggingface.co) (transformers, peft) and [Google C
 ## Features
 
 - Fast calculation of natural language speed checks for Pokemon VGC
+- ohko and 2hko optimality calcs given natural language desciptions of the game state
 - Natural language querying of pokemon stats
 - History to keep track of previous calculations
 - Report incorrect statistics to the maintainer
-
-## Future Features
-- Add chatbot functionality (Retrieval Augmented Generation) to external useful data sources (like an items dictionary, or berry dict, or game knowledge)
-- Retrain a different base model to improve performance
-- Submit multiple calcs at once for comparison
-- Calculate more advanced queries such as "When does X outspeed y?"
-- Add full damage calc capability
 
 ## Safety
 
