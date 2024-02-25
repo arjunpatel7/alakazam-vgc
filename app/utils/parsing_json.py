@@ -1,5 +1,5 @@
-from app.utils.train_pokemon import calculate_optimal_evs
-from app.utils.calculations import GameState, Pokemon, Move
+from .train_pokemon import calculate_optimal_evs
+from .calculations import GameState, Pokemon, Move
 import json
 
 """Contains code to parse JSON into gamestate and action objects"""
@@ -33,14 +33,17 @@ def json_to_action(j):
     # retrieve gamestate from json
     gamestate = json_to_gamestate(j)
     # based on action attribute in json, return the appropriate action
-
     # train
+    print(gamestate.move)
+    j = json.loads(j)
     action_results = ""
-    if json["action"]["name"] == "train":
+    train_actions = ["train", "calculate", "\train", "/train"]
+    print(j["action"]["name"])
+    if j["action"]["name"] in train_actions:
         # calculate optimal evs for 1hko
         # args so that we can use the same function for all actions
         action_results = calculate_optimal_evs(
-            gamestate, json["action"]["args"]["criteria"]
+            gamestate, j["action"]["args"]["criteria"]
         )
 
     # other actions that are not avail yet...

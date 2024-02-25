@@ -3,7 +3,7 @@ import editdistance
 import jsonlines
 import ast
 from typing import Dict, Optional
-from app.utils.consts import (
+from .consts import (
     offensive_type_resistance,
     offensive_type_effectiveness,
     offensive_type_immunities,
@@ -68,6 +68,9 @@ class Pokemon:
     def retrain(self, stat: str, ev: int):
         # retrain a pokemon with new evs
 
+        if self.evs is None:
+            self.evs = create_empty_ev_spread()
+
         self.evs[stat] = ev
         # upgrade stats based on evs
         self.trained_stats[stat] = calc_stat(50, self.stats[stat], self.evs[stat], 31)
@@ -116,10 +119,8 @@ class Move:
         for move in moves:
             if move["name"] == name:
                 selected_move = move
-                break
-        if selected_move is not None:
-            move = Move(**selected_move)
-        else:
+                return Move(**selected_move)
+        if selected_move is None:
             raise ValueError(f"Move {name} not found")
 
 

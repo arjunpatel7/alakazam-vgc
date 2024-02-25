@@ -6,6 +6,7 @@ import time
 import modal
 from utils.calculations import read_in_pokemon, formatted_speed_check
 from utils.base_stat_chat import handle_query, classify_intent
+from utils.parsing_json import json_to_action
 
 pokemons = read_in_pokemon("./data/gen9_pokemon.jsonl")
 
@@ -96,26 +97,97 @@ def get_speedcheck(prompt):
         st.session_state.session_history.append(history_entry)
 
 
+def get_train_calc(prompt):
+    # Given a prompt corresponding to optimal ev calculation, parse it and run the inference back
+
+    # keep track of how long it takes to run
+    start_time = time.time()
+    # grab our PokemonSpeedCheck inference function from Modal and predict
+    extract = modal.Function.lookup("pkmn-dmg", "run_inference")
+    # call run_inference remotely on modal
+    result = extract.remote(prompt)
+    st.write(result)
+    try:
+        # try to parse the result into json, and then the calc
+        action_result = json_to_action(result)
+        st.write(action_result)
+        end_time = time.time()
+        time_to_result = end_time - start_time
+        st.write("Total time to result: ", time_to_result)
+    except SyntaxError:
+        st.write("Something went wrong, we couldn't parse this calculation")
+
+
 st.title("Welcome to alakazam!")
+
+github_url = "https://github.com/arjunpatel7/alakazam-vgc/"
+
+github_star_button = """
+    <iframe src="https://ghbtns.com/github-btn.html?user=arjunpatel7&repo=alakazam-vgc&type=star&count=true&size=large" frameborder="0"
+    \ scrolling="0" width="160px" height="30px"></iframe>
+"""
+
+
+# Display the GitHub star button in your Streamlit app
+
 
 with st.sidebar:
     # create a description of the speedcheck bot in really fancy text
     st.header("What is alakazam")
     st.write(
-        "alakazam allows you to pass natural language queries about Pokemon speedchecks and it will return the speedcheck outcome for you!"
-    )
-    st.write(
-        "Right now, alakazam only support queries that include info about the two pokemon involved, their evs, and their speed stat changes."
+        "alakazam allows you to pass natural language queries about Pokemon battle calculations, and it'll do the calc for you!"
     )
     st.write(
         "alakazam is NOT like chatgpt, so please be sure to ask only about speedchecks including the above info"
     )
+    st.header("How does Alakazam-VGC work?")
+    st.write(
+        "This project uses some finetuned llms to pasre input game state descriptions from players to parseable Json strings?\
+             which are passed to internal game logic to calculate outcomes"
+    )
+    st.write(
+        "Many players use online damage calculators, which can take up to 1 minute to calculate a single game state"
+    )
+    st.write(
+        "Whereas alakazam can calculate a query from input to result in under 10s when hot"
+    )
+    st.write(
+        "Using LLMs can also allow us to (eventually) batch process inputs, and maybe even suggest optimal teambuilding strategies"
+    )
+    st.header("Check us out on Github!")
+    st.link_button("Github", github_url)
+    st.markdown(github_star_button, unsafe_allow_html=True)
 
-st.subheader("Query Examples")
-with st.expander("Here are some examples of queries you can ask alakazam:"):
-    st.write("Is -5 35 Noibat slower than -5 19 Blissey")
-    st.write("Will Finneon with 230 speed evs outspeed Meowth with 215 speed evs")
-    st.write("Does max speed Salamence outspeed 248 Talonflame?")
+
+# I want to include three columns here instead of query examples, that are drop down
+# for Speed Checks, Optimal Evs, and BST queries
+
+st.subheader("Ask alakazam about Pokemon battle calculations!")
+q1, q2, q3 = st.columns(3)
+
+with q1:
+    st.subheader("Speed Checks")
+    with st.expander(
+        "Ask alakazam about common speed checks using stat changes, evs, and the pokemon of interest"
+    ):
+        st.write("Is -5 35 Noibat slower than -5 19 Blissey")
+        st.write("Will Finneon with 230 speed evs outspeed Meowth with 215 speed evs")
+        st.write("Does max speed Salamence outspeed 248 Talonflame?")
+
+with q2:
+    st.subheader("EV Optimal Training for knockouts")
+    with st.expander("Ask alakazam to calculate optimal evs for a given game state"):
+        st.write("/train Charizard to ohko Eevee using overheat")
+        st.write("Train Hippowdon with banded using fire-punch to 2hko Dipplin")
+        st.write(
+            "Train Gimmighoul using karate-chop to 1hko Volcarona with 13 special-attack  1 special-defense and 29 defense and 9 hp."
+        )
+with q3:
+    st.subheader("Base Stat Queries")
+    with st.expander("Ask about base stats or base stat totals!"):
+        st.write("What is the base special defense of Meowth?")
+        st.write("What is Pikachu's speed stat?")
+
 
 st.subheader("Ask away!")
 input_prompt = st.text_input(label="Write your query here")
@@ -131,19 +203,29 @@ input_prompt = st.text_input(label="Write your query here")
 
 if input_prompt != "":
     # classify the intent of the input prompt
-    response = classify_intent(input_prompt)
-    st.write(response)
+    # I would like to refactor this later so we avoid the intent classification
+    # or, retrain the intent classifier to accept the train usecase
+    train_shortcut = ["train", "calculate", "\train", "/train"]
+
+    train_condition = [i for i in train_shortcut if i in input_prompt]
+
     # if the intent is speedcheck, run the speedcheck code
-    if response == "speed check":
-        get_speedcheck(input_prompt)
-    elif response == "sql query":
-        st.write("bst check")
-        result = handle_query(input_prompt)
-        st.write(result)
+    if any(train_condition):
+        st.write("Optimal ev calculating...")
+        get_train_calc(input_prompt)
     else:
-        st.write(
-            "Sorry, I didn't understand that. Could you rephrase your to be a speedcheck or bst?"
-        )
+        response = classify_intent(input_prompt)
+        st.write(response)
+        if response == "speed check":
+            get_speedcheck(input_prompt)
+        elif response == "sql query":
+            st.write("bst check")
+            result = handle_query(input_prompt)
+            st.write(result)
+        else:
+            st.write(
+                "Sorry, I didn't understand that. Could you rephrase your to be a speedcheck or bst?"
+            )
 
 
 def send_speed_calc_error_report(incorrect_explanation):

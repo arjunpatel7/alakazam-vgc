@@ -38,7 +38,10 @@ def calculate_optimal_evs(game_state: GameState, criteria: Optional[str] = "1hko
     )
 
     # adjust evs_remaining to account for the fact that we can't exceed 252+252+4 across stats
-    evs_remaining = min(508 - sum(game_state.p1.evs.values()), 252)
+    if game_state.p1.evs is not None:
+        evs_remaining = min(508 - sum(game_state.p1.evs.values()), 252)
+    else:
+        evs_remaining = 252
 
     # determine the minimum damage required to 1hko or 2hko
     if criteria == "2hko":
