@@ -1,0 +1,11 @@
+{"name": "pound", "type": "normal", "category": "physical", "base_power": 40, "priority": 0, "description": "Pounds with fore­\nlegs or tail."}
+{"name": "karate-chop", "type": "fighting", "category": "physical", "base_power": 50, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
+{"name": "double-slap", "type": "normal", "category": "physical", "base_power": 15, "priority": 0, "description": "Repeatedly slaps\n2-5 times."}
+{"name": "comet-punch", "type": "normal", "category": "physical", "base_power": 18, "priority": 0, "description": "Repeatedly punches\n2-5 times."}
+{"name": "mega-punch", "type": "normal", "category": "physical", "base_power": 80, "priority": 0, "description": "A powerful punch\nthrown very hard."}
+{"name": "pay-day", "type": "normal", "category": "physical", "base_power": 40, "priority": 0, "description": "Throws coins. Gets\nthem back later."}
+{"name": "fire-punch", "type": "fire", "category": "physical", "base_power": 75, "priority": 0, "description": "A fiery punch. May\ncause a burn."}
+{"name": "ice-punch", "type": "ice", "category": "physical", "base_power": 75, "priority": 0, "description": "An icy punch. May\ncause freezing."}
+{"name": "thunder-punch", "type": "electric", "category": "physical", "base_power": 75, "priority": 0, "description": "An electric punch.\nIt may paralyze."}
+{"name": "scratch", "type": "normal", "category": "physical", "base_power": 40, "priority": 0, "description": "Scratches with\nsharp claws."}
+{"name": "overheat", "type": "fire", "category": "special", "base_power": 130, "priority": 0, "description": "Scratches with\nsharp claws."}
