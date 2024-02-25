@@ -136,7 +136,9 @@ Response:\n
         batch = batch.to(self.device)
 
         with torch.cuda.amp.autocast():
-            output_tokens = self.model.generate(**batch, max_new_tokens=max_new_tokens)
+            output_tokens = self.model.generate(
+                **batch, max_new_tokens=max_new_tokens, do_sample=False
+            )
         return self.tokenizer.decode(output_tokens[0], skip_special_tokens=True)
 
     @method()
@@ -160,7 +162,7 @@ Response:\n
 
             # generate output tokens for all batches
             output_tokens_list = self.model.generate(
-                **batches, max_new_tokens=max_new_tokens
+                **batches, max_new_tokens=max_new_tokens, do_sample=False
             )
 
         # list comprehension
