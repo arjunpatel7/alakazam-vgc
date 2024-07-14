@@ -1,11 +1,937 @@
-{"name": "pound", "type": "normal", "category": "physical", "base_power": 40, "priority": 0, "description": "Pounds with fore­\nlegs or tail."}
-{"name": "karate-chop", "type": "fighting", "category": "physical", "base_power": 50, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
-{"name": "double-slap", "type": "normal", "category": "physical", "base_power": 15, "priority": 0, "description": "Repeatedly slaps\n2-5 times."}
-{"name": "comet-punch", "type": "normal", "category": "physical", "base_power": 18, "priority": 0, "description": "Repeatedly punches\n2-5 times."}
-{"name": "mega-punch", "type": "normal", "category": "physical", "base_power": 80, "priority": 0, "description": "A powerful punch\nthrown very hard."}
-{"name": "pay-day", "type": "normal", "category": "physical", "base_power": 40, "priority": 0, "description": "Throws coins. Gets\nthem back later."}
-{"name": "fire-punch", "type": "fire", "category": "physical", "base_power": 75, "priority": 0, "description": "A fiery punch. May\ncause a burn."}
-{"name": "ice-punch", "type": "ice", "category": "physical", "base_power": 75, "priority": 0, "description": "An icy punch. May\ncause freezing."}
-{"name": "thunder-punch", "type": "electric", "category": "physical", "base_power": 75, "priority": 0, "description": "An electric punch.\nIt may paralyze."}
-{"name": "scratch", "type": "normal", "category": "physical", "base_power": 40, "priority": 0, "description": "Scratches with\nsharp claws."}
-{"name": "overheat", "type": "fire", "category": "special", "base_power": 130, "priority": 0, "description": "Scratches with\nsharp claws."}
+{"name": "pound", "type": "normal", "category": "physical", "power": 40, "priority": 0, "description": "Pounds with fore­\nlegs or tail."}
+{"name": "karate-chop", "type": "fighting", "category": "physical", "power": 50, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
+{"name": "double-slap", "type": "normal", "category": "physical", "power": 15, "priority": 0, "description": "Repeatedly slaps\n2-5 times."}
+{"name": "comet-punch", "type": "normal", "category": "physical", "power": 18, "priority": 0, "description": "Repeatedly punches\n2-5 times."}
+{"name": "mega-punch", "type": "normal", "category": "physical", "power": 80, "priority": 0, "description": "A powerful punch\nthrown very hard."}
+{"name": "pay-day", "type": "normal", "category": "physical", "power": 40, "priority": 0, "description": "Throws coins. Gets\nthem back later."}
+{"name": "fire-punch", "type": "fire", "category": "physical", "power": 75, "priority": 0, "description": "A fiery punch. May\ncause a burn."}
+{"name": "ice-punch", "type": "ice", "category": "physical", "power": 75, "priority": 0, "description": "An icy punch. May\ncause freezing."}
+{"name": "thunder-punch", "type": "electric", "category": "physical", "power": 75, "priority": 0, "description": "An electric punch.\nIt may paralyze."}
+{"name": "scratch", "type": "normal", "category": "physical", "power": 40, "priority": 0, "description": "Scratches with\nsharp claws."}
+{"name": "vice-grip", "type": "normal", "category": "physical", "power": 55, "priority": 0, "description": "Grips with power­\nful pincers."}
+{"name": "guillotine", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "A one-hit KO,\npincer attack."}
+{"name": "razor-wind", "type": "normal", "category": "special", "power": 80, "priority": 0, "description": "1st turn: Prepare\n2nd turn: Attack"}
+{"name": "swords-dance", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "A dance that in­\ncreases ATTACK."}
+{"name": "cut", "type": "normal", "category": "physical", "power": 50, "priority": 0, "description": "Cuts using claws,\nscythes, etc."}
+{"name": "gust", "type": "flying", "category": "special", "power": 40, "priority": 0, "description": "Whips up a strong\ngust of wind."}
+{"name": "wing-attack", "type": "flying", "category": "physical", "power": 60, "priority": 0, "description": "Strikes the target\nwith wings."}
+{"name": "whirlwind", "type": "normal", "category": "status", "power": null, "priority": -6, "description": "Blows away the foe\n& ends battle."}
+{"name": "fly", "type": "flying", "category": "physical", "power": 90, "priority": 0, "description": "1st turn: Fly\n2nd turn: Attack"}
+{"name": "bind", "type": "normal", "category": "physical", "power": 15, "priority": 0, "description": "Binds the target\nfor 2-5 turns."}
+{"name": "slam", "type": "normal", "category": "physical", "power": 80, "priority": 0, "description": "Slams the foe with\na tail, vine, etc."}
+{"name": "vine-whip", "type": "grass", "category": "physical", "power": 45, "priority": 0, "description": "Whips the foe with\nslender vines."}
+{"name": "stomp", "type": "normal", "category": "physical", "power": 65, "priority": 0, "description": "An attack that may\ncause flinching."}
+{"name": "double-kick", "type": "fighting", "category": "physical", "power": 30, "priority": 0, "description": "A double kicking\nattack."}
+{"name": "mega-kick", "type": "normal", "category": "physical", "power": 120, "priority": 0, "description": "A powerful kicking\nattack."}
+{"name": "jump-kick", "type": "fighting", "category": "physical", "power": 100, "priority": 0, "description": "A strong jumping kick. May\nmiss and hurt the kicker."}
+{"name": "rolling-kick", "type": "fighting", "category": "physical", "power": 60, "priority": 0, "description": "A fast, spinning\nkick."}
+{"name": "sand-attack", "type": "ground", "category": "status", "power": null, "priority": 0, "description": "Reduces accuracy\nby throwing sand."}
+{"name": "headbutt", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "An attack that may\nmake foe flinch."}
+{"name": "horn-attack", "type": "normal", "category": "physical", "power": 65, "priority": 0, "description": "An attack using a\nhorn to jab."}
+{"name": "fury-attack", "type": "normal", "category": "physical", "power": 15, "priority": 0, "description": "Jabs the target\n2-5 times."}
+{"name": "horn-drill", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "A one-hit KO,\ndrill attack."}
+{"name": "tackle", "type": "normal", "category": "physical", "power": 40, "priority": 0, "description": "Trifft das Ziel mit vollem Körpereinsatz."}
+{"name": "body-slam", "type": "normal", "category": "physical", "power": 85, "priority": 0, "description": "An attack that may\ncause paralysis."}
+{"name": "wrap", "type": "normal", "category": "physical", "power": 15, "priority": 0, "description": "Squeezes the foe\nfor 2-5 turns."}
+{"name": "take-down", "type": "normal", "category": "physical", "power": 90, "priority": 0, "description": "A tackle that also\nhurts the user."}
+{"name": "thrash", "type": "normal", "category": "physical", "power": 120, "priority": 0, "description": "Works 2-3 turns\nand confuses user."}
+{"name": "double-edge", "type": "normal", "category": "physical", "power": 120, "priority": 0, "description": "A tackle that also\nhurts the user."}
+{"name": "tail-whip", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Agita la cola para bajar la Defensa del equipo rival. "}
+{"name": "poison-sting", "type": "poison", "category": "physical", "power": 15, "priority": 0, "description": "An attack that may\npoison the target."}
+{"name": "twineedle", "type": "bug", "category": "physical", "power": 25, "priority": 0, "description": "Jabs the foe twice\nusing stingers."}
+{"name": "pin-missile", "type": "bug", "category": "physical", "power": 25, "priority": 0, "description": "Fires pins that\nstrike 2-5 times."}
+{"name": "leer", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Le lanceur fait les gros yeux à l’ennemi pour\nl’intimider et baisser sa Défense."}
+{"name": "bite", "type": "dark", "category": "physical", "power": 60, "priority": 0, "description": "An attack that may\ncause flinching."}
+{"name": "growl", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Reduces the foe's\nATTACK."}
+{"name": "roar", "type": "normal", "category": "status", "power": null, "priority": -6, "description": "Scares wild foes\nto end battle."}
+{"name": "sing", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "May cause the foe\nto fall asleep."}
+{"name": "supersonic", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Sound waves that\ncause confusion."}
+{"name": "sonic-boom", "type": "normal", "category": "special", "power": null, "priority": 0, "description": "Always inflicts\n20HP damage."}
+{"name": "disable", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Per quattro turni impedisce al bersaglio\ndi riutilizzare l’ultima mossa usata."}
+{"name": "acid", "type": "poison", "category": "special", "power": 40, "priority": 0, "description": "An attack that may\nlower DEFENSE."}
+{"name": "ember", "type": "fire", "category": "special", "power": 40, "priority": 0, "description": "An attack that may\ninflict a burn."}
+{"name": "flamethrower", "type": "fire", "category": "special", "power": 90, "priority": 0, "description": "An attack that may\ninflict a burn."}
+{"name": "mist", "type": "ice", "category": "status", "power": null, "priority": 0, "description": "Prevents stat\nreduction."}
+{"name": "water-gun", "type": "water", "category": "special", "power": 40, "priority": 0, "description": "Squirts water to\nattack."}
+{"name": "hydro-pump", "type": "water", "category": "special", "power": 110, "priority": 0, "description": "The target is blasted by a huge volume\nof water launched under great pressure."}
+{"name": "surf", "type": "water", "category": "special", "power": 90, "priority": 0, "description": "A strong water-\ntype attack."}
+{"name": "ice-beam", "type": "ice", "category": "special", "power": 90, "priority": 0, "description": "An attack that may\nfreeze the foe."}
+{"name": "blizzard", "type": "ice", "category": "special", "power": 110, "priority": 0, "description": "An attack that may\nfreeze the foe."}
+{"name": "psybeam", "type": "psychic", "category": "special", "power": 65, "priority": 0, "description": "The target is attacked with a peculiar ray. This may\nalso leave the target confused."}
+{"name": "bubble-beam", "type": "water", "category": "special", "power": 65, "priority": 0, "description": "An attack that may\nlower SPEED."}
+{"name": "aurora-beam", "type": "ice", "category": "special", "power": 65, "priority": 0, "description": "An attack that may\nlower ATTACK."}
+{"name": "hyper-beam", "type": "normal", "category": "special", "power": 150, "priority": 0, "description": "1st turn: Attack\n2nd turn: Rest"}
+{"name": "peck", "type": "flying", "category": "physical", "power": 35, "priority": 0, "description": "Greift das Ziel mit dem Schnabel oder Horn an."}
+{"name": "drill-peck", "type": "flying", "category": "physical", "power": 80, "priority": 0, "description": "A strong, spin­\nning-peck attack."}
+{"name": "submission", "type": "fighting", "category": "physical", "power": 80, "priority": 0, "description": "An attack that al­\nso hurts the user."}
+{"name": "low-kick", "type": "fighting", "category": "physical", "power": null, "priority": 0, "description": "An attack that may\ncause flinching."}
+{"name": "counter", "type": "fighting", "category": "physical", "power": null, "priority": -5, "description": "Returns a physical\nblow double."}
+{"name": "seismic-toss", "type": "fighting", "category": "physical", "power": null, "priority": 0, "description": "Inflicts damage identical\nto the user’s level."}
+{"name": "strength", "type": "normal", "category": "physical", "power": 80, "priority": 0, "description": "使出浑身力气\n殴打对手进行攻击。"}
+{"name": "absorb", "type": "grass", "category": "special", "power": 20, "priority": 0, "description": "Steals 1/2 of the\ndamage inflicted."}
+{"name": "mega-drain", "type": "grass", "category": "special", "power": 40, "priority": 0, "description": "Steals 1/2 of the\ndamage inflicted."}
+{"name": "leech-seed", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "Steals HP from the\nfoe on every turn."}
+{"name": "growth", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Raises the SPCL.\nATK rating."}
+{"name": "razor-leaf", "type": "grass", "category": "physical", "power": 55, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
+{"name": "solar-beam", "type": "grass", "category": "special", "power": 120, "priority": 0, "description": "1st turn: Prepare\n2nd turn: Attack"}
+{"name": "poison-powder", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "A move that may\npoison the foe."}
+{"name": "stun-spore", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "A move that may\nparalyze the foe."}
+{"name": "sleep-powder", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "May cause the foe\nto fall asleep."}
+{"name": "petal-dance", "type": "grass", "category": "special", "power": 120, "priority": 0, "description": "Works 2-3 turns\nand confuses user."}
+{"name": "string-shot", "type": "bug", "category": "status", "power": null, "priority": 0, "description": "A move that lowers\nthe foe's SPEED."}
+{"name": "dragon-rage", "type": "dragon", "category": "special", "power": null, "priority": 0, "description": "Always inflicts\n40HP damage."}
+{"name": "fire-spin", "type": "fire", "category": "special", "power": 35, "priority": 0, "description": "将对手困在\n激烈的火焰旋涡中，\n在４～５回合内进行攻击。"}
+{"name": "thunder-shock", "type": "electric", "category": "special", "power": 40, "priority": 0, "description": "An attack that may\ncause paralysis."}
+{"name": "thunderbolt", "type": "electric", "category": "special", "power": 90, "priority": 0, "description": "An attack that may\ncause paralysis."}
+{"name": "thunder-wave", "type": "electric", "category": "status", "power": null, "priority": 0, "description": "A move that may\ncause paralysis."}
+{"name": "thunder", "type": "electric", "category": "special", "power": 110, "priority": 0, "description": "An attack that may\ncause paralysis."}
+{"name": "rock-throw", "type": "rock", "category": "physical", "power": 50, "priority": 0, "description": "Drops rocks on the\nenemy."}
+{"name": "earthquake", "type": "ground", "category": "physical", "power": 100, "priority": 0, "description": "Tough but useless\nvs. flying foes."}
+{"name": "fissure", "type": "ground", "category": "physical", "power": null, "priority": 0, "description": "A ground-type,\none-hit KO attack."}
+{"name": "dig", "type": "ground", "category": "physical", "power": 80, "priority": 0, "description": "1st turn: Burrow\n2nd turn: Attack"}
+{"name": "toxic", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "Poisons the foe with an\nintensifying toxin."}
+{"name": "confusion", "type": "psychic", "category": "special", "power": 50, "priority": 0, "description": "An attack that may\ncause confusion."}
+{"name": "psychic", "type": "psychic", "category": "special", "power": 90, "priority": 0, "description": "An attack that may\nlower SPCL.DEF."}
+{"name": "hypnosis", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "May put the foe to\nsleep."}
+{"name": "meditate", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Raises the user's\nATTACK."}
+{"name": "agility", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Sharply increases\nthe user's SPEED."}
+{"name": "quick-attack", "type": "normal", "category": "physical", "power": 40, "priority": 1, "description": "Lets the user get\nin the first hit."}
+{"name": "rage", "type": "normal", "category": "physical", "power": 20, "priority": 0, "description": "Raises ATTACK if\nthe user is hit."}
+{"name": "teleport", "type": "psychic", "category": "status", "power": null, "priority": -6, "description": "A move for fleeing\nfrom battle."}
+{"name": "night-shade", "type": "ghost", "category": "special", "power": null, "priority": 0, "description": "The user's level\nequals damage HP."}
+{"name": "mimic", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Copies a move used\nby the foe."}
+{"name": "screech", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Stridio assordante che riduce di molto la Difesa\ndel bersaglio."}
+{"name": "double-team", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Heightens evasive­\nness."}
+{"name": "recover", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Restores HP by 1/2\nthe max HP."}
+{"name": "harden", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Raises the user's\nDEFENSE."}
+{"name": "minimize", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Heightens evasive­\nness."}
+{"name": "smokescreen", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Lowers the foe's\naccuracy."}
+{"name": "confuse-ray", "type": "ghost", "category": "status", "power": null, "priority": 0, "description": "A move that causes\nconfusion."}
+{"name": "withdraw", "type": "water", "category": "status", "power": null, "priority": 0, "description": "Heightens the\nuser's DEFENSE."}
+{"name": "defense-curl", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Heightens the\nuser's DEFENSE."}
+{"name": "barrier", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Sharply increases\nuser's DEFENSE."}
+{"name": "light-screen", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Ups SPCL.DEF with\na wall of light."}
+{"name": "haze", "type": "ice", "category": "status", "power": null, "priority": 0, "description": "Eliminates all\nstat changes."}
+{"name": "reflect", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Raises DEFENSE\nwith a barrier."}
+{"name": "focus-energy", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Raises the criti­\ncal hit ratio."}
+{"name": "bide", "type": "normal", "category": "physical", "power": null, "priority": 1, "description": "Waits 2-3 turns &\nhits back double."}
+{"name": "metronome", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Randomly uses any\nPOKéMON move."}
+{"name": "mirror-move", "type": "flying", "category": "status", "power": null, "priority": 0, "description": "Counters with the\nsame move."}
+{"name": "self-destruct", "type": "normal", "category": "physical", "power": 200, "priority": 0, "description": "Powerful but makes\nthe user faint."}
+{"name": "egg-bomb", "type": "normal", "category": "physical", "power": 100, "priority": 0, "description": "Eggs are hurled at\nthe foe."}
+{"name": "lick", "type": "ghost", "category": "physical", "power": 30, "priority": 0, "description": "An attack that may\ncause paralysis."}
+{"name": "smog", "type": "poison", "category": "special", "power": 30, "priority": 0, "description": "An attack that may\npoison the foe."}
+{"name": "sludge", "type": "poison", "category": "special", "power": 65, "priority": 0, "description": "An attack that may\npoison the foe."}
+{"name": "bone-club", "type": "ground", "category": "physical", "power": 65, "priority": 0, "description": "An attack that may\ncause flinching."}
+{"name": "fire-blast", "type": "fire", "category": "special", "power": 110, "priority": 0, "description": "An attack that\nmay cause a burn."}
+{"name": "waterfall", "type": "water", "category": "physical", "power": 80, "priority": 0, "description": "An aquatic charge\nattack."}
+{"name": "clamp", "type": "water", "category": "physical", "power": 35, "priority": 0, "description": "Traps the foe for\n2-5 turns."}
+{"name": "swift", "type": "normal", "category": "special", "power": 60, "priority": 0, "description": "An attack that\nnever misses."}
+{"name": "skull-bash", "type": "normal", "category": "physical", "power": 130, "priority": 0, "description": "1st turn: Prepare\n2nd turn: Attack"}
+{"name": "spike-cannon", "type": "normal", "category": "physical", "power": 20, "priority": 0, "description": "Fires spikes to\nhit 2-5 times."}
+{"name": "constrict", "type": "normal", "category": "physical", "power": 10, "priority": 0, "description": "An attack that may\nlower SPEED."}
+{"name": "amnesia", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Sharply raises the\nuser's SPCL.DEF."}
+{"name": "kinesis", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Reduces the foe's\naccuracy."}
+{"name": "soft-boiled", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Restores HP by 1/2\nthe user's max HP."}
+{"name": "high-jump-kick", "type": "fighting", "category": "physical", "power": 130, "priority": 0, "description": "May miss and hurt\nthe user."}
+{"name": "glare", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Schüchtert Ziel ein, sodass dieses paralysiert wird."}
+{"name": "dream-eater", "type": "psychic", "category": "special", "power": 100, "priority": 0, "description": "Steals HP from a\nsleeping victim."}
+{"name": "poison-gas", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "A move that may\npoison the foe."}
+{"name": "barrage", "type": "normal", "category": "physical", "power": 15, "priority": 0, "description": "Throws orbs to hit\n2-5 times."}
+{"name": "leech-life", "type": "bug", "category": "physical", "power": 80, "priority": 0, "description": "Steals 1/2 of the\ndamage inflicted."}
+{"name": "lovely-kiss", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "May cause the foe\nto fall asleep."}
+{"name": "sky-attack", "type": "flying", "category": "physical", "power": 140, "priority": 0, "description": "1st turn: Prepare\n2nd turn: Attack"}
+{"name": "transform", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "变身成对手宝可梦的样子，\n能够使用和对手\n完全相同的招式。"}
+{"name": "bubble", "type": "water", "category": "special", "power": 40, "priority": 0, "description": "An attack that may\nreduce SPEED."}
+{"name": "dizzy-punch", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "리드미컬한 펀치를 날려\n상대를 공격한다.\n혼란시킬 때가 있다."}
+{"name": "spore", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "The user scatters bursts of spores\nthat induce sleep."}
+{"name": "flash", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Blinds the foe to\nreduce accuracy."}
+{"name": "psywave", "type": "psychic", "category": "special", "power": null, "priority": 0, "description": "An attack with\nvariable power."}
+{"name": "splash", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Has no effect\nwhatsoever."}
+{"name": "acid-armor", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "Sharply raises the\nuser's DEFENSE."}
+{"name": "crabhammer", "type": "water", "category": "physical", "power": 100, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
+{"name": "explosion", "type": "normal", "category": "physical", "power": 250, "priority": 0, "description": "Inflicts severe damage but\nmakes the user faint."}
+{"name": "fury-swipes", "type": "normal", "category": "physical", "power": 18, "priority": 0, "description": "Quickly scratches\n2-5 times."}
+{"name": "bonemerang", "type": "ground", "category": "physical", "power": 50, "priority": 0, "description": "An attack that\nstrikes twice."}
+{"name": "rest", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Sleep for 2 turns\nto fully recover."}
+{"name": "rock-slide", "type": "rock", "category": "physical", "power": 75, "priority": 0, "description": "An attack that may\ncause flinching."}
+{"name": "hyper-fang", "type": "normal", "category": "physical", "power": 80, "priority": 0, "description": "An attack that may\ncause flinching."}
+{"name": "sharpen", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Reduces the polygon count\nand raises ATTACK."}
+{"name": "conversion", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Change user's type\nto a move's type."}
+{"name": "tri-attack", "type": "normal", "category": "special", "power": 80, "priority": 0, "description": "Fires three kinds\nof beams at once."}
+{"name": "super-fang", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "Cuts the foe's HP\nby 1/2."}
+{"name": "slash", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
+{"name": "substitute", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Makes a decoy with\n1/4 user's max HP."}
+{"name": "struggle", "type": "normal", "category": "physical", "power": 50, "priority": 0, "description": "Solo se usa como último recurso al acabarse los PP. \nHiere un poco al agresor."}
+{"name": "sketch", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Copies the foe's\nmove permanently."}
+{"name": "triple-kick", "type": "fighting", "category": "physical", "power": 10, "priority": 0, "description": "Hits three times\nwith rising power."}
+{"name": "thief", "type": "dark", "category": "physical", "power": 60, "priority": 0, "description": "An attack that may\nsteal a held item."}
+{"name": "spider-web", "type": "bug", "category": "status", "power": null, "priority": 0, "description": "Prevents fleeing\nor switching."}
+{"name": "mind-reader", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Ensures the next\nattack will hit."}
+{"name": "nightmare", "type": "ghost", "category": "status", "power": null, "priority": 0, "description": "A sleeper loses\n1/4 HP every turn."}
+{"name": "flame-wheel", "type": "fire", "category": "physical", "power": 60, "priority": 0, "description": "An attack that may\ncause a burn."}
+{"name": "snore", "type": "normal", "category": "special", "power": 50, "priority": 0, "description": "An attack useable\nonly while asleep."}
+{"name": "curse", "type": "ghost", "category": "status", "power": null, "priority": 0, "description": "Works differently\nfor ghost-types."}
+{"name": "flail", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "Stronger if the\nuser's HP is low."}
+{"name": "conversion-2", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "The user's type is\nmade resistant."}
+{"name": "aeroblast", "type": "flying", "category": "special", "power": 100, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
+{"name": "cotton-spore", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "Sharply reduces\nthe foe's SPEED."}
+{"name": "reversal", "type": "fighting", "category": "physical", "power": null, "priority": 0, "description": "Ataque desesperado que causa más daño cuantos \nmenos PS tenga el usuario."}
+{"name": "spite", "type": "ghost", "category": "status", "power": null, "priority": 0, "description": "Cuts the PP of the\nfoe's last move."}
+{"name": "powder-snow", "type": "ice", "category": "special", "power": 40, "priority": 0, "description": "An attack that may\ncause freezing."}
+{"name": "protect", "type": "normal", "category": "status", "power": null, "priority": 4, "description": "Foils attack that\nturn. It may fail."}
+{"name": "mach-punch", "type": "fighting", "category": "physical", "power": 40, "priority": 1, "description": "Coup de poing fulgurant.\nFrappe toujours en premier."}
+{"name": "scary-face", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Sharply reduces\nthe foe's SPEED."}
+{"name": "feint-attack", "type": "dark", "category": "physical", "power": 60, "priority": 0, "description": "An attack that\nnever misses."}
+{"name": "sweet-kiss", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "Chi la usa bacia il bersaglio con una dolcezza\nangelica, confondendolo."}
+{"name": "belly-drum", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Reduces own HP to\nmaximize ATTACK."}
+{"name": "sludge-bomb", "type": "poison", "category": "special", "power": 90, "priority": 0, "description": "An attack that may\npoison the foe."}
+{"name": "mud-slap", "type": "ground", "category": "special", "power": 20, "priority": 0, "description": "Reduces the foe's\naccuracy."}
+{"name": "octazooka", "type": "water", "category": "special", "power": 65, "priority": 0, "description": "An attack that may\nreduce accuracy."}
+{"name": "spikes", "type": "ground", "category": "status", "power": null, "priority": 0, "description": "Hurts foes when\nthey switch out."}
+{"name": "zap-cannon", "type": "electric", "category": "special", "power": 120, "priority": 0, "description": "An attack that\nalways paralyzes."}
+{"name": "foresight", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Negates accuracy\nreduction moves."}
+{"name": "destiny-bond", "type": "ghost", "category": "status", "power": null, "priority": 0, "description": "The foe faints if\nthe user does."}
+{"name": "perish-song", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Wer diese Musik hört, wird nach drei Runden\nbesiegt. Rettung ist durch den Eintausch\neines neuen Pokémon möglich."}
+{"name": "icy-wind", "type": "ice", "category": "special", "power": 55, "priority": 0, "description": "A chilling attack that\nlowers the foe’s SPEED."}
+{"name": "detect", "type": "fighting", "category": "status", "power": null, "priority": 4, "description": "Evades attack that\nturn. It may fail."}
+{"name": "bone-rush", "type": "ground", "category": "physical", "power": 25, "priority": 0, "description": "An attack that\nhits 2-5 times."}
+{"name": "lock-on", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Ensures the next\nattack will hit."}
+{"name": "outrage", "type": "dragon", "category": "physical", "power": 120, "priority": 0, "description": "Works 2-3 turns\nand confuses user."}
+{"name": "sandstorm", "type": "rock", "category": "status", "power": null, "priority": 0, "description": "Inflicts damage\nevery turn."}
+{"name": "giga-drain", "type": "grass", "category": "special", "power": 75, "priority": 0, "description": "Steals 1/2 of the\ndamage inflicted."}
+{"name": "endure", "type": "normal", "category": "status", "power": null, "priority": 4, "description": "Always leaves at\nleast 1HP."}
+{"name": "charm", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "Sharply lowers the\nfoe's ATTACK."}
+{"name": "rollout", "type": "rock", "category": "physical", "power": 30, "priority": 0, "description": "Attacks 5 turns\nwith rising power."}
+{"name": "false-swipe", "type": "normal", "category": "physical", "power": 40, "priority": 0, "description": "Leaves the foe\nwith at least 1HP."}
+{"name": "swagger", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Causes confusion\nand raises ATTACK."}
+{"name": "milk-drink", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Restores HP by 1/2\nthe max HP."}
+{"name": "spark", "type": "electric", "category": "physical", "power": 65, "priority": 0, "description": "An attack that may\ncause paralysis."}
+{"name": "fury-cutter", "type": "bug", "category": "physical", "power": 40, "priority": 0, "description": "An attack that intensifies\non each successive hit."}
+{"name": "steel-wing", "type": "steel", "category": "physical", "power": 70, "priority": 0, "description": "Stiff wings strike\nthe foe."}
+{"name": "mean-look", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Prevents fleeing\nor switching."}
+{"name": "attract", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Makes the opposite\ngender infatuated."}
+{"name": "sleep-talk", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Randomly attacks\nwhile asleep."}
+{"name": "heal-bell", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "The user makes a soothing bell chime\nto heal the status problems of all the\nparty Pokémon."}
+{"name": "return", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "An attack that increases\nin power with friendship."}
+{"name": "present", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "A bomb that may\nrestore HP."}
+{"name": "frustration", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "An attack based on\nlack of loyalty."}
+{"name": "safeguard", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Prevents all\nstatus problems."}
+{"name": "pain-split", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Adds user & foe's\nHPs. Shares total."}
+{"name": "sacred-fire", "type": "fire", "category": "physical", "power": 100, "priority": 0, "description": "An attack that may\ninflict a burn."}
+{"name": "magnitude", "type": "ground", "category": "physical", "power": null, "priority": 0, "description": "A ground attack\nwith random power."}
+{"name": "dynamic-punch", "type": "fighting", "category": "physical", "power": 100, "priority": 0, "description": "Kräftiger Schlag, der das Ziel bei Erfolg verwirrt."}
+{"name": "megahorn", "type": "bug", "category": "physical", "power": 120, "priority": 0, "description": "A powerful charge\nattack."}
+{"name": "dragon-breath", "type": "dragon", "category": "special", "power": 60, "priority": 0, "description": "A strong breath\nattack."}
+{"name": "baton-pass", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Switches while\nkeeping effects."}
+{"name": "encore", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Makes the foe re­\npeat 2-6 times."}
+{"name": "pursuit", "type": "dark", "category": "physical", "power": 40, "priority": 0, "description": "Heavily strikes\nswitching POKéMON."}
+{"name": "rapid-spin", "type": "normal", "category": "physical", "power": 50, "priority": 0, "description": "A high-speed\nspinning attack."}
+{"name": "sweet-scent", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Reduces the foe's\nevasiveness."}
+{"name": "iron-tail", "type": "steel", "category": "physical", "power": 100, "priority": 0, "description": "An attack that may\nreduce DEFENSE."}
+{"name": "metal-claw", "type": "steel", "category": "physical", "power": 50, "priority": 0, "description": "An attack that may\nup user's ATTACK."}
+{"name": "vital-throw", "type": "fighting", "category": "physical", "power": 70, "priority": -1, "description": "A 2nd-strike move\nthat never misses."}
+{"name": "morning-sun", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Füllt KP des Anwenders auf.\nDie Menge hängt vom Wetter ab."}
+{"name": "synthesis", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "Restores HP\n(varies by time)."}
+{"name": "moonlight", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "Restores HP\n(varies by time)."}
+{"name": "hidden-power", "type": "normal", "category": "special", "power": 60, "priority": 0, "description": "The power varies\nwith the POKéMON."}
+{"name": "cross-chop", "type": "fighting", "category": "physical", "power": 100, "priority": 0, "description": "Has a high criti­\ncal hit ratio."}
+{"name": "twister", "type": "dragon", "category": "special", "power": 40, "priority": 0, "description": "Whips up a tornado\nto attack."}
+{"name": "rain-dance", "type": "water", "category": "status", "power": null, "priority": 0, "description": "Boosts water-type\nmoves for 5 turns."}
+{"name": "sunny-day", "type": "fire", "category": "status", "power": null, "priority": 0, "description": "Boosts fire-type\nmoves for 5 turns."}
+{"name": "crunch", "type": "dark", "category": "physical", "power": 80, "priority": 0, "description": "An attack that may\nlower SPCL.DEF."}
+{"name": "mirror-coat", "type": "psychic", "category": "special", "power": null, "priority": -5, "description": "將來自對手的特殊攻擊傷害加倍後，\n返還給該對手。"}
+{"name": "psych-up", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Copies the foe's\nstat changes."}
+{"name": "extreme-speed", "type": "normal", "category": "physical", "power": 80, "priority": 2, "description": "A powerful first-\nstrike move."}
+{"name": "ancient-power", "type": "rock", "category": "special", "power": 60, "priority": 0, "description": "Colpisce il bersaglio con una forza primordiale.\nPuò aumentare tutte le statistiche."}
+{"name": "shadow-ball", "type": "ghost", "category": "special", "power": 80, "priority": 0, "description": "An attack that may\nlower SPCL.DEF."}
+{"name": "future-sight", "type": "psychic", "category": "special", "power": 120, "priority": 0, "description": "An attack that\nhits on 3rd turn."}
+{"name": "rock-smash", "type": "fighting", "category": "physical", "power": 40, "priority": 0, "description": "A rock-crushing attack\nthat may lower DEFENSE."}
+{"name": "whirlpool", "type": "water", "category": "special", "power": 35, "priority": 0, "description": "Traps the foe for\n2-5 turns."}
+{"name": "beat-up", "type": "dark", "category": "physical", "power": null, "priority": 0, "description": "Party POKéMON join\nin the attack.\n"}
+{"name": "fake-out", "type": "normal", "category": "physical", "power": 40, "priority": 3, "description": "A 1st-turn, 1st-strike move\nthat causes flinching."}
+{"name": "uproar", "type": "normal", "category": "special", "power": 90, "priority": 0, "description": "Causes an uproar for 2 to 5\nturns and prevents sleep."}
+{"name": "stockpile", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Charges up power for up to\n3 turns."}
+{"name": "spit-up", "type": "normal", "category": "special", "power": null, "priority": 0, "description": "Releases stockpiled power\n(the more the better)."}
+{"name": "swallow", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Absorbs stockpiled power\nand restores HP."}
+{"name": "heat-wave", "type": "fire", "category": "special", "power": 95, "priority": 0, "description": "Exhales a hot breath on the\nfoe. May inflict a burn."}
+{"name": "hail", "type": "ice", "category": "status", "power": null, "priority": 0, "description": "Summons a hailstorm that\nstrikes every turn."}
+{"name": "torment", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "Torments the foe and stops\nsuccessive use of a move."}
+{"name": "flatter", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "Rend la cible confuse, mais\naugmente son Attaque Spéciale."}
+{"name": "will-o-wisp", "type": "fire", "category": "status", "power": null, "priority": 0, "description": "Inflicts a burn on the foe\nwith intense fire."}
+{"name": "memento", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "The user faints and lowers\nthe foe’s abilities."}
+{"name": "facade", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "Boosts ATTACK when burned,\nparalyzed, or poisoned."}
+{"name": "focus-punch", "type": "fighting", "category": "physical", "power": 150, "priority": -3, "description": "A powerful loyalty attack.\nThe user flinches if hit."}
+{"name": "smelling-salts", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "Powerful against paralyzed\nfoes, but also heals them."}
+{"name": "follow-me", "type": "normal", "category": "status", "power": null, "priority": 2, "description": "Draws attention to make\nfoes attack only the user."}
+{"name": "nature-power", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "The type of attack varies\ndepending on the location."}
+{"name": "charge", "type": "electric", "category": "status", "power": null, "priority": 0, "description": "Charges power to boost the\nelectric move used next."}
+{"name": "taunt", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "Taunts the foe into only\nusing attack moves."}
+{"name": "helping-hand", "type": "normal", "category": "status", "power": null, "priority": 5, "description": "Boosts the power of the\nrecipient’s moves."}
+{"name": "trick", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Tricks the foe into trading\nheld items."}
+{"name": "role-play", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Imita al objetivo por completo y copia su habilidad. "}
+{"name": "wish", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "A wish that restores HP.\nIt takes time to work."}
+{"name": "assist", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Attacks randomly with one\nof the partner’s moves."}
+{"name": "ingrain", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "Lays roots that restore HP.\nThe user can’t switch out."}
+{"name": "superpower", "type": "fighting", "category": "physical", "power": 120, "priority": 0, "description": "Boosts strength sharply,\nbut lowers abilities."}
+{"name": "magic-coat", "type": "psychic", "category": "status", "power": null, "priority": 4, "description": "Reflects special effects\nback to the attacker."}
+{"name": "recycle", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Recycles a used item for\none more use."}
+{"name": "revenge", "type": "fighting", "category": "physical", "power": 60, "priority": -4, "description": "An attack that gains power\nif injured by the foe."}
+{"name": "brick-break", "type": "fighting", "category": "physical", "power": 75, "priority": 0, "description": "Destroys barriers such as\nREFLECT and causes damage."}
+{"name": "yawn", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Lulls the foe into yawning,\nthen sleeping next turn."}
+{"name": "knock-off", "type": "dark", "category": "physical", "power": 65, "priority": 0, "description": "Knocks down the foe’s held\nitem to prevent its use."}
+{"name": "endeavor", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "Gains power if the user’s HP\nis lower than the foe’s HP."}
+{"name": "eruption", "type": "fire", "category": "special", "power": 150, "priority": 0, "description": "The higher the user’s HP,\nthe more damage caused."}
+{"name": "skill-swap", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user swaps special\nabilities with the target."}
+{"name": "imprison", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Prevents foes from using\nmoves known by the user."}
+{"name": "refresh", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Heals poisoning, paralysis,\nor a burn."}
+{"name": "grudge", "type": "ghost", "category": "status", "power": null, "priority": 0, "description": "If the user faints, deletes\nthe PP of the final move."}
+{"name": "snatch", "type": "dark", "category": "status", "power": null, "priority": 4, "description": "Steals the effects of the\nmove the foe uses next."}
+{"name": "secret-power", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "An attack with effects\nthat vary by location."}
+{"name": "dive", "type": "water", "category": "physical", "power": 80, "priority": 0, "description": "Dives underwater the first\nturn and strikes next turn."}
+{"name": "arm-thrust", "type": "fighting", "category": "physical", "power": 15, "priority": 0, "description": "Schläge mit geradem Arm, die das Ziel\nzwei- bis fünfmal treffen."}
+{"name": "camouflage", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Alters the POKéMON’s type\ndepending on the location."}
+{"name": "tail-glow", "type": "bug", "category": "status", "power": null, "priority": 0, "description": "Flashes a light that sharply\nraises SP. ATK."}
+{"name": "luster-purge", "type": "psychic", "category": "special", "power": 95, "priority": 0, "description": "Attacks with a burst of\nlight. May lower SP. DEF."}
+{"name": "mist-ball", "type": "psychic", "category": "special", "power": 95, "priority": 0, "description": "Attacks with a flurry of\ndown. May lower SP. ATK."}
+{"name": "feather-dance", "type": "flying", "category": "status", "power": null, "priority": 0, "description": "撒出羽毛，\n笼罩在对手的周围。\n大幅降低对手的攻击。"}
+{"name": "teeter-dance", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Confuses all POKéMON on\nthe scene."}
+{"name": "blaze-kick", "type": "fire", "category": "physical", "power": 85, "priority": 0, "description": "A kick with a high critical-\nhit ratio. May cause a burn."}
+{"name": "mud-sport", "type": "ground", "category": "status", "power": null, "priority": 0, "description": "Covers the user in mud to\nraise electrical resistance."}
+{"name": "ice-ball", "type": "ice", "category": "physical", "power": 30, "priority": 0, "description": "A 5-turn attack that gains\npower on successive hits."}
+{"name": "needle-arm", "type": "grass", "category": "physical", "power": 60, "priority": 0, "description": "用带刺的手臂\n猛烈地挥舞进行攻击。\n有时会使对手畏缩。"}
+{"name": "slack-off", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Slacks off and restores\nhalf the maximum HP."}
+{"name": "hyper-voice", "type": "normal", "category": "special", "power": 90, "priority": 0, "description": "A loud attack that uses\nsound waves to injure."}
+{"name": "poison-fang", "type": "poison", "category": "physical", "power": 50, "priority": 0, "description": "A sharp-fanged attack.\nMay badly poison the foe."}
+{"name": "crush-claw", "type": "normal", "category": "physical", "power": 75, "priority": 0, "description": "Tears at the foe with sharp\nclaws. May lower DEFENSE."}
+{"name": "blast-burn", "type": "fire", "category": "special", "power": 150, "priority": 0, "description": "Powerful, but leaves the\nuser immobile the next turn."}
+{"name": "hydro-cannon", "type": "water", "category": "special", "power": 150, "priority": 0, "description": "Powerful, but leaves the\nuser immobile the next turn."}
+{"name": "meteor-mash", "type": "steel", "category": "physical", "power": 90, "priority": 0, "description": "Fires a meteor-like punch.\nMay raise ATTACK."}
+{"name": "astonish", "type": "ghost", "category": "physical", "power": 30, "priority": 0, "description": "An attack that may shock\nthe foe into flinching."}
+{"name": "weather-ball", "type": "normal", "category": "special", "power": 50, "priority": 0, "description": "The move’s type and power\nchange with the weather."}
+{"name": "aromatherapy", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "Heals all status problems\nwith a soothing scent."}
+{"name": "fake-tears", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "Feigns crying to sharply\nlower the foe’s SP. DEF."}
+{"name": "air-cutter", "type": "flying", "category": "special", "power": 60, "priority": 0, "description": "Hacks with razorlike wind.\nHigh critical-hit ratio."}
+{"name": "overheat", "type": "fire", "category": "special", "power": 130, "priority": 0, "description": "Allows a full-power attack,\nbut sharply lowers SP. ATK."}
+{"name": "odor-sleuth", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Chi la usa rende i Pokémon di tipo Spettro\nvulnerabili a qualsiasi tipo di mossa e può,\ninoltre, colpire i nemici sfuggenti."}
+{"name": "rock-tomb", "type": "rock", "category": "physical", "power": 60, "priority": 0, "description": "Stops the foe from moving\nwith rocks and cuts SPEED."}
+{"name": "silver-wind", "type": "bug", "category": "special", "power": 60, "priority": 0, "description": "A powdery attack that may\nraise abilities."}
+{"name": "metal-sound", "type": "steel", "category": "status", "power": null, "priority": 0, "description": "Emits a horrible screech\nthat sharply lowers SP. DEF."}
+{"name": "grass-whistle", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "Lulls the foe into sleep\nwith a pleasant melody."}
+{"name": "tickle", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Makes the foe laugh to\nlower ATTACK and DEFENSE."}
+{"name": "cosmic-power", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Raises DEFENSE and SP. DEF\nwith a mystic power."}
+{"name": "water-spout", "type": "water", "category": "special", "power": 150, "priority": 0, "description": "Inflicts more damage if the\nuser’s HP is high."}
+{"name": "signal-beam", "type": "bug", "category": "special", "power": 75, "priority": 0, "description": "Strahlenattacke, die das Ziel eventuell verwirrt."}
+{"name": "shadow-punch", "type": "ghost", "category": "physical", "power": 60, "priority": 0, "description": "An unavoidable punch that\nis thrown from shadows."}
+{"name": "extrasensory", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "Attacks with a peculiar\npower. May cause flinching."}
+{"name": "sky-uppercut", "type": "fighting", "category": "physical", "power": 85, "priority": 0, "description": "An uppercut thrown as if\nleaping into the sky."}
+{"name": "sand-tomb", "type": "ground", "category": "physical", "power": 35, "priority": 0, "description": "The user traps the target inside a harshly raging\nsandstorm for four to five turns."}
+{"name": "sheer-cold", "type": "ice", "category": "special", "power": null, "priority": 0, "description": "A chilling attack that\ncauses fainting if it hits."}
+{"name": "muddy-water", "type": "water", "category": "special", "power": 90, "priority": 0, "description": "Attacks with muddy water.\nMay lower accuracy."}
+{"name": "bullet-seed", "type": "grass", "category": "physical", "power": 25, "priority": 0, "description": "Shoots 2 to 5 seeds in a row\nto strike the foe."}
+{"name": "aerial-ace", "type": "flying", "category": "physical", "power": 60, "priority": 0, "description": "An extremely speedy and\nunavoidable attack."}
+{"name": "icicle-spear", "type": "ice", "category": "physical", "power": 25, "priority": 0, "description": "Feuert zwei bis fünf Eiszapfen auf das Ziel."}
+{"name": "iron-defense", "type": "steel", "category": "status", "power": null, "priority": 0, "description": "Hardens the body’s surface\nto sharply raise DEFENSE."}
+{"name": "block", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Blocks the foe’s way to\nprevent escape."}
+{"name": "howl", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Howls to raise the spirit\nand boosts ATTACK."}
+{"name": "dragon-claw", "type": "dragon", "category": "physical", "power": 80, "priority": 0, "description": "Slashes the foe with sharp\nclaws."}
+{"name": "frenzy-plant", "type": "grass", "category": "special", "power": 150, "priority": 0, "description": "Powerful, but leaves the\nuser immobile the next turn."}
+{"name": "bulk-up", "type": "fighting", "category": "status", "power": null, "priority": 0, "description": "Bulks up the body to boost\nboth ATTACK and DEFENSE."}
+{"name": "bounce", "type": "flying", "category": "physical", "power": 85, "priority": 0, "description": "Bounces up, then down the\nnext turn. May paralyze."}
+{"name": "mud-shot", "type": "ground", "category": "special", "power": 55, "priority": 0, "description": "Hurls mud at the foe and\nreduces SPEED."}
+{"name": "poison-tail", "type": "poison", "category": "physical", "power": 50, "priority": 0, "description": "Has a high critical-hit\nratio. May also poison."}
+{"name": "covet", "type": "normal", "category": "physical", "power": 60, "priority": 0, "description": "Cutely begs to obtain an\nitem held by the foe."}
+{"name": "volt-tackle", "type": "electric", "category": "physical", "power": 120, "priority": 0, "description": "A life-risking tackle that\nslightly hurts the user."}
+{"name": "magical-leaf", "type": "grass", "category": "special", "power": 60, "priority": 0, "description": "Attacks with a strange leaf\nthat cannot be evaded."}
+{"name": "water-sport", "type": "water", "category": "status", "power": null, "priority": 0, "description": "The user becomes soaked to\nraise resistance to fire."}
+{"name": "calm-mind", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Raises SP. ATK and SP. DEF\nby focusing the mind."}
+{"name": "leaf-blade", "type": "grass", "category": "physical", "power": 90, "priority": 0, "description": "Hieb mit scharfkantigem Blatt. Hohe Volltrefferquote."}
+{"name": "dragon-dance", "type": "dragon", "category": "status", "power": null, "priority": 0, "description": "A mystical dance that ups\nATTACK and SPEED."}
+{"name": "rock-blast", "type": "rock", "category": "physical", "power": 25, "priority": 0, "description": "Hurls boulders at the foe\n2 to 5 times in a row."}
+{"name": "shock-wave", "type": "electric", "category": "special", "power": 60, "priority": 0, "description": "A fast and unavoidable\nelectric attack."}
+{"name": "water-pulse", "type": "water", "category": "special", "power": 60, "priority": 0, "description": "Attacks with ultrasonic\nwaves. May confuse the foe"}
+{"name": "doom-desire", "type": "steel", "category": "special", "power": 140, "priority": 0, "description": "Summons strong sunlight to\nattack 2 turns later."}
+{"name": "psycho-boost", "type": "psychic", "category": "special", "power": 140, "priority": 0, "description": "Allows a full-power attack,\nbut sharply lowers SP. ATK."}
+{"name": "roost", "type": "flying", "category": "status", "power": null, "priority": 0, "description": "The user lands and\nrests its body.\nIt restores the\nuser’s HP by up to\nhalf of its max HP."}
+{"name": "gravity", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Gravity is intensified\nfor five turns, making\nmoves involving flying\nunusable and\nnegating Levitation."}
+{"name": "miracle-eye", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Enables the user to\nhit a Ghost type with\nany type of move. It\nalso enables the user\nto hit an evasive foe."}
+{"name": "wake-up-slap", "type": "fighting", "category": "physical", "power": 70, "priority": 0, "description": "Richtet großen Schaden bei einem schlafenden Ziel\nan, weckt es aber auch auf."}
+{"name": "hammer-arm", "type": "fighting", "category": "physical", "power": 100, "priority": 0, "description": "The user swings and\nhits with its strong\nand heavy fist.\nIt lowers the user’s\nSpeed, however."}
+{"name": "gyro-ball", "type": "steel", "category": "physical", "power": null, "priority": 0, "description": "The user tackles the\nfoe with a high-speed\nspin. The slower the\nuser, the greater\nthe damage."}
+{"name": "healing-wish", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user faints. In\nreturn, the Pokémon\ntaking its place will\nhave its HP restored\nand status cured."}
+{"name": "brine", "type": "water", "category": "special", "power": 65, "priority": 0, "description": "If the foe’s HP is\ndown to about half,\nthis attack will hit\nwith double the\npower."}
+{"name": "natural-gift", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "The user draws power\nto attack by using\nits held Berry.\nThe Berry determines\nits type and power."}
+{"name": "feint", "type": "normal", "category": "physical", "power": 30, "priority": 2, "description": "An attack that hits a\nfoe using Protect or\nDetect. It also lifts\nthe effects of those\nmoves."}
+{"name": "pluck", "type": "flying", "category": "physical", "power": 60, "priority": 0, "description": "The user pecks the\nfoe. If the foe is\nholding a Berry, the\nuser plucks it and\ngains its effect."}
+{"name": "tailwind", "type": "flying", "category": "status", "power": null, "priority": 0, "description": "The user whips up a\nturbulent whirlwind\nthat ups the Speed\nof all party Pokémon\nfor three turns."}
+{"name": "acupressure", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "The user applies\npressure to stress\npoints, sharply\nboosting one of its\nstats."}
+{"name": "metal-burst", "type": "steel", "category": "physical", "power": null, "priority": 0, "description": "The user retaliates\nagainst the foe that\nlast inflicted damage\non it with much\ngreater power."}
+{"name": "u-turn", "type": "bug", "category": "physical", "power": 70, "priority": 0, "description": "After making its\nattack, the user\nrushes back to switch\nplaces with a party\nPokémon in waiting."}
+{"name": "close-combat", "type": "fighting", "category": "physical", "power": 120, "priority": 0, "description": "방어를 포기하고 상대 깊숙이\n돌격한다. 자신의\n방어와 특수방어가 떨어진다."}
+{"name": "payback", "type": "dark", "category": "physical", "power": 50, "priority": 0, "description": "蓄力攻击。\n如果能在对手之后攻击，\n招式的威力会变成２倍。"}
+{"name": "assurance", "type": "dark", "category": "physical", "power": 60, "priority": 0, "description": "如果此回合內對手\n已受到傷害，\n招式威力會變成２倍。"}
+{"name": "embargo", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "It prevents the foe\nfrom using its held\nitem. Its Trainer is\nalso prevented from\nusing items on it."}
+{"name": "fling", "type": "dark", "category": "physical", "power": null, "priority": 0, "description": "The user flings its\nheld item at the foe\nto attack. Its power\nand effects depend\non the item."}
+{"name": "psycho-shift", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Using its psychic\npower of suggestion,\nthe user transfers\nits status problems\nto the target."}
+{"name": "trump-card", "type": "normal", "category": "special", "power": null, "priority": 0, "description": "The fewer PP this move has, the greater\nits attack power."}
+{"name": "heal-block", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user prevents\nthe foe from using\nany HP-recovery\nmoves for five turns.\n"}
+{"name": "wring-out", "type": "normal", "category": "special", "power": null, "priority": 0, "description": "The user powerfully\nwrings the foe.\nThe more HP the foe\nhas, the greater this\nattack’s power."}
+{"name": "power-trick", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user employs its\npsychic power to\nswitch its Attack\nwith its Defense\nstat."}
+{"name": "gastro-acid", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "The user hurls up its\nstomach acids on\nthe foe. The fluid\neliminates the effect\nof the foe’s ability."}
+{"name": "lucky-chant", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "The user chants an\nincantation toward\nthe sky, preventing\nthe foe from landing\ncritical hits."}
+{"name": "me-first", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "The user tries to cut\nahead of the foe to\nsteal and use the\nfoe’s intended move\nwith greater power."}
+{"name": "copycat", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Le lanceur imite la dernière capacité employée.\nÉchoue si aucune capacité n’a été utilisée."}
+{"name": "power-swap", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user employs its\npsychic power to\nswitch changes to\nits Attack and\nSp. Atk with the foe."}
+{"name": "guard-swap", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user employs its\npsychic power to\nswitch changes to\nits Defense and\nSp. Def with the foe."}
+{"name": "punishment", "type": "dark", "category": "physical", "power": null, "priority": 0, "description": "對手的能力因為\n能力變化而提高得越多，\n招式的威力就越大。"}
+{"name": "last-resort", "type": "normal", "category": "physical", "power": 140, "priority": 0, "description": "This move can be used\nonly after the user\nhas used all the\nother moves it knows\nin the battle."}
+{"name": "worry-seed", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "A seed that causes\nworry is planted on\nthe foe. It prevents\nsleep by making its\nability Insomnia."}
+{"name": "sucker-punch", "type": "dark", "category": "physical", "power": 70, "priority": 1, "description": "Permite atacar con prioridad. Falla si el objetivo no\nestá preparando ningún ataque."}
+{"name": "toxic-spikes", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "The user lays a trap\nof poison spikes at\nthe foe’s feet. They\npoison foes that\nswitch into battle."}
+{"name": "heart-swap", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user employs its psychic power to switch stat\nchanges with the target."}
+{"name": "aqua-ring", "type": "water", "category": "status", "power": null, "priority": 0, "description": "자신의 몸 주변을\n물로 만든 베일로 덮는다.\n매 턴 HP를 회복한다."}
+{"name": "magnet-rise", "type": "electric", "category": "status", "power": null, "priority": 0, "description": "The user levitates\nusing electrically\ngenerated magnetism\nfor five turns.\n"}
+{"name": "flare-blitz", "type": "fire", "category": "physical", "power": 120, "priority": 0, "description": "The user cloaks\nitself in fire and\ncharges at the foe.\nThe user sustains\nserious damage, too."}
+{"name": "force-palm", "type": "fighting", "category": "physical", "power": 60, "priority": 0, "description": "The foe is attacked\nwith a shock wave.\nIt may also leave the\ntarget paralyzed.\n"}
+{"name": "aura-sphere", "type": "fighting", "category": "special", "power": 80, "priority": 0, "description": "The user looses a\nblast of aura power\nfrom deep within its\nbody. This move is\ncertain to hit."}
+{"name": "rock-polish", "type": "rock", "category": "status", "power": null, "priority": 0, "description": "The user polishes its\nbody to reduce drag.\nIt can sharply raise\nthe Speed stat.\n"}
+{"name": "poison-jab", "type": "poison", "category": "physical", "power": 80, "priority": 0, "description": "The foe is stabbed\nwith a tentacle or\narm steeped in\npoison. It may also\npoison the foe."}
+{"name": "dark-pulse", "type": "dark", "category": "special", "power": 80, "priority": 0, "description": "The user releases a\nhorrible aura imbued\nwith dark thoughts.\nIt may also make the\ntarget flinch."}
+{"name": "night-slash", "type": "dark", "category": "physical", "power": 70, "priority": 0, "description": "The user slashes the\nfoe the instant an\nopportunity arises.\nIt has a high\ncritical-hit ratio."}
+{"name": "aqua-tail", "type": "water", "category": "physical", "power": 90, "priority": 0, "description": "The user attacks by\nswinging its tail as if\nit were a vicious wave\nin a raging storm.\n"}
+{"name": "seed-bomb", "type": "grass", "category": "physical", "power": 80, "priority": 0, "description": "The user slams a\nbarrage of hard-\nshelled seeds\ndown on the foe\nfrom above."}
+{"name": "air-slash", "type": "flying", "category": "special", "power": 75, "priority": 0, "description": "The user attacks with\na blade of air that\nslices even the sky.\nIt may also make the\ntarget flinch."}
+{"name": "x-scissor", "type": "bug", "category": "physical", "power": 80, "priority": 0, "description": "The user slashes at\nthe foe by crossing\nits scythes or claws\nas if they were a pair\nof scissors."}
+{"name": "bug-buzz", "type": "bug", "category": "special", "power": 90, "priority": 0, "description": "利用振动发出音波进行攻击。\n有时会降低对手的特防。"}
+{"name": "dragon-pulse", "type": "dragon", "category": "special", "power": 85, "priority": 0, "description": "The foe is attacked\nwith a shock wave\ngenerated by the\nuser’s gaping mouth.\n"}
+{"name": "dragon-rush", "type": "dragon", "category": "physical", "power": 100, "priority": 0, "description": "The user tackles the\nfoe while exhibiting\noverwhelming menace.\nIt may also make the\ntarget flinch."}
+{"name": "power-gem", "type": "rock", "category": "special", "power": 80, "priority": 0, "description": "發射如寶石般\n閃耀的光芒攻擊對手。"}
+{"name": "drain-punch", "type": "fighting", "category": "physical", "power": 75, "priority": 0, "description": "An energy-draining\npunch. The user’s\nHP is restored by\nhalf the damage taken\nby the target."}
+{"name": "vacuum-wave", "type": "fighting", "category": "special", "power": 40, "priority": 1, "description": "The user whirls its\nfists to send a wave\nof pure vacuum at\nthe foe. This move\nalways goes first."}
+{"name": "focus-blast", "type": "fighting", "category": "special", "power": 120, "priority": 0, "description": "The user heightens\nits mental focus and\nunleashes its power.\nIt may also lower the\ntarget’s Sp. Def."}
+{"name": "energy-ball", "type": "grass", "category": "special", "power": 90, "priority": 0, "description": "The user draws power\nfrom nature and\nfires it at the foe.\nIt may also lower the\ntarget’s Sp. Def."}
+{"name": "brave-bird", "type": "flying", "category": "physical", "power": 120, "priority": 0, "description": "The user tucks in\nits wings and charges\nfrom a low altitude.\nThe user also takes\nserious damage."}
+{"name": "earth-power", "type": "ground", "category": "special", "power": 90, "priority": 0, "description": "The user makes the\nground under the foe\nerupt with power.\nIt may also lower the\ntarget’s Sp. Def."}
+{"name": "switcheroo", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "The user trades held\nitems with the foe\nfaster than the eye\ncan follow.\n"}
+{"name": "giga-impact", "type": "normal", "category": "physical", "power": 150, "priority": 0, "description": "使出自己浑身力量突击对手。\n下一回合自己将无法动弹。"}
+{"name": "nasty-plot", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "The user stimulates\nits brain by thinking\nbad thoughts.\nIt sharply raises the\nuser’s Sp. Atk."}
+{"name": "bullet-punch", "type": "steel", "category": "physical", "power": 40, "priority": 1, "description": "The user strikes\nwith a tough punch as\nfast as a bullet.\nThis move always goes\nfirst."}
+{"name": "avalanche", "type": "ice", "category": "physical", "power": 60, "priority": -4, "description": "An attack move that\ninflicts double the\ndamage if the user\nhas been hurt by the\nfoe in the same turn."}
+{"name": "ice-shard", "type": "ice", "category": "physical", "power": 40, "priority": 1, "description": "Crea bolas de hielo y las lanza a gran velocidad.\nEste movimiento siempre va primero."}
+{"name": "shadow-claw", "type": "ghost", "category": "physical", "power": 70, "priority": 0, "description": "The user slashes with\na sharp claw made\nfrom shadows.\nIt has a high\ncritical-hit ratio."}
+{"name": "thunder-fang", "type": "electric", "category": "physical", "power": 65, "priority": 0, "description": "The user bites with\nelectrified fangs.\nIt may also make the\nfoe flinch or become\nparalyzed."}
+{"name": "ice-fang", "type": "ice", "category": "physical", "power": 65, "priority": 0, "description": "The user bites with\ncold-infused fangs.\nIt may also make the\nfoe flinch or freeze.\n"}
+{"name": "fire-fang", "type": "fire", "category": "physical", "power": 65, "priority": 0, "description": "The user bites with\nflame-cloaked fangs.\nIt may also make the\nfoe flinch or sustain\na burn."}
+{"name": "shadow-sneak", "type": "ghost", "category": "physical", "power": 40, "priority": 1, "description": "The user extends its\nshadow and attacks\nthe foe from behind.\nThis move always goes\nfirst."}
+{"name": "mud-bomb", "type": "ground", "category": "special", "power": 65, "priority": 0, "description": "The user launches a\nhard-packed mud ball\nto attack.\nIt may also lower the\ntarget’s accuracy."}
+{"name": "psycho-cut", "type": "psychic", "category": "physical", "power": 70, "priority": 0, "description": "The user tears at\nthe foe with blades\nformed by psychic\npower. It has a high\ncritical-hit ratio."}
+{"name": "zen-headbutt", "type": "psychic", "category": "physical", "power": 80, "priority": 0, "description": "The user focuses its\nwillpower to its head\nand rams the foe.\nIt may also make the\ntarget flinch."}
+{"name": "mirror-shot", "type": "steel", "category": "special", "power": 65, "priority": 0, "description": "The user looses a\nflash of energy from\nits polished body.\nIt may also lower the\ntarget’s accuracy."}
+{"name": "flash-cannon", "type": "steel", "category": "special", "power": 80, "priority": 0, "description": "The user gathers all\nits light energy and\nreleases it at once.\nIt may also lower the\nfoe’s Sp. Def stat."}
+{"name": "rock-climb", "type": "normal", "category": "physical", "power": 90, "priority": 0, "description": "A charging attack\nthat may also leave\nthe foe confused.\nIt can also be used\nto scale rocky walls."}
+{"name": "defog", "type": "flying", "category": "status", "power": null, "priority": 0, "description": "Obstacles are moved,\nreducing the foe’s\nevasion stat. It can\nalso be used to\nclear deep fog, etc."}
+{"name": "trick-room", "type": "psychic", "category": "status", "power": null, "priority": -7, "description": "The user creates a\nbizarre area in which\nslower Pokémon get\nto move first for five\nturns."}
+{"name": "draco-meteor", "type": "dragon", "category": "special", "power": 130, "priority": 0, "description": "Comets are summoned\ndown from the sky.\nThe attack’s recoil\nsharply reduces the\nuser’s Sp. Atk stat."}
+{"name": "discharge", "type": "electric", "category": "special", "power": 80, "priority": 0, "description": "A flare of electricity\nis loosed to strike\nall Pokémon in battle.\nIt may also cause\nparalysis."}
+{"name": "lava-plume", "type": "fire", "category": "special", "power": 80, "priority": 0, "description": "An inferno of scarlet\nflames washes over\nall Pokémon in battle.\nIt may also inflict\nburns."}
+{"name": "leaf-storm", "type": "grass", "category": "special", "power": 130, "priority": 0, "description": "Cae una lluvia de hojas afiladas. Baja mucho el\nAtaque Especial de quien lo usa."}
+{"name": "power-whip", "type": "grass", "category": "physical", "power": 120, "priority": 0, "description": "덩굴이나 촉수를 세차게 흔들어\n상대를 힘껏 쳐서 공격한다."}
+{"name": "rock-wrecker", "type": "rock", "category": "physical", "power": 150, "priority": 0, "description": "The user launches a\nhuge boulder at the\nfoe to attack.\nIt must rest on the\nnext turn, however."}
+{"name": "cross-poison", "type": "poison", "category": "physical", "power": 70, "priority": 0, "description": "A slashing attack\nthat may also leave\nthe target poisoned.\nIt has a high\ncritical-hit ratio."}
+{"name": "gunk-shot", "type": "poison", "category": "physical", "power": 120, "priority": 0, "description": "The user shoots\nfilthy garbage at the\nfoe to attack.\nIt may also poison\nthe target."}
+{"name": "iron-head", "type": "steel", "category": "physical", "power": 80, "priority": 0, "description": "The foe slams the\ntarget with its\nsteel-hard head.\nIt may also make the\ntarget flinch."}
+{"name": "magnet-bomb", "type": "steel", "category": "physical", "power": 60, "priority": 0, "description": "The user launches a\nsteel bomb that\nsticks to the target.\nThis attack will not\nmiss."}
+{"name": "stone-edge", "type": "rock", "category": "physical", "power": 100, "priority": 0, "description": "Clava piedras muy afiladas al objetivo. Suele ser \ncrítico."}
+{"name": "captivate", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "If it is the opposite\ngender of the user,\nthe foe is charmed\ninto sharply lowering\nits Sp. Atk stat."}
+{"name": "stealth-rock", "type": "rock", "category": "status", "power": null, "priority": 0, "description": "The user lays a trap\nof levitating stones\naround the foe. The\ntrap hurts foes that\nswitch into battle."}
+{"name": "grass-knot", "type": "grass", "category": "special", "power": null, "priority": 0, "description": "Chi la usa intrappola il bersaglio con l’erba e lo fa\ncadere. Danneggia maggiormente i Pokémon\npiù pesanti."}
+{"name": "chatter", "type": "flying", "category": "special", "power": 65, "priority": 0, "description": "The user attacks\nusing a sound wave\nbased on words it has\nlearned. It may also\nconfuse the foe."}
+{"name": "judgment", "type": "normal", "category": "special", "power": 100, "priority": 0, "description": "The user releases\ncountless shots of\nlight. Its type varies\nwith the kind of Plate\nthe user is holding."}
+{"name": "bug-bite", "type": "bug", "category": "physical", "power": 60, "priority": 0, "description": "The user bites the\nfoe. If the foe is\nholding a Berry, the\nuser eats it and\ngains its effect."}
+{"name": "charge-beam", "type": "electric", "category": "special", "power": 50, "priority": 0, "description": "The user fires a\nconcentrated bundle\nof electricity. It may\nalso raise the user’s\nSp. Atk stat."}
+{"name": "wood-hammer", "type": "grass", "category": "physical", "power": 120, "priority": 0, "description": "The user slams its\nrugged body into the\nfoe to attack. The\nuser also sustains\nserious damage."}
+{"name": "aqua-jet", "type": "water", "category": "physical", "power": 40, "priority": 1, "description": "The user lunges at\nthe foe at a speed\nthat makes it almost\ninvisible. It is sure\nto strike first."}
+{"name": "attack-order", "type": "bug", "category": "physical", "power": 90, "priority": 0, "description": "The user calls out\nits underlings to\npummel the foe.\nIt has a high\ncritical-hit ratio."}
+{"name": "defend-order", "type": "bug", "category": "status", "power": null, "priority": 0, "description": "The user calls out\nits underlings to\nmake a living shield,\nraising its Defense\nand Sp. Def stats."}
+{"name": "heal-order", "type": "bug", "category": "status", "power": null, "priority": 0, "description": "The user calls out\nits underlings to heal\nit. The user regains\nup to half of its\nmax HP."}
+{"name": "head-smash", "type": "rock", "category": "physical", "power": 150, "priority": 0, "description": "Le lanceur assène un coup de tête désespéré.\nBlesse aussi gravement le lanceur."}
+{"name": "double-hit", "type": "normal", "category": "physical", "power": 35, "priority": 0, "description": "Chi la usa colpisce il bersaglio due volte di fila\ncon la coda, una liana o simili."}
+{"name": "roar-of-time", "type": "dragon", "category": "special", "power": 150, "priority": 0, "description": "The user blasts the\nfoe with power that\ndistorts even time.\nThe user must rest\non the next turn."}
+{"name": "spacial-rend", "type": "dragon", "category": "special", "power": 100, "priority": 0, "description": "Chi la usa lacera il bersaglio e lo spazio che\nlo circonda. Probabile brutto colpo."}
+{"name": "lunar-dance", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "The user faints. In\nreturn, the Pokémon\ntaking its place will\nhave its status and\nHP fully restored."}
+{"name": "crush-grip", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "The foe is crushed\nwith great force.\nThe attack is more\npowerful the more HP\nthe foe has left."}
+{"name": "magma-storm", "type": "fire", "category": "special", "power": 100, "priority": 0, "description": "세차게 타오르는 불꽃 속에\n4-5턴 동안 상대를\n가두어 공격한다."}
+{"name": "dark-void", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "The foe is dragged\ninto a world of total\ndarkness that puts it\nto sleep.\n"}
+{"name": "seed-flare", "type": "grass", "category": "special", "power": 120, "priority": 0, "description": "The user generates\na shock wave from\nwithin its body.\nIt may also lower the\ntarget’s Sp. Def."}
+{"name": "ominous-wind", "type": "ghost", "category": "special", "power": 60, "priority": 0, "description": "The user creates a\ngust of repulsive\nwind. It may also\nraise all the user’s\nstats at once."}
+{"name": "shadow-force", "type": "ghost", "category": "physical", "power": 120, "priority": 0, "description": "The user disappears,\nthen strikes the foe\non the second turn.\nIt hits even if the\nfoe used Protect."}
+{"name": "hone-claws", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "Le lanceur s’aiguise les griffes.\nAugmente l’Attaque et la Précision."}
+{"name": "wide-guard", "type": "rock", "category": "status", "power": null, "priority": 3, "description": "Annule les attaques visant toute l’équipe\npendant 1 tour. Peut échouer si utilisée\nplusieurs fois de suite."}
+{"name": "guard-split", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Additionne la Défense et la Défense\nSpéciale du lanceur et de sa cible et les\nredistribue équitablement entre les deux."}
+{"name": "power-split", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Additionne l’Attaque Spéciale et l’Attaque\ndu lanceur et de sa cible et les\nredistribue équitablement entre les deux."}
+{"name": "wonder-room", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Crée une zone étrange où pendant 5 tours,\nla Défense et la Défense Spéciale de tous\nles Pokémon sont inversées."}
+{"name": "psyshock", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "Le lanceur matérialise des ondes\nmystérieuses qu’il projette sur\nl’ennemi. Inflige des dégâts physiques."}
+{"name": "venoshock", "type": "poison", "category": "special", "power": 65, "priority": 0, "description": "Le lanceur inocule un poison spécial\nà l’ennemi. L’effet est doublé si\nl’ennemi est déjà empoisonné."}
+{"name": "autotomize", "type": "steel", "category": "status", "power": null, "priority": 0, "description": "Le lanceur se débarrasse des parties\ninutiles de son corps. Son poids diminue\net sa Vitesse augmente fortement."}
+{"name": "rage-powder", "type": "bug", "category": "status", "power": null, "priority": 2, "description": "Le lanceur s’asperge d’une poudre\nirritante pour attirer l’attention. Il\nattire toutes les attaques ennemies."}
+{"name": "telekinesis", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Un pouvoir qui fait flotter l’ennemi dans\nles airs. Pendant 3 tours, il devient plus\nfacile à atteindre."}
+{"name": "magic-room", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "制造出离奇的空间。\n在５回合内所有宝可梦\n携带道具的效果都会消失。"}
+{"name": "smack-down", "type": "rock", "category": "physical", "power": 50, "priority": 0, "description": "Le lanceur jette toutes sortes\nde projectiles à un ennemi. Si ce\ndernier vole, il tombe au sol."}
+{"name": "storm-throw", "type": "fighting", "category": "physical", "power": 60, "priority": 0, "description": "Un coup très puissant dont l’effet\nest toujours critique."}
+{"name": "flame-burst", "type": "fire", "category": "special", "power": 70, "priority": 0, "description": "Quand l’attaque atteint sa cible, elle\nprojette des flammes qui touchent\ntout ennemi situé à côté."}
+{"name": "sludge-wave", "type": "poison", "category": "special", "power": 95, "priority": 0, "description": "Une vague de détritus attaque tous\nles Pokémon autour du lanceur.\nPeut aussi empoisonner."}
+{"name": "quiver-dance", "type": "bug", "category": "status", "power": null, "priority": 0, "description": "Une danse mystique dont le rythme parfait\naugmente l’Attaque Spéciale, la Défense\nSpéciale et la Vitesse du lanceur."}
+{"name": "heavy-slam", "type": "steel", "category": "physical", "power": null, "priority": 0, "description": "Le lanceur se jette sur l’ennemi de tout\nson poids. S’il est plus lourd que l’ennemi,\nl’effet augmente en conséquence."}
+{"name": "synchronoise", "type": "psychic", "category": "special", "power": 120, "priority": 0, "description": "Des ondes mystérieuses blessent tous\nles Pokémon alentour qui sont du même\ntype que le lanceur."}
+{"name": "electro-ball", "type": "electric", "category": "special", "power": null, "priority": 0, "description": "Le lanceur envoie une boule d’électricité.\nSi sa Vitesse est plus grande que celle de\nl’ennemi, les dégâts augmentent d’autant."}
+{"name": "soak", "type": "water", "category": "status", "power": null, "priority": 0, "description": "Le lanceur projette beaucoup d’eau sur\nsa cible, qui devient de type Eau."}
+{"name": "flame-charge", "type": "fire", "category": "physical", "power": 50, "priority": 0, "description": "Le lanceur s’entoure de flammes pour\nattaquer l’ennemi. Il se concentre\net sa Vitesse augmente."}
+{"name": "coil", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "Le lanceur s’enroule sur lui-même et se\nconcentre. Son Attaque, sa Défense et\nsa Précision augmentent."}
+{"name": "low-sweep", "type": "fighting", "category": "physical", "power": 65, "priority": 0, "description": "Un coup rapide qui vise les pieds\nde l’ennemi et diminue sa Vitesse."}
+{"name": "acid-spray", "type": "poison", "category": "special", "power": 40, "priority": 0, "description": "Ataca con un líquido corrosivo, reduciendo mucho\nla Defensa Especial del objetivo."}
+{"name": "foul-play", "type": "dark", "category": "physical", "power": 95, "priority": 0, "description": "Le lanceur utilise la force de l’ennemi.\nPlus l’Attaque de l’ennemi est élevée,\nplus le lanceur inflige de dégâts."}
+{"name": "simple-beam", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Le lanceur envoie des ondes\nmystérieuses à l’ennemi. Sa\ncapacité spéciale devient Simple."}
+{"name": "entrainment", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Le lanceur danse sur un rythme étrange.\nIl force sa cible à l’imiter, ce qui lui fait\nadopter sa capacité spéciale."}
+{"name": "after-you", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "S’il est le premier à agir, le lanceur\npermet à sa cible d’utiliser une\ncapacité juste après lui."}
+{"name": "round", "type": "normal", "category": "special", "power": 60, "priority": 0, "description": "Le lanceur attaque l’ennemi en chantant.\nSi plusieurs Pokémon déclenchent cette\nattaque à la suite, l’effet augmente."}
+{"name": "echoed-voice", "type": "normal", "category": "special", "power": 40, "priority": 0, "description": "Un cri retentissant blesse l’ennemi. Si le\nlanceur ou d’autres Pokémon l’utilisent\nà chaque tour, l’effet augmente."}
+{"name": "chip-away", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "Une attaque puissante quand l’ennemi\nbaisse sa garde. Inflige des dégâts sans\ntenir compte des changements de stats."}
+{"name": "clear-smog", "type": "poison", "category": "special", "power": 50, "priority": 0, "description": "Le lanceur jette un tas de détritus\nspéciaux sur la cible. Les changements\nde stats de la cible sont annulés."}
+{"name": "stored-power", "type": "psychic", "category": "special", "power": 20, "priority": 0, "description": "Le lanceur attaque l’ennemi avec une force\naccumulée. Plus les stats du lanceur sont\naugmentées, plus le coup est efficace."}
+{"name": "quick-guard", "type": "fighting", "category": "status", "power": null, "priority": 3, "description": "Le lanceur et son équipe sont protégés\ncontre les attaques prioritaires. Peut\néchouer si utilisée plusieurs fois de suite."}
+{"name": "ally-switch", "type": "psychic", "category": "status", "power": null, "priority": 2, "description": "Le lanceur se téléporte à l’aide d’un\npouvoir mystérieux. Il échange sa place\navec celle d’un allié sur le terrain."}
+{"name": "scald", "type": "water", "category": "special", "power": 80, "priority": 0, "description": "L’ennemi est attaqué par un jet d’eau\nbouillante. Peut aussi le brûler."}
+{"name": "shell-smash", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Le lanceur brise sa coquille. Il baisse sa\nDéfense et Déf. Spé., mais augmente forte-\nment son Attaque, Atq. Spé. et Vitesse."}
+{"name": "heal-pulse", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "Una onda curativa restaura los PS del objetivo a la\nmitad de su máximo."}
+{"name": "hex", "type": "ghost", "category": "special", "power": 65, "priority": 0, "description": "Attaque acharnée qui cause\ndavantage de dégâts à l’ennemi\ns’il a un problème de statut."}
+{"name": "sky-drop", "type": "flying", "category": "physical", "power": 60, "priority": 0, "description": "Le lanceur emmène l’ennemi dans les airs\nau 1er tour et le lâche dans le vide au\n2è. L’ennemi saisi ne peut pas attaquer."}
+{"name": "shift-gear", "type": "steel", "category": "status", "power": null, "priority": 0, "description": "Le lanceur fait tourner ses engrenages.\nCeci augmente son Attaque et augmente\nfortement sa Vitesse."}
+{"name": "circle-throw", "type": "fighting", "category": "physical", "power": 60, "priority": -6, "description": "Projette le Pokémon ennemi et le\nremplace par un autre. Dans la\nnature, met fin au combat."}
+{"name": "incinerate", "type": "fire", "category": "special", "power": 60, "priority": 0, "description": "Des flammes calcinent l’ennemi.\nS’il tient une Baie, elle est\nbrûlée et devient inutilisable."}
+{"name": "quash", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "Retient la cible de force, l’obligeant à agir\nen dernier."}
+{"name": "acrobatics", "type": "flying", "category": "physical", "power": 55, "priority": 0, "description": "Attaque agile. Si le lanceur ne tient\npas d’objet, l’attaque inflige\ndavantage de dégâts."}
+{"name": "reflect-type", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Cambia el tipo del Pokémon al mismo tipo que\nel del objetivo."}
+{"name": "retaliate", "type": "normal", "category": "physical", "power": 70, "priority": 0, "description": "Venge un Pokémon de l’équipe mis K.O.\nSi un Pokémon de l’équipe a été mis\nK.O. au tour d’avant, l’effet augmente."}
+{"name": "final-gambit", "type": "fighting", "category": "special", "power": null, "priority": 0, "description": "Une attaque très risquée. Le lanceur perd\ntous ses PV restants et inflige autant de\ndégâts à l’ennemi."}
+{"name": "bestow", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Si la cible ne tient pas d’objet, le\nlanceur lui donne l’objet qu’il tient."}
+{"name": "inferno", "type": "fire", "category": "special", "power": 100, "priority": 0, "description": "L’ennemi est entouré d’un torrent de\nflammes ardentes qui le brûlent."}
+{"name": "water-pledge", "type": "water", "category": "special", "power": 80, "priority": 0, "description": "Une masse d’eau s’abat sur l’ennemi.\nEn l’utilisant avec Aire de Feu, l’effet\naugmente et un arc-en-ciel apparaît."}
+{"name": "fire-pledge", "type": "fire", "category": "special", "power": 80, "priority": 0, "description": "Une masse de feu s’abat sur l’ennemi.\nEn l’utilisant avec Aire d’Herbe, l’effet\naugmente et une mer de feu apparaît."}
+{"name": "grass-pledge", "type": "grass", "category": "special", "power": 80, "priority": 0, "description": "Une masse végétale s’abat sur l’ennemi.\nEn l’utilisant avec Aire d’Eau, l’effet\naugmente et un marécage apparaît."}
+{"name": "volt-switch", "type": "electric", "category": "special", "power": 70, "priority": 0, "description": "Après son attaque, le lanceur revient à\ntoute vitesse et change de place avec\nun Pokémon de l’équipe prêt au combat."}
+{"name": "struggle-bug", "type": "bug", "category": "special", "power": 50, "priority": 0, "description": "Le lanceur se débat de toutes ses forces,\net baisse l’Attaque Spéciale de l’ennemi."}
+{"name": "bulldoze", "type": "ground", "category": "physical", "power": 60, "priority": 0, "description": "Le lanceur piétine le sol et inflige des\ndégâts à tous les Pokémon autour\nde lui. Baisse aussi la Vitesse."}
+{"name": "frost-breath", "type": "ice", "category": "special", "power": 60, "priority": 0, "description": "Un souffle froid blesse l’ennemi.\nL’effet est toujours critique."}
+{"name": "dragon-tail", "type": "dragon", "category": "physical", "power": 60, "priority": -6, "description": "Un coup puissant qui blesse la cible\net l’envoie balader. Dans la nature,\nmet fin au combat."}
+{"name": "work-up", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "激勵自己，\n提高自己的攻擊和特攻。"}
+{"name": "electroweb", "type": "electric", "category": "special", "power": 55, "priority": 0, "description": "Attrape l’ennemi dans un filet électrique.\nBaisse aussi la Vitesse de l’ennemi."}
+{"name": "wild-charge", "type": "electric", "category": "physical", "power": 90, "priority": 0, "description": "Une charge électrique violente qui blesse\naussi légèrement le lanceur."}
+{"name": "drill-run", "type": "ground", "category": "physical", "power": 80, "priority": 0, "description": "Le lanceur tourne sur lui-même comme\nune perceuse et se jette sur l’ennemi.\nTaux de critiques élevé."}
+{"name": "dual-chop", "type": "dragon", "category": "physical", "power": 40, "priority": 0, "description": "Le lanceur frappe l’ennemi deux fois\nd’affilée avec les parties les plus\nrobustes de son corps."}
+{"name": "heart-stamp", "type": "psychic", "category": "physical", "power": 60, "priority": 0, "description": "Déconcentre l’ennemi avec des mouvements\nmignons avant de le frapper violemment.\nPeut apeurer l’ennemi."}
+{"name": "horn-leech", "type": "grass", "category": "physical", "power": 75, "priority": 0, "description": "Un coup de corne qui draine l’énergie\nde l’ennemi. Convertit la moitié des dégâts\ninfligés en PV pour le lanceur."}
+{"name": "sacred-sword", "type": "fighting", "category": "physical", "power": 90, "priority": 0, "description": "Un coup de lame violent qui lacère\nl’ennemi et lui inflige des dégâts quels\nque soient ses changements de stats."}
+{"name": "razor-shell", "type": "water", "category": "physical", "power": 75, "priority": 0, "description": "用鋒利的貝殼斬切\n對手進行攻擊。\n有時會降低對手的防禦。"}
+{"name": "heat-crash", "type": "fire", "category": "physical", "power": null, "priority": 0, "description": "Le lanceur projette son corps enflammé\ncontre l’ennemi. S’il est plus lourd que\nl’ennemi, l’effet augmente en conséquence."}
+{"name": "leaf-tornado", "type": "grass", "category": "special", "power": 65, "priority": 0, "description": "L’ennemi est pris dans un tourbillon de\nfeuilles acérées. Peut aussi baisser\nla Précision de l’ennemi."}
+{"name": "steamroller", "type": "bug", "category": "physical", "power": 65, "priority": 0, "description": "Le lanceur se roule en boule et\nécrase son ennemi. Peut aussi\napeurer l’ennemi."}
+{"name": "cotton-guard", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "用軟綿綿的絨毛\n保護自己的身體。\n極大幅提高自己的防禦。"}
+{"name": "night-daze", "type": "dark", "category": "special", "power": 85, "priority": 0, "description": "Le lanceur attaque l’ennemi avec une onde\nde choc ténébreuse. Peut aussi baisser la\nPrécision de l’ennemi."}
+{"name": "psystrike", "type": "psychic", "category": "special", "power": 100, "priority": 0, "description": "Le lanceur matérialise des ondes\nmystérieuses qu’il projette sur\nl’ennemi. Inflige des dégâts physiques."}
+{"name": "tail-slap", "type": "normal", "category": "physical", "power": 25, "priority": 0, "description": "Golpea con la cola u otras partes de su cuerpo de\ndos a cinco veces seguidas."}
+{"name": "hurricane", "type": "flying", "category": "special", "power": 110, "priority": 0, "description": "Le lanceur déclenche une tempête de\nvents violents qui s’abat sur l’ennemi.\nPeut aussi le rendre confus."}
+{"name": "head-charge", "type": "normal", "category": "physical", "power": 120, "priority": 0, "description": "Le lanceur donne un coup avec sa tête\ncouronnée d’une fière crinière.\nBlesse aussi légèrement le lanceur."}
+{"name": "gear-grind", "type": "steel", "category": "physical", "power": 50, "priority": 0, "description": "Le lanceur jette deux écrous d’acier qui\nfrappent l’ennemi deux fois d’affilée."}
+{"name": "searing-shot", "type": "fire", "category": "special", "power": 100, "priority": 0, "description": "Des flammes rougeoyantes s’abattent\nsur tous les Pokémon autour du lanceur.\nPeut aussi brûler."}
+{"name": "techno-blast", "type": "normal", "category": "special", "power": 120, "priority": 0, "description": "Le lanceur projette un rayon lumineux sur\nl’ennemi. Le type varie selon le Module\nque tient le lanceur."}
+{"name": "relic-song", "type": "normal", "category": "special", "power": 75, "priority": 0, "description": "Le lanceur attaque l’ennemi en lui\nchantant une chanson d’un autre temps.\nPeut endormir l’ennemi."}
+{"name": "secret-sword", "type": "fighting", "category": "special", "power": 85, "priority": 0, "description": "L’ennemi est lacéré par une longue lame.\nLe pouvoir mystérieux de la lame inflige\ndes dégâts physiques."}
+{"name": "glaciate", "type": "ice", "category": "special", "power": 65, "priority": 0, "description": "Ataque con aire helado que baja la Velocidad del\nobjetivo."}
+{"name": "bolt-strike", "type": "electric", "category": "physical", "power": 130, "priority": 0, "description": "S’enveloppe d’une charge électrique\nsurpuissante et se jette sur l’ennemi.\nPeut aussi le paralyser."}
+{"name": "blue-flare", "type": "fire", "category": "special", "power": 130, "priority": 0, "description": "De magnifiques et redoutables flammes\nbleues fondent sur l’ennemi.\nPeut aussi le brûler."}
+{"name": "fiery-dance", "type": "fire", "category": "special", "power": 80, "priority": 0, "description": "Le lanceur enveloppe l’ennemi de flammes.\nPeut aussi augmenter l’Attaque Spéciale\ndu lanceur."}
+{"name": "freeze-shock", "type": "ice", "category": "physical", "power": 140, "priority": 0, "description": "Projette un bloc de glace électrifié\nsur l’ennemi au second tour.\nPeut aussi le paralyser."}
+{"name": "ice-burn", "type": "ice", "category": "special", "power": 140, "priority": 0, "description": "Au second tour, le lanceur projette un\nsouffle de vent glacial dévastateur\nsur l’ennemi. Peut le brûler."}
+{"name": "snarl", "type": "dark", "category": "special", "power": 55, "priority": 0, "description": "Le lanceur hurle sur l’ennemi.\nBaisse l’Attaque Spéciale de l’ennemi."}
+{"name": "icicle-crash", "type": "ice", "category": "physical", "power": 85, "priority": 0, "description": "Envoie de gros blocs de glace sur\nl’ennemi pour lui infliger des dégâts.\nPeut aussi l’apeurer."}
+{"name": "v-create", "type": "fire", "category": "physical", "power": 180, "priority": 0, "description": "Le lanceur projette une flamme ardente de\nson front et se jette sur l’ennemi. Baisse\nla Défense, la Déf. Spé. et la Vitesse."}
+{"name": "fusion-flare", "type": "fire", "category": "special", "power": 100, "priority": 0, "description": "Projette une boule de feu\ngigantesque. L’effet augmente\nsous l’influence d’Éclair Croix."}
+{"name": "fusion-bolt", "type": "electric", "category": "physical", "power": 100, "priority": 0, "description": "Projette un orbe électrique\ngigantesque. L’effet augmente\nsous l’influence de Flamme Croix."}
+{"name": "flying-press", "type": "fighting", "category": "physical", "power": 100, "priority": 0, "description": "くうちゅうから　あいてに　ダイブする。\nこのわざは　かくとうタイプと　どうじに\nひこうタイプでも　ある。"}
+{"name": "mat-block", "type": "fighting", "category": "status", "power": null, "priority": 0, "description": "かえした　タタミを　たてにして　じぶんや\nみかたへの　わざの　ダメージを　ふせぐ。\nへんかわざは　ふせぐことが　できない。"}
+{"name": "belch", "type": "poison", "category": "special", "power": 120, "priority": 0, "description": "あいてに　むかって　ゲップを\nあびせて　ダメージを　あたえる。\nきのみを　たべないと　だせない。"}
+{"name": "rototiller", "type": "ground", "category": "status", "power": null, "priority": 0, "description": "じめんを　たがやして　くさきが\nそだちやすいようにする。くさタイプの\nこうげきと　とくこうが　あがる。"}
+{"name": "sticky-web", "type": "bug", "category": "status", "power": null, "priority": 0, "description": "あいての　まわりに　ねばねばした\nネットを　はりめぐらせ　こうたいで\nでてきた　あいての　すばやさを　さげる。"}
+{"name": "fell-stinger", "type": "bug", "category": "physical", "power": 50, "priority": 0, "description": "この　わざを　つかって\nあいてを　たおすと\nこうげきが　ぐーんと　あがる。"}
+{"name": "phantom-force", "type": "ghost", "category": "physical", "power": 90, "priority": 0, "description": "１ターンめで　どこかに　きえて\n２ターンめに　あいてを　こうげきする。\nまもりを　むしして　こうげきできる。"}
+{"name": "trick-or-treat", "type": "ghost", "category": "status", "power": null, "priority": 0, "description": "あいてを　ハロウィンに　さそう。\nあいての　タイプに\nゴーストタイプが　ついかされる。"}
+{"name": "noble-roar", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "おたけびを　あげて\nあいてを　いかくし　あいての\nこうげきと　とくこうを　さげる。"}
+{"name": "ion-deluge", "type": "electric", "category": "status", "power": null, "priority": 1, "description": "でんきを　おびた　りゅうしを\nかくさんし　ノーマルタイプの　わざを\nでんきタイプに　してしまう。"}
+{"name": "parabolic-charge", "type": "electric", "category": "special", "power": 65, "priority": 0, "description": "まわりにいる　ポケモン　ぜんいんに\nダメージ。　あたえた　ダメージの\nはんぶんを　じぶんが　かいふくする。"}
+{"name": "forests-curse", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "あいてに　もりののろいを　かける。\nのろいを　かけられた　あいては\nタイプに　くさタイプが　ついかされる。"}
+{"name": "petal-blizzard", "type": "grass", "category": "physical", "power": 90, "priority": 0, "description": "はげしい　はなふぶきを　おこし\nまわりに　いるものに　こうげきして\nダメージを　あたえる。"}
+{"name": "freeze-dry", "type": "ice", "category": "special", "power": 70, "priority": 0, "description": "あいてを　きゅうげきに　ひやして\nこおり　じょうたいに　することが　ある。\nみずタイプにも　こうかばつぐんに　なる。"}
+{"name": "disarming-voice", "type": "fairy", "category": "special", "power": 40, "priority": 0, "description": "みわくの　なきごえを　だして　あいてに\nせいしんてきな　ダメージを　あたえる。\nこうげきは　かならず　めいちゅう　する。"}
+{"name": "parting-shot", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "すてゼリフで　あいてを　いかくし\nこうげきと　とくこうを　さげたのち\nひかえの　ポケモンと　いれかわる。"}
+{"name": "topsy-turvy", "type": "dark", "category": "status", "power": null, "priority": 0, "description": "あいてに　かかっている\nすべての　のうりょくへんかを\nひっくりかえして　ぎゃくにする。"}
+{"name": "draining-kiss", "type": "fairy", "category": "special", "power": 50, "priority": 0, "description": "キッスによって　あいてから　ＨＰを\nすいとる。あたえた　ダメージの\nはんぶんいじょう　ＨＰを　かいふくする。"}
+{"name": "crafty-shield", "type": "fairy", "category": "status", "power": null, "priority": 3, "description": "ふしぎな　ちからを　つかって\nみかたへの　へんかわざを　ふせぐ。\nダメージわざは　うけてしまう。"}
+{"name": "flower-shield", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "使用神奇的力量\n提高在场的所有\n草属性宝可梦的防御。"}
+{"name": "grassy-terrain", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "５ターンの　あいだ　あしもとを\nグラスフィールドにする。　じめんにいる\nポケモンは　まいターン　かいふくする。"}
+{"name": "misty-terrain", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "５ターンの　あいだ　あしもとを\nミストフィールドにする。　じめんにいると\nじょうたいいじょうに　ならない。"}
+{"name": "electrify", "type": "electric", "category": "status", "power": null, "priority": 0, "description": "상대가 기술을 쓰기 전에\n송전하면 그 턴에 상대가\n사용하는 기술은 전기타입이 된다."}
+{"name": "play-rough", "type": "fairy", "category": "physical", "power": 90, "priority": 0, "description": "あいてに　じゃれついて\nこうげきする。　あいての\nこうげきを　さげる　ことがある。"}
+{"name": "fairy-wind", "type": "fairy", "category": "special", "power": 40, "priority": 0, "description": "ようせいのかぜを　おこし\nあいてに　ふきつけて　こうげきする。\n"}
+{"name": "moonblast", "type": "fairy", "category": "special", "power": 95, "priority": 0, "description": "つきの　パワーを　かりて\nあいてを　こうげきする。　あいての\nとくこうを　さげる　ことがある。"}
+{"name": "boomburst", "type": "normal", "category": "special", "power": 140, "priority": 0, "description": "Colpisce i Pokémon che ha intorno\ncon la forza di un boato distruttivo."}
+{"name": "fairy-lock", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "ロックを　かけることによって\nつぎのターン　すべての\nポケモンを　にげられなくする。"}
+{"name": "kings-shield", "type": "steel", "category": "status", "power": null, "priority": 4, "description": "あいての　こうげきを　ふせぐと　どうじに\nぼうぎょたいせいになる。　ふれた\nあいての　こうげきを　がくっと　さげる。"}
+{"name": "play-nice", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "和对手和睦相处，\n使其失去战斗的气力，\n从而降低对手的攻击。"}
+{"name": "confide", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "ないしょばなしを　することで　あいての\nしゅうちゅうりょくを　うしなわせ\nあいての　とくこうを　さげる。"}
+{"name": "diamond-storm", "type": "rock", "category": "physical", "power": 100, "priority": 0, "description": "ダイヤの　あらしを　まきおこし\nダメージを　あたえる。　じぶんの\nぼうぎょを　あげることが　ある。"}
+{"name": "steam-eruption", "type": "water", "category": "special", "power": 110, "priority": 0, "description": "Travolge il bersaglio con un’ondata di vapore\nrovente che può anche scottarlo."}
+{"name": "hyperspace-hole", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "いじげんホールで　とつぜん　あいての\nまよこに　あらわれ　こうげきする。\nまもるや　みきりも　むし　できる。"}
+{"name": "water-shuriken", "type": "water", "category": "special", "power": 15, "priority": 1, "description": "ねんえきで　できた　しゅりけんを\n２ー５かいの　あいだ　れんぞくで　だす。\nかならず　せんせい　こうげき　できる。"}
+{"name": "mystical-fire", "type": "fire", "category": "special", "power": 75, "priority": 0, "description": "くちから　はきだす　とくべつ\nあつい　ほのおで　こうげきする。\nあいての　とくこうを　さげる。"}
+{"name": "spiky-shield", "type": "grass", "category": "status", "power": null, "priority": 4, "description": "あいての　こうげきを　ふせぐと\nどうじに　ふれた　あいての\nたいりょくを　けずって　しまう。"}
+{"name": "aromatic-mist", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "Grâce à un parfum mystérieux, augmente la\nDéfense Spéciale d’un allié."}
+{"name": "eerie-impulse", "type": "electric", "category": "status", "power": null, "priority": 0, "description": "からだから　かいでんぱを　はなち\nあいてに　あびせる　ことによって\nとくこうを　がくっと　さげる。"}
+{"name": "venom-drench", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "とくしゅな　どくえきを　あびせかける。\nどく　じょうたいの　あいては\nこうげき　とくこう　すばやさが　さがる。"}
+{"name": "powder", "type": "bug", "category": "status", "power": null, "priority": 1, "description": "ふんじんを　あびせた　あいてが\nほのおわざを　つかうと\nばくはつして　ダメージを　あたえる。"}
+{"name": "geomancy", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "１ターンめで　エネルギーを\nきゅうしゅうし　２ターンめに　とくこう\nとくぼう　すばやさを　ぐーんと　あげる。"}
+{"name": "magnetic-flux", "type": "electric", "category": "status", "power": null, "priority": 0, "description": "磁場を　操作　することによって\n特性　プラスと　マイナスの\n防御　特防が　あがる。"}
+{"name": "happy-hour", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "ハッピータイムの　わざを　つかうと\nせんとうの　あとで　もらえる\nおかねが　ばいになる。"}
+{"name": "electric-terrain", "type": "electric", "category": "status", "power": null, "priority": 0, "description": "5턴 동안 발밑을\n일렉트릭필드로 만든다. 땅에 있는\n포켓몬은 잠들지 않게 된다."}
+{"name": "dazzling-gleam", "type": "fairy", "category": "special", "power": 80, "priority": 0, "description": "きょうりょくな　ひかりを　はなち\nあいてに　ダメージを　あたえる。\n"}
+{"name": "celebrate", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "ポケモンが　とっても\nハッピーな　あなたのことを\nおいわい　してくれる。"}
+{"name": "hold-hands", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "みかたの　ポケモン　どうしが\nてをつなぐ。　とっても　しあわせな\nきもちに　なれる。"}
+{"name": "baby-doll-eyes", "type": "fairy", "category": "status", "power": null, "priority": 1, "description": "つぶらなひとみで　あいてを　みつめて\nこうげきを　さげる。\nかならず　せんせい　こうげき　できる。"}
+{"name": "nuzzle", "type": "electric", "category": "physical", "power": 20, "priority": 0, "description": "でんきを　おびた　ほっぺを\nすりつけて　こうげき。\nあいてを　まひ　じょうたいに　する。"}
+{"name": "hold-back", "type": "normal", "category": "physical", "power": 40, "priority": 0, "description": "てかげん　した　こうげきで\nあいての　ＨＰを\nかならず　１だけ　のこす。"}
+{"name": "infestation", "type": "bug", "category": "special", "power": 20, "priority": 0, "description": "４ー５ターンの　あいだ　あいてに\nまとわりついて　こうげきする。\nそのあいだ　あいては　にげられない。"}
+{"name": "power-up-punch", "type": "fighting", "category": "physical", "power": 40, "priority": 0, "description": "くりかえし　うつことで\nだんだん　こぶしが　かたくなる。\nあいてに　あてると　こうげきが　あがる。"}
+{"name": "oblivion-wing", "type": "flying", "category": "special", "power": 80, "priority": 0, "description": "ねらいを　さだめた　あいてから　ＨＰを\nすいとる。あたえた　ダメージの\nはんぶんいじょう　ＨＰを　かいふくする。"}
+{"name": "thousand-arrows", "type": "ground", "category": "physical", "power": 90, "priority": 0, "description": "ういている　ポケモンにも　あたる。\nういていた　あいては\nうちおとされて　じめんに　おちる。"}
+{"name": "thousand-waves", "type": "ground", "category": "physical", "power": 90, "priority": 0, "description": "ちをはう　なみによって　こうげき。\nなみに　まきこまれた　あいては\nせんとうから　にげられなくなる。"}
+{"name": "lands-wrath", "type": "ground", "category": "physical", "power": 90, "priority": 0, "description": "대지의 힘을 모으고\n그 힘을 상대에게 집중시켜서\n데미지를 준다."}
+{"name": "light-of-ruin", "type": "fairy", "category": "special", "power": 140, "priority": 0, "description": "えいえんのはな　の　パワーを　かりて\nきょうりょくな　こうせんを　うちだす。\nじぶんも　かなりの　ダメージを　うける。"}
+{"name": "origin-pulse", "type": "water", "category": "special", "power": 110, "priority": 0, "description": "Der Anwender greift das Ziel mit unzähligen blau\nleuchtenden Strahlen an."}
+{"name": "precipice-blades", "type": "ground", "category": "physical", "power": 120, "priority": 0, "description": "だいちの　ちからを　やいばに　かえて\nあいてを　こうげきする。"}
+{"name": "dragon-ascent", "type": "flying", "category": "physical", "power": 120, "priority": 0, "description": "おおぞらから　きゅうそくらっか　して\nあいてを　こうげきする。\nじぶんの　ぼうぎょと　とくぼうが　さがる。"}
+{"name": "hyperspace-fury", "type": "dark", "category": "physical", "power": 100, "priority": 0, "description": "たくさんの　うでを　つかって　まもるや\n きりを　むしした　れんぞくこうげき。\nじぶんの　ぼうぎょが　さがる。"}
+{"name": "breakneck-blitz--physical", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　いきおいを　つけて\nぜんりょくで　あいてに　ぶつかる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "breakneck-blitz--special", "type": "normal", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "all-out-pummeling--physical", "type": "fighting", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　つくった　エネルギーの　たまを\nぜんりょくで　あいてに　ぶつける。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "all-out-pummeling--special", "type": "fighting", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "supersonic-skystrike--physical", "type": "flying", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　いきおいよく　とびあがり\nあいてに　むかって　ぜんりょくで　らっか。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "supersonic-skystrike--special", "type": "flying", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "acid-downpour--physical", "type": "poison", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　どくの　ぬまを　わきあがらせ\nぜんりょくで　あいてを　しずめる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "acid-downpour--special", "type": "poison", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "tectonic-rage--physical", "type": "ground", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　じめんの　おくふかくに　もぐり\nぜんりょくで　あいてに　ぶつかる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "tectonic-rage--special", "type": "ground", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "continental-crush--physical", "type": "rock", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　おおきな　いわやまを　よびだし\nぜんりょくで　あいてに　ぶつける。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "continental-crush--special", "type": "rock", "category": "special", "power": null, "priority": 0, "description": "Dummy"}
+{"name": "savage-spin-out--physical", "type": "bug", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　はきだした　いとが\nぜんりょくで　あいてを　しばりつける。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "savage-spin-out--special", "type": "bug", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "never-ending-nightmare--physical", "type": "ghost", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　よびよせた　つよい　おんねんが\nぜんりょくで　あいてに　ふりかかる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "never-ending-nightmare--special", "type": "ghost", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "corkscrew-crash--physical", "type": "steel", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　こうそくかいてんを　おこない\nぜんりょくで　あいてに　ぶつかる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "corkscrew-crash--special", "type": "steel", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "inferno-overdrive--physical", "type": "fire", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　もえさかる　ほのおを　はきだし\nぜんりょくで　あいてに　ぶつける。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "inferno-overdrive--special", "type": "fire", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "hydro-vortex--physical", "type": "water", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　おおきな　うずしおを　つくり\nぜんりょくで　あいてを　のみこむ。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "hydro-vortex--special", "type": "water", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "bloom-doom--physical", "type": "grass", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　くさばなの　エネルギーを　かり\nぜんりょくで　あいてを　こうげきする。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "bloom-doom--special", "type": "grass", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "gigavolt-havoc--physical", "type": "electric", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　ためた　つよい　でんきを\nぜんりょくで　あいてに　ぶつける。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "gigavolt-havoc--special", "type": "electric", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "shattered-psyche--physical", "type": "psychic", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　あいてを　あやつり\nぜんりょくで　いたい　おもいを　させる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "shattered-psyche--special", "type": "psychic", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "subzero-slammer--physical", "type": "ice", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　きおんを　きゅうげきに　さげ\nぜんりょくで　あいてを　こおらせる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "subzero-slammer--special", "type": "ice", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "devastating-drake--physical", "type": "dragon", "category": "physical", "power": null, "priority": 0, "description": "Ｚパワーで　オーラを　じったいかし\nぜんりょくで　あいてに　おそいかかる。\nもとになった　わざで　いりょくが　かわる。"}
+{"name": "devastating-drake--special", "type": "dragon", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "black-hole-eclipse--physical", "type": "dark", "category": "physical", "power": null, "priority": 0, "description": "The user gathers dark energy using its Z-Power\nand sucks the target into it. The power varies,\ndepending on the original move."}
+{"name": "black-hole-eclipse--special", "type": "dark", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "twinkle-tackle--physical", "type": "fairy", "category": "physical", "power": null, "priority": 0, "description": "透過Ｚ力量製造魅惑空間，\n全力玩弄對手。\n威力會隨原本的招式而改變。"}
+{"name": "twinkle-tackle--special", "type": "fairy", "category": "special", "power": null, "priority": 0, "description": "ダミーデータ"}
+{"name": "catastropika", "type": "electric", "category": "physical", "power": 210, "priority": 0, "description": "Ｚパワーで　さいだい　でんりょくを\nみに　まとった　ピカチュウが\nぜんりょくで　あいてに　とびかかる。"}
+{"name": "shore-up", "type": "ground", "category": "status", "power": null, "priority": 0, "description": "さいだい　ＨＰの　はんぶん\nじぶんの　ＨＰを　かいふく　する。\nすなあらしのときは　おおく　かいふく。"}
+{"name": "first-impression", "type": "bug", "category": "physical", "power": 90, "priority": 2, "description": "Une capacité très puissante, mais qui ne fonctionne\nqu’au premier tour."}
+{"name": "baneful-bunker", "type": "poison", "category": "status", "power": null, "priority": 4, "description": "あいての　こうげきを　ふせぐと\nどうじに　ふれた　あいてに\nどくを　あたえて　しまう。"}
+{"name": "spirit-shackle", "type": "ghost", "category": "physical", "power": 80, "priority": 0, "description": "こうげきと　どうじに\nあいての　かげを　ぬいつけて\nにげられなくする。"}
+{"name": "darkest-lariat", "type": "dark", "category": "physical", "power": 85, "priority": 0, "description": "りょううでを　まわし　あいてに　あてる。\nあいての　のうりょく　へんかに\nかんけいなく　ダメージを　あたえる。"}
+{"name": "sparkling-aria", "type": "water", "category": "special", "power": 90, "priority": 0, "description": "うたうことによって　たくさんの\nバルーンを　ほうしゅつする。\nわざを　うけると　やけどが　なおる。"}
+{"name": "ice-hammer", "type": "ice", "category": "physical", "power": 100, "priority": 0, "description": "つよくて　おもい　こぶしを\nふるって　ダメージを　あたえる。\nじぶんの　すばやさが　さがる。"}
+{"name": "floral-healing", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "さいだい　ＨＰの　はんぶん\nあいての　ＨＰを　かいふく　する。\nグラスフィールドのとき　こうかが　あがる。"}
+{"name": "high-horsepower", "type": "ground", "category": "physical", "power": 95, "priority": 0, "description": "ぜんしんを　つかって\nあいてに　もうアタックする。"}
+{"name": "strength-sap", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "將自己的HP回復到和\n對手的攻擊力相同。\n然後降低對手的攻擊。"}
+{"name": "solar-blade", "type": "grass", "category": "physical", "power": 125, "priority": 0, "description": "１ターンめに　ひかりを　いっぱいに\nあつめ　２ターンめに　そのちからを\nけんに　こめて　こうげきする。"}
+{"name": "leafage", "type": "grass", "category": "physical", "power": 40, "priority": 0, "description": "はっぱを　あいてに　あてて\nこうげきする。"}
+{"name": "spotlight", "type": "normal", "category": "status", "power": null, "priority": 3, "description": "ポケモンに　スポットライトを　あて\nそのターンに　そのポケモンしか\nねらえない　ようにする。"}
+{"name": "toxic-thread", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "Tisse un fil imprégné de venin. Empoisonne la cible\net baisse sa Vitesse."}
+{"name": "laser-focus", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "せいしんを　しゅうちゅうして\nつぎの　こうげきを　かならず\nきゅうしょに　あてる。"}
+{"name": "gear-up", "type": "steel", "category": "status", "power": null, "priority": 0, "description": "ギアを　いれる　ことによって\nとくせい　プラスと　マイナスの\nこうげきと　とくこうが　あがる。"}
+{"name": "throat-chop", "type": "dark", "category": "physical", "power": 80, "priority": 0, "description": "この　わざを　うけた　あいては\nじごくの　くるしみから　２ターンのあいだ\nおとの　わざを　だすことが　できなくなる。"}
+{"name": "pollen-puff", "type": "bug", "category": "special", "power": 90, "priority": 0, "description": "Chi la usa attacca il nemico con una sfera\nesplosiva. Se colpisce degli alleati, fa recuperare\nloro dei PS."}
+{"name": "anchor-shot", "type": "steel", "category": "physical", "power": 80, "priority": 0, "description": "アンカーを　あいてに　からませて\nこうげきする。　あいては\nにげることが　できなくなる。"}
+{"name": "psychic-terrain", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "５ターンの　あいだ　じめんにいると\nせんせいわざを　うけない。\nエスパータイプの　いりょくが　あがる。"}
+{"name": "lunge", "type": "bug", "category": "physical", "power": 80, "priority": 0, "description": "ぜんりょくで　あいてに\nとびかかって　こうげき。\nあいての　こうげきを　さげる。"}
+{"name": "fire-lash", "type": "fire", "category": "physical", "power": 80, "priority": 0, "description": "やけたムチで　あいてを　うちつける。\nこうげきを　うけた　あいては\nぼうぎょが　さがる。"}
+{"name": "power-trip", "type": "dark", "category": "physical", "power": 20, "priority": 0, "description": "じぶんの　つよさを　はなたかだかに\nこうげきする。じぶんの　のうりょくが\nあがって　いるほど　いりょくが　あがる。"}
+{"name": "burn-up", "type": "fire", "category": "special", "power": 130, "priority": 0, "description": "ぜんしんの　ほのおを　すべて\nもやして　だいダメージを　あたえる。\nじぶんの　ほのおタイプが　なくなる。"}
+{"name": "speed-swap", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "あいての　すばやさと\nじぶんの　すばやさを\nいれかえて　しまう。"}
+{"name": "smart-strike", "type": "steel", "category": "physical", "power": 70, "priority": 0, "description": "とがった　つので　あいてを\nつきさして　こうげきする。\nこうげきは　かならず　めいちゅう　する。"}
+{"name": "purify", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "あいての　じょうたいいじょうを　なおす。\nなおすと　じぶんは　ＨＰを\nかいふく　することが　できる。"}
+{"name": "revelation-dance", "type": "normal", "category": "special", "power": 90, "priority": 0, "description": "ぜんりょくで　おどって　こうげきする。\nこの　わざの　タイプは\nじぶんの　タイプと　おなじに　なる。"}
+{"name": "core-enforcer", "type": "dragon", "category": "special", "power": 100, "priority": 0, "description": "ダメージを　あたえた　あいてが\nすでに　こうどうを　おえて　いたら\nあいての　とくせいを　けして　しまう。"}
+{"name": "trop-kick", "type": "grass", "category": "physical", "power": 70, "priority": 0, "description": "なんごく　ゆらいの　あつい\nキックを　あいてに　あびせる。\nあいての　こうげきを　さげる。"}
+{"name": "instruct", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "あいてが　だした　わざを\nしじして　もういちど\nださせる　ことが　できる。"}
+{"name": "beak-blast", "type": "flying", "category": "physical", "power": 100, "priority": -3, "description": "さいしょに　クチバシを　かねつしてから\nこうげきを　くりだす。\nかねつちゅうに　さわると　やけどする。"}
+{"name": "clanging-scales", "type": "dragon", "category": "special", "power": 110, "priority": 0, "description": "ぜんしんの　うろこを　こすり\nおおきな　おとを　だして　こうげきする。\nこうげきご　じぶんの　ぼうぎょが　さがる。"}
+{"name": "dragon-hammer", "type": "dragon", "category": "physical", "power": 90, "priority": 0, "description": "からだを　ハンマーのように\nつかって　あいてに　おそいかかり\nダメージを　あたえる。"}
+{"name": "brutal-swing", "type": "dark", "category": "physical", "power": 60, "priority": 0, "description": "じぶんの　からだを\nぶんまわして　あいてに\nダメージを　あたえる。"}
+{"name": "aurora-veil", "type": "ice", "category": "status", "power": null, "priority": 0, "description": "５ターンの　あいだ　ぶつりと\nとくしゅの　ダメージを　よわめる。\nあられの　ときしか　だすことが　できない。"}
+{"name": "sinister-arrow-raid", "type": "ghost", "category": "physical", "power": 180, "priority": 0, "description": "Ｚパワーで　無数の　矢を　作りだした\nジュナイパーが　全力で\n相手を　射抜く　攻撃。"}
+{"name": "malicious-moonsault", "type": "dark", "category": "physical", "power": 180, "priority": 0, "description": "Ｚパワーで　タフな　にくたいを　えた\nガオガエンが　ぜんりょくで\nあいてに　ぶつかって　こうげきする。"}
+{"name": "oceanic-operetta", "type": "water", "category": "special", "power": 195, "priority": 0, "description": "Ｚパワーで　たいりょうの　みずを　よんだ\nアシレーヌが　ぜんりょくで\nあいてを　こうげきする。"}
+{"name": "guardian-of-alola", "type": "fairy", "category": "special", "power": null, "priority": 0, "description": "Ｚパワーで　アローラの　ちからを　えた\nとちがみポケモン　ぜんりょくの　こうげき。\nあいての　のこりＨＰを　たくさん　へらす。"}
+{"name": "soul-stealing-7-star-strike", "type": "ghost", "category": "physical", "power": 195, "priority": 0, "description": "Ｚパワーを　えた　マーシャドーが\nパンチと　キックの　れんぞくわざを\nぜんりょくで　あいてに　たたきこむ。"}
+{"name": "stoked-sparksurfer", "type": "electric", "category": "special", "power": 175, "priority": 0, "description": "Ｚパワーを　えた　アローラちほうの\nライチュウが　ぜんりょくで　こうげきする。\nあいてを　まひ　じょうたいに　する。"}
+{"name": "pulverizing-pancake", "type": "normal", "category": "physical", "power": 210, "priority": 0, "description": "Ｚパワーで　ほんきを　だした　カビゴンが\nきょたいを　やくどうさせて\nぜんりょくで　あいてに　おそいかかる。"}
+{"name": "extreme-evoboost", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "Ｚパワーを　えた　イーブイが\nしんかした　なかまたちの　ちからを　かりて\nのうりょくを　ぐーんと　あげる。"}
+{"name": "genesis-supernova", "type": "psychic", "category": "special", "power": 185, "priority": 0, "description": "得到Ｚ力量的夢幻\n全力攻擊對手。\n腳下變成精神場地。"}
+{"name": "shell-trap", "type": "fire", "category": "special", "power": 150, "priority": -3, "description": "こうらの　トラップを　しかける。\nあいてが　ぶつり　わざを　だすと\nばくはつして　ダメージを　あたえる。"}
+{"name": "fleur-cannon", "type": "fairy", "category": "special", "power": 130, "priority": 0, "description": "きょうりょくな　ビームを　はなったあと\nじぶんの　とくこうが　がくっと　さがる。"}
+{"name": "psychic-fangs", "type": "psychic", "category": "physical", "power": 85, "priority": 0, "description": "サイコパワーで　かみついて\nあいてを　こうげきする。　ひかりのかべや\nリフレクター　なども　はかいできる。"}
+{"name": "stomping-tantrum", "type": "ground", "category": "physical", "power": 75, "priority": 0, "description": "くやしさを　バネにして　こうげきする。\nまえの　ターンに　わざを　はずしていると\nいりょくが　ばいに　なる。"}
+{"name": "shadow-bone", "type": "ghost", "category": "physical", "power": 85, "priority": 0, "description": "たましいの　やどった　ホネで\nあいてを　なぐりつけて　こうげきする。\nあいての　ぼうぎょを　さげる　ことがある。"}
+{"name": "accelerock", "type": "rock", "category": "physical", "power": 40, "priority": 1, "description": "すばやい　スピードで\nあいてに　ぶつかって　こうげきする。\nかならず　せんせい　こうげき　できる。"}
+{"name": "liquidation", "type": "water", "category": "physical", "power": 85, "priority": 0, "description": "みずの　ちからで　あいてに\nぶつかって　こうげきする。\nあいての　ぼうぎょを　さげる　ことがある。"}
+{"name": "prismatic-laser", "type": "psychic", "category": "special", "power": 160, "priority": 0, "description": "プリズムの　ちからで　きょうりょくな\nこうせんを　はっしゃする。\nつぎの　ターンは　うごけなくなる。"}
+{"name": "spectral-thief", "type": "ghost", "category": "physical", "power": 90, "priority": 0, "description": "あいての　かげに　もぐりこみ\nあいての　のうりょく　アップを\nうばって　こうげきする。"}
+{"name": "sunsteel-strike", "type": "steel", "category": "physical", "power": 100, "priority": 0, "description": "りゅうせいの　ような　いきおいで\nとっしんする。　あいての　とくせいを\nむしして　こうげき　することが　できる。"}
+{"name": "moongeist-beam", "type": "ghost", "category": "special", "power": 100, "priority": 0, "description": "あやしい　こうせんを　はなって\nこうげきする。あいての　とくせいを\nむしして　こうげき　することが　できる。"}
+{"name": "tearful-look", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "变得泪眼汪汪，\n让对手丧失斗志。\n从而降低对手的攻击和特攻。"}
+{"name": "zing-zap", "type": "electric", "category": "physical", "power": 80, "priority": 0, "description": "あいてに　ぶつかって　きょうりょくな\nでんきをあびせ　びりびりちくちく　させる。\nあいてを　ひるませる　ことが　ある。"}
+{"name": "natures-madness", "type": "fairy", "category": "special", "power": null, "priority": 0, "description": "しぜんの　いかりを　あいてに　ぶつける。\nあいての　ＨＰは　はんぶんに　なる。"}
+{"name": "multi-attack", "type": "normal", "category": "physical", "power": 120, "priority": 0, "description": "たかい　エネルギーを　まといつつ\nあいてに　ぶつかって　こうげきする。\nメモリに　より　タイプが　かわる。"}
+{"name": "10-000-000-volt-thunderbolt", "type": "electric", "category": "special", "power": 195, "priority": 0, "description": "ぼうしを　かぶった　ピカチュウが\nＺパワーで　パワーアップした　でんげきを\nはなつ。　きゅうしょに　あたりやすい。"}
+{"name": "mind-blown", "type": "fire", "category": "special", "power": 150, "priority": 0, "description": "じぶんの　あたまを　ばくはつ　させて\nまわりの　すべてを　こうげきする。\nじぶんも　ダメージを　うけてしまう。"}
+{"name": "plasma-fists", "type": "electric", "category": "physical", "power": 100, "priority": 0, "description": "でんきを　まとった　こぶしで\nこうげき。　ノーマルタイプの　わざを\nでんきタイプに　してしまう。"}
+{"name": "photon-geyser", "type": "psychic", "category": "special", "power": 100, "priority": 0, "description": "ひかりの　はしらで　こうげきする。\nこうげきと　とくこうを　くらべて\nたかいほうで　ダメージを　あたえる。"}
+{"name": "light-that-burns-the-sky", "type": "psychic", "category": "special", "power": 200, "priority": 0, "description": "ネクロズマが　あいての　とくせいの\nこうかを　むしして　こうげきと　とくこうの\nたかいほうで　ダメージを　あたえる。"}
+{"name": "searing-sunraze-smash", "type": "steel", "category": "physical", "power": 200, "priority": 0, "description": "Ｚパワーを　えた　ソルガレオが\nぜんりょくで　こうげきする。　あいての\nとくせいの　こうかを　むしできる。"}
+{"name": "menacing-moonraze-maelstrom", "type": "ghost", "category": "special", "power": 200, "priority": 0, "description": "Ｚパワーを　えた　ルナアーラが\nぜんりょくで　こうげきする。　あいての\nとくせいの　こうかを　むしできる。"}
+{"name": "lets-snuggle-forever", "type": "fairy", "category": "physical", "power": 190, "priority": 0, "description": "Grazie al Potere Z, Mimikyu fa appello a tutte le sue\nforze e attacca il bersaglio tempestandolo di colpi."}
+{"name": "splintered-stormshards", "type": "rock", "category": "physical", "power": 190, "priority": 0, "description": "Ｚパワーを　えた　ルガルガンが\nぜんりょくで　こうげきする。　ついかで\nフィールドじょうたいを　うちけす。"}
+{"name": "clangorous-soulblaze", "type": "dragon", "category": "special", "power": 185, "priority": 0, "description": "Ｚパワーを　えた　ジャラランガが\nぜんりょくで　あいてを　こうげきする。\nついかで　じぶんの　のうりょくが　あがる。"}
+{"name": "zippy-zap", "type": "electric", "category": "physical", "power": 80, "priority": 2, "description": "もうスピードの　でんげき　アタック。\nかならず　せんせい　こうげき　できて\nきゅうしょに　あたる。"}
+{"name": "splishy-splash", "type": "water", "category": "special", "power": 90, "priority": 0, "description": "おおきな　なみに　でんきを　あびせ\nあいてに　ぶつけて　こうげきする。\nまひ　じょうたいに　することが　ある。"}
+{"name": "floaty-fall", "type": "flying", "category": "physical", "power": 90, "priority": 0, "description": "ふんわりと　うかび　あがり\nいっきに　きゅうこうか　して　こうげき。\nあいてを　ひるませる　ことが　ある。"}
+{"name": "pika-papow", "type": "electric", "category": "special", "power": null, "priority": 0, "description": "ピカチュウの　トレーナーへの　だいすきな\nきもちが　つよいほど　いりょくが　あがる\nでんげき。　かならず　めいちゅうする。"}
+{"name": "bouncy-bubble", "type": "water", "category": "special", "power": 60, "priority": 0, "description": "みずの　かたまりを　ぶつけて　こうげき。\nみずを　すいとり　ダメージの\nはんぶんの　HPを　かいふくする。"}
+{"name": "buzzy-buzz", "type": "electric", "category": "special", "power": 60, "priority": 0, "description": "でんきを　とばし　あいてに\nあびせて　こうげきする。　\nあいてを　まひ　じょうたいに　する。"}
+{"name": "sizzly-slide", "type": "fire", "category": "physical", "power": 60, "priority": 0, "description": "ほのおを　まとった　からだで\nいきおいよく　あいてに　ぶつかる。\nあいてを　やけど　じょうたいに　する。"}
+{"name": "glitzy-glow", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "ねんりきを　これでもかと　あびせる。\nあいての　とくしゅこうげきを　よわめる\nふしぎな　かべを　つくりだす。"}
+{"name": "baddy-bad", "type": "dark", "category": "special", "power": 80, "priority": 0, "description": "わるさを　アピールして　こうげき。\nあいての　ぶつりこうげきを　よわめる\nふしぎな　かべを　つくりだす。"}
+{"name": "sappy-seed", "type": "grass", "category": "physical", "power": 100, "priority": 0, "description": "きょだいな　ツルを　はやし　タネを\nまきちらかして　こうげきする。　タネは\nまいターン　あいての　HPを　すいとる。"}
+{"name": "freezy-frost", "type": "ice", "category": "special", "power": 100, "priority": 0, "description": "つめたく　こおった　くろいきりの\nけっしょうで　こうげき。　ぜんいんの\nのうりょく　へんかを　もとに　もどす。"}
+{"name": "sparkly-swirl", "type": "fairy", "category": "special", "power": 120, "priority": 0, "description": "むせかえる　ような　かおりの　たつまきで\nあいてを　つつんで　こうげき。　みかたの\nじょうたい　いじょうを　かいふくする。"}
+{"name": "veevee-volley", "type": "normal", "category": "physical", "power": null, "priority": 0, "description": "イーブイの　トレーナーへの　だいすきな\nきもちが　つよいほど　いりょくが　あがる\nたいあたり。　かならず　めいちゅうする。"}
+{"name": "double-iron-bash", "type": "steel", "category": "physical", "power": 60, "priority": 0, "description": "むねの　ナットを　じくに　かいてんして\n２かい　つづけて　うでを　たたきつける。\nあいてを　ひるませる　ことが　ある。"}
+{"name": "max-guard", "type": "normal", "category": "status", "power": null, "priority": 4, "description": "あいての　こうげきを\nまったく　うけない。\nれんぞくで　だすと　しっぱい　しやすい。"}
+{"name": "dynamax-cannon", "type": "dragon", "category": "special", "power": 100, "priority": 0, "description": "コアから　ビームを　はなって　こうげき。\nあいてが　ダイマックス　していると\nダメージは　２ばいに　なる。"}
+{"name": "snipe-shot", "type": "water", "category": "special", "power": 80, "priority": 0, "description": "あいての　わざを　ひきうける\nとくせいや　わざの　えいきょうを　むしして\nえらんだ　あいてを　こうげき　できる。"}
+{"name": "jaw-lock", "type": "dark", "category": "physical", "power": 80, "priority": 0, "description": "おたがい　ひんしに　なるまで\nこうたいが　できなくなる。　どちらかの\nポケモンが　いなくなると　こうかはきえる。"}
+{"name": "stuff-cheeks", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "もっている　きのみを　たべて\nぼうぎょを　ぐーんと　あげる。"}
+{"name": "no-retreat", "type": "fighting", "category": "status", "power": null, "priority": 0, "description": "じぶんの　すべての\nのうりょくが　あがるが　こうたい　したり\nにげることが　できなくなる。"}
+{"name": "tar-shot", "type": "rock", "category": "status", "power": null, "priority": 0, "description": "ねばねばの　タールを　あびせて\nあいての　すばやさを　さげる。\nあいては　ほのおが　じゃくてんに　なる。"}
+{"name": "magic-powder", "type": "psychic", "category": "status", "power": null, "priority": 0, "description": "마법가루를 날려서\n상대를 에스퍼타입으로 바꾼다."}
+{"name": "dragon-darts", "type": "dragon", "category": "physical", "power": 50, "priority": 0, "description": "ドラメシヤで　２かい　こうげき。\nあいてが　２ひき　いるときは\nそれぞれに　１かいずつ　こうげきする。"}
+{"name": "teatime", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "おちゃかいを　ひらいて\nばにいる　ポケモンが　それぞれ\nもっている　きのみを　たべる。"}
+{"name": "octolock", "type": "fighting", "category": "status", "power": null, "priority": 0, "description": "あいてを　にげられなくする。\nかためられた　あいては　まいターン\nぼうぎょと　とくぼうが　さがる。"}
+{"name": "bolt-beak", "type": "electric", "category": "physical", "power": 85, "priority": 0, "description": "でんきを　まとった　くちばしで　さす。\nあいてより　さきに　こうげきできると\nわざの　いりょくは　２ばいに　なる。"}
+{"name": "fishious-rend", "type": "water", "category": "physical", "power": 85, "priority": 0, "description": "かたい　エラで　かみつく。\nあいてより　さきに　こうげきできると\nわざの　いりょくは　２ばいに　なる。"}
+{"name": "court-change", "type": "normal", "category": "status", "power": null, "priority": 0, "description": "ふしぎな　ちからで\nおたがいの　ばの　こうかを　いれかえる。"}
+{"name": "max-flare", "type": "fire", "category": "physical", "power": 100, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　ほのおタイプの　こうげき。\n５ターンの　あいだ　ひざしを　つよくする。"}
+{"name": "max-flutterby", "type": "bug", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　むしタイプの　こうげき。\nあいての　とくこうを　さげる。"}
+{"name": "max-lightning", "type": "electric", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　でんきタイプの　こうげき。\n５ターンのあいだ　エレキフィールドにする。"}
+{"name": "max-strike", "type": "normal", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　ノーマルタイプの　こうげき。\nあいての　すばやさを　さげる。"}
+{"name": "max-knuckle", "type": "fighting", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　かくとうタイプの　こうげき。\nみかたの　こうげきを　あげる。"}
+{"name": "max-phantasm", "type": "ghost", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　ゴーストタイプの　こうげき。\nあいての　ぼうぎょを　さげる。"}
+{"name": "max-hailstorm", "type": "ice", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　こおりタイプの　こうげき。\n５ターンの　あいだ　あられを　ふらす。"}
+{"name": "max-ooze", "type": "poison", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　どくタイプの　こうげき。\nみかたの　とくこうを　あげる。"}
+{"name": "max-geyser", "type": "water", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　みずタイプの　こうげき。\n５ターンの　あいだ　あめを　ふらせる。"}
+{"name": "max-airstream", "type": "flying", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　ひこうタイプの　こうげき。\nみかたの　すばやさを　あげる。"}
+{"name": "max-starfall", "type": "fairy", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　フェアリータイプの　こうげき。\n５ターンのあいだ　ミストフィールドにする。"}
+{"name": "max-wyrmwind", "type": "dragon", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　ドラゴンタイプの　こうげき。\nあいての　こうげきを　さげる。"}
+{"name": "max-mindstorm", "type": "psychic", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　エスパータイプの　こうげき。\n５ターンのあいだ　サイコフィールドにする。"}
+{"name": "max-rockfall", "type": "rock", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　いわタイプの　こうげき。\n５ターンの　あいだ　すなあらしにする。"}
+{"name": "max-quake", "type": "ground", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　じめんタイプの　こうげき。\nみかたの　とくぼうを　あげる。"}
+{"name": "max-darkness", "type": "dark", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　あくタイプの　こうげき。\nあいての　とくぼうを　さげる。"}
+{"name": "max-overgrowth", "type": "grass", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　くさタイプの　こうげき。\n５ターンのあいだ　グラスフィールドにする。"}
+{"name": "max-steelspike", "type": "steel", "category": "physical", "power": 10, "priority": 0, "description": "ダイマックスした　ポケモンが\nくりだす　はがねタイプの　こうげき。\nみかたの　ぼうぎょを　あげる。"}
+{"name": "clangorous-soul", "type": "dragon", "category": "status", "power": null, "priority": 0, "description": "じぶんの　ＨＰを　すこし　けずって\nすべての　のうりょくを　あげる。"}
+{"name": "body-press", "type": "fighting", "category": "physical", "power": 80, "priority": 0, "description": "からだを　ぶつけて　こうげき。\nぼうぎょが　たかいほど\nあたえる　ダメージが　ふえる。"}
+{"name": "decorate", "type": "fairy", "category": "status", "power": null, "priority": 0, "description": "かざりつけを　することで\nあいての　こうげきと　とくこうを\nぐーんと　あげる。"}
+{"name": "drum-beating", "type": "grass", "category": "physical", "power": 80, "priority": 0, "description": "ドラムの　ねっこを　ドラミングで\nコントロールして　こうげき　することで\nあいての　すばやさを　さげる。"}
+{"name": "snap-trap", "type": "grass", "category": "physical", "power": 35, "priority": 0, "description": "トラバサミで　とらえて\n４－５ターンの　あいだ\nあいてを　はさんで　こうげきする。"}
+{"name": "pyro-ball", "type": "fire", "category": "physical", "power": 120, "priority": 0, "description": "こいしを　もやした　ほのおの　ボールで\nあいてを　こうげきする。\nやけど　じょうたいに　することが　ある。"}
+{"name": "behemoth-blade", "type": "steel", "category": "physical", "power": 100, "priority": 0, "description": "きょだいな　けんとなり　きりかかる。\nあいてが　ダイマックス　していると\nダメージは　２ばいに　なる。"}
+{"name": "behemoth-bash", "type": "steel", "category": "physical", "power": 100, "priority": 0, "description": "きょだいな　たてとなり　ぶつかる。\nあいてが　ダイマックス　していると\nダメージは　２ばいに　なる。"}
+{"name": "aura-wheel", "type": "electric", "category": "physical", "power": 110, "priority": 0, "description": "ほほぶくろに　ためた　エネルギーで\nこうげきし　じぶんの　すばやさを　あげる。\nモルペコの　すがたで　タイプが　かわる。"}
+{"name": "breaking-swipe", "type": "dragon", "category": "physical", "power": 60, "priority": 0, "description": "きょうじんな　しっぽを　はげしく\nふりはらって　あいてを　こうげきする。\nあいての　こうげきを　さげる。"}
+{"name": "branch-poke", "type": "grass", "category": "physical", "power": 40, "priority": 0, "description": "するどく　とがった　えだで\nあいてを　つついて　こうげきする。"}
+{"name": "overdrive", "type": "electric", "category": "special", "power": 80, "priority": 0, "description": "ギターや　ベースを　かきならして\nはげしく　ひびく　おおきな　しんどうを\nあいてに　あたえて　こうげきする。"}
+{"name": "apple-acid", "type": "grass", "category": "special", "power": 80, "priority": 0, "description": "すっぱい　りんごから　つくりだした\nさんせいの　えきたいで　こうげき。\nあいての　とくぼうを　さげる。"}
+{"name": "grav-apple", "type": "grass", "category": "physical", "power": 80, "priority": 0, "description": "たかいところから　りんごを　おとして\nダメージを　あたえる。\nあいての　ぼうぎょを　さげる。"}
+{"name": "spirit-break", "type": "fairy", "category": "physical", "power": 75, "priority": 0, "description": "くらうと　くじけるほどの\nいきおいで　こうげき。\nあいての　とくこうを　さげる。"}
+{"name": "strange-steam", "type": "fairy", "category": "special", "power": 90, "priority": 0, "description": "けむりを　ふんしゅつして\nあいてを　こうげき。\nこんらん　させることが　ある。"}
+{"name": "life-dew", "type": "water", "category": "status", "power": null, "priority": 0, "description": "ふしぎな　みずを　ふりまいて\nじぶんと　ばにいる\nみかたの　ＨＰを　かいふくする。"}
+{"name": "obstruct", "type": "dark", "category": "status", "power": null, "priority": 4, "description": "あいての　こうげきを　まったく　うけない。\nれんぞくで　だすと　しっぱい　しやすい。\nふれると　ぼうぎょが　がくっと　さがる。"}
+{"name": "false-surrender", "type": "dark", "category": "physical", "power": 80, "priority": 0, "description": "あたまを　さげる　ふりを　しながら\nふりみだした　かみのけを　つきさす。\nこうげきは　かならず　めいちゅうする。"}
+{"name": "meteor-assault", "type": "fighting", "category": "physical", "power": 150, "priority": 0, "description": "ふとい　クキを　ふりまわして　こうげき。\nただし　じぶんも　よろめいてしまうため\nつぎの　ターンは　うごけなくなる。"}
+{"name": "eternabeam", "type": "dragon", "category": "special", "power": 160, "priority": 0, "description": "ほんらいの　すがたと　なった\nムゲンダイナ　さいだいの　こうげき。\nつぎの　ターンは　うごけなくなる。"}
+{"name": "steel-beam", "type": "steel", "category": "special", "power": 140, "priority": 0, "description": "ぜんしんから　あつめた　はがねを\nビームとして　はげしく　うちだす。\nじぶんも　ダメージを　うけてしまう。"}
+{"name": "expanding-force", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "サイコパワーで　あいてを　こうげきする。\nサイコフィールドの　とき　いりょくが　あがり\nすべての　あいてに　ダメージを　あたえる。"}
+{"name": "steel-roller", "type": "steel", "category": "physical", "power": 130, "priority": 0, "description": "フィールドを　はかい　しながら　こうげき。\nなんらかの　フィールドじょうたいに\nかわって　いないと　わざは　しっぱいする。"}
+{"name": "scale-shot", "type": "dragon", "category": "physical", "power": 25, "priority": 0, "description": "ウロコを　うちだして　こうげきする。\n２ー５かいの　あいだ　れんぞくで　だす。\nすばやさが　あがるが　ぼうぎょが　さがる。"}
+{"name": "meteor-beam", "type": "rock", "category": "special", "power": 120, "priority": 0, "description": "１ターンめに　うちゅうの　ちからを\nあつめることで　とくこうが　あがり\n２ターンめに　あいてを　こうげきする。"}
+{"name": "shell-side-arm", "type": "poison", "category": "special", "power": 90, "priority": 0, "description": "ぶつりか　とくしゅか　よりおおく　ダメージを\nあたえられる　のうりょくで　こうげきする。\nどく　じょうたいに　することが　ある。"}
+{"name": "misty-explosion", "type": "fairy", "category": "special", "power": 100, "priority": 0, "description": "じぶんの　まわりに　いる　すべてを\nこうげき　するが　つかうと　ひんしになる。\nミストフィールドで　いりょくが　あがる。"}
+{"name": "grassy-glide", "type": "grass", "category": "physical", "power": 55, "priority": 0, "description": "じめんを　すべるように　あいてを　こうげき。\nグラスフィールドの　とき\nかならず　せんせい　こうげき　できる。"}
+{"name": "rising-voltage", "type": "electric", "category": "special", "power": 70, "priority": 0, "description": "じめんから　たちのぼる　でんげきで　こうげき。\nあいてが　エレキフィールドに　いるとき\nわざの　いりょくが　２ばいに　なる。"}
+{"name": "terrain-pulse", "type": "normal", "category": "special", "power": 50, "priority": 0, "description": "フィールドの　ちからを　かりて　こうげき。\nつかったときの　フィールドのじょうたいに　よって\nわざの　タイプと　いりょくが　かわる。"}
+{"name": "skitter-smack", "type": "bug", "category": "physical", "power": 70, "priority": 0, "description": "はいごから　はいより　こうげきする。\nあいての　とくこうを　さげる。"}
+{"name": "burning-jealousy", "type": "fire", "category": "special", "power": 70, "priority": 0, "description": "しっとの　エネルギーで　あいてを　こうげき。\nそのターン　のうりょくが　あがった　ポケモンを\nやけどの　じょうたいに　する。"}
+{"name": "lash-out", "type": "dark", "category": "physical", "power": 75, "priority": 0, "description": "あいてへの　いらだちを　ぶつけて　こうげき。\nそのターンに　のうりょくを　さげられていると\nわざの　いりょくが　２ばいに　なる。"}
+{"name": "poltergeist", "type": "ghost", "category": "physical", "power": 110, "priority": 0, "description": "あいての　もちものを　あやつって　こうげき。\nあいてが　どうぐを　もっていない　ばあいは\nしっぱい　する。"}
+{"name": "corrosive-gas", "type": "poison", "category": "status", "power": null, "priority": 0, "description": "つよい　さんせいの　ガスで\nまわりに　いるものを　つつみこみ\nもっている　どうぐを　とかしてしまう。"}
+{"name": "coaching", "type": "fighting", "category": "status", "power": null, "priority": 0, "description": "てきかくな　しどうを　おこなうことで　\nみかた　ぜんいんの\nこうげきと　ぼうぎょを　あげる。"}
+{"name": "flip-turn", "type": "water", "category": "physical", "power": 60, "priority": 0, "description": "こうげきした　あと\nものすごい　スピードで　もどってきて\nひかえの　ポケモンと　いれかわる。"}
+{"name": "triple-axel", "type": "ice", "category": "physical", "power": 20, "priority": 0, "description": "３かい　れんぞくで　キックを　くりだして\nこうげきする。　わざが　あたる　たびに\nいりょくは　あがる。"}
+{"name": "dual-wingbeat", "type": "flying", "category": "physical", "power": 40, "priority": 0, "description": "つばさを　あいてに　ぶつけて\nこうげきする。　２かい　れんぞくで\nダメージを　あたえる。"}
+{"name": "scorching-sands", "type": "ground", "category": "special", "power": 70, "priority": 0, "description": "あつく　やけた　すなを\nあいてに　ぶつけて　こうげきする。\nやけど　じょうたいに　することが　ある。"}
+{"name": "jungle-healing", "type": "grass", "category": "status", "power": null, "priority": 0, "description": "ジャングルと　いったいか　して\nじぶんと　ばにいる　みかたの\nＨＰと　じょうたいを　かいふくする。"}
+{"name": "wicked-blow", "type": "dark", "category": "physical", "power": 75, "priority": 0, "description": "あくの　かたを　きわめし\nきょうれつな　いちげき。\nかならず　きゅうしょに　あたる。"}
+{"name": "surging-strikes", "type": "water", "category": "physical", "power": 25, "priority": 0, "description": "みずの　かたを　きわめし\nながれるような　３かいの　れんげき。\nかならず　きゅうしょに　あたる。"}
+{"name": "thunder-cage", "type": "electric", "category": "special", "power": 80, "priority": 0, "description": "ほとばしる　でんきの　おりの　なかに\n４ー５ターンの　あいだ\nあいてを　とじこめて　こうげきする。"}
+{"name": "dragon-energy", "type": "dragon", "category": "special", "power": 150, "priority": 0, "description": "せいめいりょくを　パワーに　かえ　あいてを\nこうげきする。　じぶんの　ＨＰが　すくないほど\nわざの　いりょくは　さがる。"}
+{"name": "freezing-glare", "type": "psychic", "category": "special", "power": 90, "priority": 0, "description": "りょうめから　サイコパワーを\nうちだして　こうげきする。\nこおり　じょうたいに　することが　ある。"}
+{"name": "fiery-wrath", "type": "dark", "category": "special", "power": 90, "priority": 0, "description": "いかりを　ほのおの　ような\nオーラに　かえて　こうげきする。\nあいてを　ひるませる　ことが　ある。"}
+{"name": "thunderous-kick", "type": "fighting", "category": "physical", "power": 90, "priority": 0, "description": "かみなりの　ような　うごきで\nあいてを　ほんろう　しながら　キックする。\nあいての　ぼうぎょを　さげる。"}
+{"name": "glacial-lance", "type": "ice", "category": "physical", "power": 120, "priority": 0, "description": "ふぶきを　まとった　こおりの　やりを\nあいてに　なげつけて　こうげきする。"}
+{"name": "astral-barrage", "type": "ghost", "category": "special", "power": 120, "priority": 0, "description": "たくさんの　ちいさな　れいたいを\nあいてに　ぶつけて　こうげきする。"}
+{"name": "eerie-spell", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "きょうりょくな　サイコパワーで　こうげき。\nあいてが　さいごに　つかった　わざの\nＰＰを　３だけ　へらす。"}
+{"name": "dire-claw", "type": "poison", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "psyshield-bash", "type": "psychic", "category": "physical", "power": 70, "priority": 0, "description": "Couldn't find it"}
+{"name": "power-shift", "type": "normal", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "stone-axe", "type": "rock", "category": "physical", "power": 65, "priority": 0, "description": "Couldn't find it"}
+{"name": "springtide-storm", "type": "fairy", "category": "special", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "mystical-power", "type": "psychic", "category": "special", "power": 70, "priority": 0, "description": "Couldn't find it"}
+{"name": "raging-fury", "type": "fire", "category": "physical", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "wave-crash", "type": "water", "category": "physical", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "chloroblast", "type": "grass", "category": "special", "power": 150, "priority": 0, "description": "Couldn't find it"}
+{"name": "mountain-gale", "type": "ice", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "victory-dance", "type": "fighting", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "headlong-rush", "type": "ground", "category": "physical", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "barb-barrage", "type": "poison", "category": "physical", "power": 60, "priority": 0, "description": "Couldn't find it"}
+{"name": "esper-wing", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "bitter-malice", "type": "ghost", "category": "special", "power": 75, "priority": 0, "description": "Couldn't find it"}
+{"name": "shelter", "type": "steel", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "triple-arrows", "type": "fighting", "category": "physical", "power": 90, "priority": 0, "description": "Couldn't find it"}
+{"name": "infernal-parade", "type": "ghost", "category": "special", "power": 60, "priority": 0, "description": "Couldn't find it"}
+{"name": "ceaseless-edge", "type": "dark", "category": "physical", "power": 65, "priority": 0, "description": "Couldn't find it"}
+{"name": "bleakwind-storm", "type": "flying", "category": "special", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "wildbolt-storm", "type": "electric", "category": "special", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "sandsear-storm", "type": "ground", "category": "special", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "lunar-blessing", "type": "psychic", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "take-heart", "type": "psychic", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "tera-blast", "type": "normal", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "silk-trap", "type": "bug", "category": "status", "power": 0, "priority": 4, "description": "Couldn't find it"}
+{"name": "axe-kick", "type": "fighting", "category": "physical", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "last-respects", "type": "ghost", "category": "physical", "power": 50, "priority": 0, "description": "Couldn't find it"}
+{"name": "lumina-crash", "type": "psychic", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "order-up", "type": "dragon", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "jet-punch", "type": "water", "category": "physical", "power": 60, "priority": 1, "description": "Couldn't find it"}
+{"name": "spicy-extract", "type": "grass", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "spin-out", "type": "steel", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "population-bomb", "type": "normal", "category": "physical", "power": 20, "priority": 0, "description": "Couldn't find it"}
+{"name": "ice-spinner", "type": "ice", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "glaive-rush", "type": "dragon", "category": "physical", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "revival-blessing", "type": "normal", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "salt-cure", "type": "rock", "category": "physical", "power": 40, "priority": 0, "description": "Couldn't find it"}
+{"name": "triple-dive", "type": "water", "category": "physical", "power": 30, "priority": 0, "description": "Couldn't find it"}
+{"name": "mortal-spin", "type": "poison", "category": "physical", "power": 30, "priority": 0, "description": "Couldn't find it"}
+{"name": "doodle", "type": "normal", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "fillet-away", "type": "normal", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "kowtow-cleave", "type": "dark", "category": "physical", "power": 85, "priority": 0, "description": "Couldn't find it"}
+{"name": "flower-trick", "type": "grass", "category": "physical", "power": 70, "priority": 0, "description": "Couldn't find it"}
+{"name": "torch-song", "type": "fire", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "aqua-step", "type": "water", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "raging-bull", "type": "normal", "category": "physical", "power": 90, "priority": 0, "description": "Couldn't find it"}
+{"name": "make-it-rain", "type": "steel", "category": "special", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "psyblade", "type": "psychic", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "hydro-steam", "type": "water", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "ruination", "type": "dark", "category": "special", "power": 1, "priority": 0, "description": "Couldn't find it"}
+{"name": "collision-course", "type": "fighting", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "electro-drift", "type": "electric", "category": "special", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "shed-tail", "type": "normal", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "chilly-reception", "type": "ice", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "tidy-up", "type": "normal", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "snowscape", "type": "ice", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "pounce", "type": "bug", "category": "physical", "power": 50, "priority": 0, "description": "Couldn't find it"}
+{"name": "trailblaze", "type": "grass", "category": "physical", "power": 50, "priority": 0, "description": "Couldn't find it"}
+{"name": "chilling-water", "type": "water", "category": "special", "power": 50, "priority": 0, "description": "Couldn't find it"}
+{"name": "hyper-drill", "type": "normal", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "twin-beam", "type": "psychic", "category": "special", "power": 40, "priority": 0, "description": "Couldn't find it"}
+{"name": "rage-fist", "type": "ghost", "category": "physical", "power": 50, "priority": 0, "description": "Couldn't find it"}
+{"name": "armor-cannon", "type": "fire", "category": "special", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "bitter-blade", "type": "fire", "category": "physical", "power": 90, "priority": 0, "description": "Couldn't find it"}
+{"name": "double-shock", "type": "electric", "category": "physical", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "gigaton-hammer", "type": "steel", "category": "physical", "power": 160, "priority": 0, "description": "Couldn't find it"}
+{"name": "comeuppance", "type": "dark", "category": "physical", "power": 1, "priority": 0, "description": "Couldn't find it"}
+{"name": "aqua-cutter", "type": "water", "category": "physical", "power": 70, "priority": 0, "description": "Couldn't find it"}
+{"name": "blazing-torque", "type": "fire", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "wicked-torque", "type": "dark", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "noxious-torque", "type": "poison", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "combat-torque", "type": "fighting", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "magical-torque", "type": "fairy", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "blood-moon", "type": "normal", "category": "special", "power": 140, "priority": 0, "description": "Couldn't find it"}
+{"name": "matcha-gotcha", "type": "grass", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "syrup-bomb", "type": "grass", "category": "special", "power": 60, "priority": 0, "description": "Couldn't find it"}
+{"name": "ivy-cudgel", "type": "grass", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "electro-shot", "type": "electric", "category": "special", "power": 130, "priority": 0, "description": "Couldn't find it"}
+{"name": "tera-starstorm", "type": "normal", "category": "special", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "fickle-beam", "type": "dragon", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "burning-bulwark", "type": "fire", "category": "status", "power": 0, "priority": 4, "description": "Couldn't find it"}
+{"name": "thunderclap", "type": "electric", "category": "special", "power": 70, "priority": 1, "description": "Couldn't find it"}
+{"name": "mighty-cleave", "type": "rock", "category": "physical", "power": 95, "priority": 0, "description": "Couldn't find it"}
+{"name": "tachyon-cutter", "type": "steel", "category": "special", "power": 50, "priority": 0, "description": "Couldn't find it"}
+{"name": "hard-press", "type": "steel", "category": "physical", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "dragon-cheer", "type": "dragon", "category": "status", "power": 0, "priority": 0, "description": "Couldn't find it"}
+{"name": "alluring-voice", "type": "fairy", "category": "special", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "temper-flare", "type": "fire", "category": "physical", "power": 75, "priority": 0, "description": "Couldn't find it"}
+{"name": "supercell-slam", "type": "electric", "category": "physical", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "psychic-noise", "type": "psychic", "category": "special", "power": 75, "priority": 0, "description": "Couldn't find it"}
+{"name": "upper-hand", "type": "fighting", "category": "physical", "power": 65, "priority": 3, "description": "Couldn't find it"}
+{"name": "malignant-chain", "type": "poison", "category": "special", "power": 100, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-rush", "type": "shadow", "category": "physical", "power": 55, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-blast", "type": "shadow", "category": "physical", "power": 80, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-blitz", "type": "shadow", "category": "physical", "power": 40, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-bolt", "type": "shadow", "category": "special", "power": 75, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-break", "type": "shadow", "category": "physical", "power": 75, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-chill", "type": "shadow", "category": "special", "power": 75, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-end", "type": "shadow", "category": "physical", "power": 120, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-fire", "type": "shadow", "category": "special", "power": 75, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-rave", "type": "shadow", "category": "special", "power": 70, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-storm", "type": "shadow", "category": "special", "power": 95, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-wave", "type": "shadow", "category": "special", "power": 50, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-down", "type": "shadow", "category": "status", "power": null, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-half", "type": "shadow", "category": "special", "power": null, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-hold", "type": "shadow", "category": "status", "power": null, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-mist", "type": "shadow", "category": "status", "power": null, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-panic", "type": "shadow", "category": "status", "power": null, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-shed", "type": "shadow", "category": "status", "power": null, "priority": 0, "description": "Couldn't find it"}
+{"name": "shadow-sky", "type": "shadow", "category": "status", "power": null, "priority": 0, "description": "Couldn't find it"}
